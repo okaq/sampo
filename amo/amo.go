@@ -11,6 +11,9 @@ import (
 const (
     // try open file for writing
     // create new if it doesnt exist
+    CFG = "cfg.txt"
+    SRT = "sat.txt"
+    PAT = "data/"
 )
 
 func Handler(w http.ResponseWriter, r *http.Request) {
@@ -19,6 +22,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
     fmt.Println("starting amo web")
+    fmt.Println("opening data files")
     // server
     // stats handler
     // config load
