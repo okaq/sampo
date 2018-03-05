@@ -8,6 +8,11 @@ import (
     "net/http"
 )
 
+const (
+    // try open file for writing
+    // create new if it doesnt exist
+)
+
 func Handler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(r)
 }
@@ -15,4 +20,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 func main() {
     fmt.Println("starting amo web")
     // server
+    // stats handler
+    // config load
+    // scratch load
 }
