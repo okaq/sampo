@@ -16,6 +16,8 @@ const (
     CFG = "cfg.txt"
     SRT = "srt.txt"
     PAT = "data/"
+    // web file
+    INDEX = "amo.html"
 )
 
 var (
@@ -42,8 +44,10 @@ func Load() {
     }
 }
 
-func Handler(w http.ResponseWriter, r *http.Request) {
+func AmoHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(r)
+    atomic.AddUint64(&Counter, 1)
+    http.ServeFile(w, r, INDEX)
 }
 
 func main() {
@@ -54,6 +58,8 @@ func main() {
     // stats handler
     // config load
     // scratch load
+    http.HandleFunc("/", AmoHandler)
+    http.ListenAndServe(":8080", nil)
 }
 
 
