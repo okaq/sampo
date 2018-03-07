@@ -7,6 +7,7 @@ import (
     "fmt"
     "net/http"
     "os"
+    "sync/atomic"
 )
 
 const (
@@ -20,13 +21,25 @@ const (
 var (
     Scratch *os.File
     Config *os.File
+    Counter uint64
 )
 
 func Load() {
+    var err error
     // global state
     p0 := fmt.Sprintf("%s%s", PAT, CFG)
     p1 := fmt.Sprintf("%s%s", PAT, SRT)
     fmt.Println(p0, p1)
+    // config open
+    Config, err = os.Open(p0)
+    if err != nil {
+        fmt.Println(err)
+    }
+    // scratch open
+    Scratch, err = os.Open(p1)
+    if err != nil {
+        fmt.Println(err)
+    }
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
