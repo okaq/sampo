@@ -50,6 +50,21 @@ func AmoHandler(w http.ResponseWriter, r *http.Request) {
     http.ServeFile(w, r, INDEX)
 }
 
+func StatHandler(w http.ResponseWriter, r *http.Request) {
+    // ouput statistics
+    // to web client
+    fmt.Println(r)
+    // golang anonymous struct
+    stat := struct (
+        Count uint64 `json:"count"`
+        ID string `json:"id"`
+    ) {
+        atomic.LoadUint64(&Counter),
+        "amo_server"
+    }
+
+}
+
 func main() {
     fmt.Println("starting amo web")
     fmt.Println("opening data files")
@@ -59,6 +74,7 @@ func main() {
     // config load
     // scratch load
     http.HandleFunc("/", AmoHandler)
+    http.HandleFunc("/s", StatHandler)
     http.ListenAndServe(":8080", nil)
 }
 
