@@ -4,6 +4,7 @@
 package main
 
 import (
+    "encoding/json"
     "fmt"
     "net/http"
     "os"
@@ -55,14 +56,19 @@ func StatHandler(w http.ResponseWriter, r *http.Request) {
     // to web client
     fmt.Println(r)
     // golang anonymous struct
-    stat := struct (
+    stat := struct {
         Count uint64 `json:"count"`
         ID string `json:"id"`
-    ) {
+    } {
         atomic.LoadUint64(&Counter),
-        "amo_server"
+        "amo_server",
     }
-
+    js1, err := json.Marshal(stat)
+    if err != nil {
+        fmt.Println(err)
+    }
+    fmt.Println(stat)
+    fmt.Println(js1)
 }
 
 func main() {
