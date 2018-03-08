@@ -56,6 +56,14 @@ var net = {
         net.p.time = Date.now();
         var s0 = JSON.stringify(net.p);
         console.log(net.p, s0);
+        // send
+        net.a = new XMLHttpRequest();
+        net.a.open("POST", net.url[0], true);
+        net.a.requestType = "json";
+        net.a.onload = function(e) {
+            console.log(e);
+        }
+        net.a.send(s0);
     }
 }
     // dom

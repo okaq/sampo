@@ -6,9 +6,11 @@ package main
 import (
     "encoding/json"
     "fmt"
+    "math/rand"
     "net/http"
     "os"
     "sync/atomic"
+    "time"
 )
 
 const (
@@ -25,6 +27,7 @@ var (
     Scratch *os.File
     Config *os.File
     Counter uint64
+    Random *rand.Rand
 )
 
 func Load() {
@@ -43,6 +46,12 @@ func Load() {
     if err != nil {
         fmt.Println(err)
     }
+}
+
+func Rng() {
+    // setup the rand
+    s0 := rand.NewSource(time.Now().UnixNano())
+    Random = rand.New(s0)
 }
 
 func AmoHandler(w http.ResponseWriter, r *http.Request) {
@@ -77,12 +86,27 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
     // player cache
     // pid formed from browser id, timestamp
     // and server id, timestamp combo
+    // decoder
+    pid := struct {
+        Id string `json:"id"`
+        Time string `json:"time"`
+    } {
+        "0",
+        "0",
+    }
+    err := json.NewDecoder(r.Body).Decode(&pid)
+    if err != nil {
+        // write 500
+        fmt.Println(err)
+    }
+
 }
 
 func main() {
     fmt.Println("starting amo web")
     fmt.Println("opening data files")
     Load()
+    Rng()
     // server
     // stats handler
     // config load
