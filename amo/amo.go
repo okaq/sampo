@@ -69,6 +69,14 @@ func StatHandler(w http.ResponseWriter, r *http.Request) {
     }
     fmt.Println(stat)
     fmt.Println(js1)
+    w.Header().Set("Content-Type","application/json")
+    w.Write(js1)
+}
+
+func PidHandler(w http.ResponseWriter, r *http.Request) {
+    // player cache
+    // pid formed from browser id, timestamp
+    // and server id, timestamp combo
 }
 
 func main() {
@@ -81,6 +89,7 @@ func main() {
     // scratch load
     http.HandleFunc("/", AmoHandler)
     http.HandleFunc("/s", StatHandler)
+    http.HandleFunc("/p", PidHandler)
     http.ListenAndServe(":8080", nil)
 }
 

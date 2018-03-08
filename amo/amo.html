@@ -41,8 +41,17 @@ var g = {
         },
         "start": function() {
             // start the network conns
+            net.conn();
         }
     }
+// xhr
+var net = {
+    "conn": function() {
+        // open the bridge
+        net.url = [];
+        net.url[0] = "http:/localhost:8080/p";
+    }
+}
     // dom
     var dom = {
         "init": function() {
