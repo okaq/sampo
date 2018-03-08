@@ -50,6 +50,12 @@ var net = {
         // open the bridge
         net.url = [];
         net.url[0] = "http:/localhost:8080/p";
+        // player id
+        net.p = {};
+        net.p.id = (Math.random() * Number.MAX_SAFE_INTEGER) >>> 0;
+        net.p.time = Date.now();
+        var s0 = JSON.stringify(net.p);
+        console.log(net.p, s0);
     }
 }
     // dom
