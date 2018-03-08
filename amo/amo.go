@@ -9,6 +9,7 @@ import (
     "math/rand"
     "net/http"
     "os"
+    "strconv"
     "sync/atomic"
     "time"
 )
@@ -87,6 +88,7 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
     // pid formed from browser id, timestamp
     // and server id, timestamp combo
     // decoder
+    // browser side player id
     pid := struct {
         Id string `json:"id"`
         Time string `json:"time"`
@@ -99,7 +101,29 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
         // write 500
         fmt.Println(err)
     }
-
+    fmt.Println(pid)
+    // server side player id
+    sid := struct {
+        Id uint64 `json:"id"`
+        Time uint64 `json:"time"`
+    } {
+        Random.Uint64(),
+        time.Now().UnixNano()
+    }
+    fmt.Println(sid)
+    // put it all together
+    tid := struct {
+        Pid string `json:"pid"`
+        Ptime string `json:"ptime"`
+        Sid string `json:"Sid"`
+        Stime string `json:"stime"`
+    } {
+        pid.Id,
+        pid.Time,
+        strconv.FormatInt(sid.Id, 10),
+        strconv.FormatInt(sid.Time, 10),
+    }
+    fmt.Println(tid)
 }
 
 func main() {
