@@ -124,6 +124,16 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
         strconv.FormatInt(sid.Time, 10),
     }
     fmt.Println(tid)
+    // store in server side cache
+    // log ip, user agent for analysis
+    js0, err := json.Marshal(tid)
+    if err != nil {
+        fmt.Println(err)
+        // log and write 500
+    }
+    fmt.Println(js0)
+    w.Header().Set("Content-Type", "application/json")
+    w.Write(js0)
 }
 
 func main() {
