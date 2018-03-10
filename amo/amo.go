@@ -136,6 +136,12 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
     w.Write(js0)
 }
 
+func GameHandler(w http.ResponseWriter, r *http.Request) {
+    fmt.Println(r)
+    // game state update and response
+    // struct for current state of play
+}
+
 func main() {
     fmt.Println("starting amo web")
     fmt.Println("opening data files")
@@ -148,6 +154,7 @@ func main() {
     http.HandleFunc("/", AmoHandler)
     http.HandleFunc("/s", StatHandler)
     http.HandleFunc("/p", PidHandler)
+    http.HandleFunc("/q", GameHandler)
     http.ListenAndServe(":8080", nil)
 }
 
