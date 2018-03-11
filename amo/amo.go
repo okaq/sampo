@@ -29,6 +29,7 @@ var (
     Config *os.File
     Counter uint64
     Random *rand.Rand
+    Cache map[string]string
 )
 
 func Load() {
@@ -53,6 +54,14 @@ func Rng() {
     // setup the rand
     s0 := rand.NewSource(time.Now().UnixNano())
     Random = rand.New(s0)
+}
+
+func Store() {
+    // make the cache
+    Cache = make(map[string]string)
+    Cache["zero"] = "hero"
+    fmt.Println(Cache)
+    // needs channel to sync access
 }
 
 func AmoHandler(w http.ResponseWriter, r *http.Request) {
@@ -105,10 +114,10 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
     // server side player id
     sid := struct {
         Id uint64 `json:"id"`
-        Time uint64 `json:"time"`
+        Time int64 `json:"time"`
     } {
         Random.Uint64(),
-        time.Now().UnixNano()
+        time.Now().UnixNano(),
     }
     fmt.Println(sid)
     // put it all together
@@ -120,7 +129,7 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
     } {
         pid.Id,
         pid.Time,
-        strconv.FormatInt(sid.Id, 10),
+        strconv.FormatInt(int64(sid.Id), 10),
         strconv.FormatInt(sid.Time, 10),
     }
     fmt.Println(tid)
@@ -147,6 +156,7 @@ func main() {
     fmt.Println("opening data files")
     Load()
     Rng()
+    Store()
     // server
     // stats handler
     // config load
