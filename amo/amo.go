@@ -29,7 +29,9 @@ var (
     Config *os.File
     Counter uint64
     Random *rand.Rand
-    Cache map[string]string
+    // Cache map[string]string
+    Cache *Cache
+    Chan chan string
 )
 
 type Cache struct {
@@ -71,6 +73,11 @@ func Store() {
     Cache["zero"] = "hero"
     fmt.Println(Cache)
     // needs channel to sync access
+}
+
+func Store2() {
+    // create the cache
+    // launch goroutine for reciever
 }
 
 func AmoHandler(w http.ResponseWriter, r *http.Request) {
