@@ -32,6 +32,15 @@ var (
     Cache map[string]string
 )
 
+type Cache struct {
+    C map[string]string
+    *sync.Mutex
+}
+
+func NewCache() *Cache {
+    return &Cache{make(map[string]string)}
+}
+
 func Load() {
     var err error
     // global state
