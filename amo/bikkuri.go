@@ -22,3 +22,5 @@ func main() {
     http.HandleFunc("/", BikHandler)
     http.ListenAndServe(":8080", nil)
 }
+
+
