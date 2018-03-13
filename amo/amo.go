@@ -10,6 +10,7 @@ import (
     "net/http"
     "os"
     "strconv"
+    "sync"
     "sync/atomic"
     "time"
 )
@@ -29,8 +30,8 @@ var (
     Config *os.File
     Counter uint64
     Random *rand.Rand
-    // Cache map[string]string
-    Cache *Cache
+    Cache1 map[string]string
+    Cach *Cache
     Chan chan string
 )
 
@@ -40,7 +41,7 @@ type Cache struct {
 }
 
 func NewCache() *Cache {
-    return &Cache{make(map[string]string)}
+    return &Cache{make(map[string]string),&sync.Mutex{}}
 }
 
 func Load() {
@@ -69,9 +70,9 @@ func Rng() {
 
 func Store() {
     // make the cache
-    Cache = make(map[string]string)
-    Cache["zero"] = "hero"
-    fmt.Println(Cache)
+    Cache1 = make(map[string]string)
+    Cache1["zero"] = "hero"
+    fmt.Println(Cache1)
     // needs channel to sync access
 }
 
@@ -173,6 +174,8 @@ func main() {
     Load()
     Rng()
     Store()
+    Cach = NewCache()
+    fmt.Println(Cach)
     // server
     // stats handler
     // config load
