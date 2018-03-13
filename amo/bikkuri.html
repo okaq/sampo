@@ -32,7 +32,6 @@ var g = {
             // subs
             g.subs = [dom];
             g.subs.forEach(function(el){el.init();});
-            g.s = 0;
 
             window.setTimeout(g.start, 1000);
 
@@ -41,6 +40,20 @@ var g = {
         },
         "start": function() {
             // poisson squares (8)
+            g.tick = 0;
+            g.max = 16;
+            g.count = 8;
+
+            // loop
+            g.id = window.setInterval(g.frame, 1000);
+        },
+        "frame": function() {
+            console.log("tick #: " + g.tick);
+            if (g.tick >= g.max) {
+                console.log("loop done");
+                window.clearInterval(g.id);
+            }
+            g.tick = g.tick + 1;
         }
     }
     // dom
