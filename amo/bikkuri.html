@@ -30,7 +30,7 @@ var g = {
             console.log("start amo bikkuri...");
 
             // subs
-            g.subs = [dom];
+            g.subs = [dom,sce];
             g.subs.forEach(function(el){el.init();});
 
             window.setTimeout(g.start, 1000);
@@ -56,6 +56,9 @@ var g = {
                 console.log("loop done");
                 window.clearInterval(g.id);
             }
+            // per tick plot and render
+            ren.clear();
+            // black points on white bkgd
             g.tick = g.tick + 1;
         }
     }
@@ -65,13 +68,13 @@ var fane = {
         fane.n = 16;
         fane.a = rand.list(fane.n);
         console.log(fane.a);
-        fane.b = rand.Points(fane.n);
+        fane.b = rand.points(fane.n);
         console.log(fane.b);
         // center point
         var x0 = (1920 / 2) >>> 0;
         var y0 = (1080 / 2) >>> 0;
         var p0 = [x0, y0];
-        fane.c = fane.pois(fane.b);
+        fane.c = fane.pois(p0, fane.b);
     },
     "pois": function(p0, d0) {
         // return indicies
@@ -99,12 +102,36 @@ var rand = {
         var y0 = rand.list(n0);
         var r0 = [];
         for (var i = 0; i < n0; i++) {
-            var x1 = (x0 * 1920) >>> 0;
-            var y1 = (y0 * 1080) >>> 0;
+            var x1 = (x0[i] * 1920) >>> 0;
+            var y1 = (y0[i] * 1080) >>> 0;
             var r1 = [x1, y1];
             r0.push(r1);
         }
         return r0;
+    }
+}
+// scene
+var sce = {
+    "init": function() {
+        sce.a = {};
+        sce.a.r = [1920,1080,0,0];
+        sce.a.c = dom.cavnas(sce.a.r);
+        sce.a.d = rgba.rmon();
+
+        dom.add(sce.a);
+
+        sce.b = {};
+        sce.b.r = [960,540,480,270];
+        sce.b.c = dom.cavnas(sce.b.r);
+        sce.b.d = rgba.rmon();
+
+        dom.add(sce.b);
+    }
+}
+// render
+var ren = {
+    "clear": function() {
+        
     }
 }
     // dom
