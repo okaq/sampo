@@ -63,6 +63,8 @@ var g = {
 var fane = {
     "start": function() {
         fane.a = rand.list(16);
+        console.log(fane.a);
+        fane.b
     },
     "poisson": function(p0, d0) {
         // return indicies
@@ -78,6 +80,22 @@ var rand = {
         for (var i = 0; i < n0; i++) {
             var f0 = Math.random();
             r0.push(f0);
+        }
+        return r0;
+    },
+    "points": function(n0) {
+        // list of rand points
+        // points of form [x0,y0]
+        // width height set to one HD frame
+        // 1920 x 1080
+        var x0 = rand.list(n0);
+        var y0 = rand.list(n0);
+        var r0 = [];
+        for (var i = 0; i < n0; i++) {
+            var x1 = (x0 * 1920) >>> 0;
+            var y1 = (y0 * 1080) >>> 0;
+            var r1 = [x1, y1];
+            r0.push(r1);
         }
         return r0;
     }
