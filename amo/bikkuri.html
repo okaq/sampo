@@ -44,6 +44,9 @@ var g = {
             g.max = 16;
             g.count = 8;
 
+            // setup
+            fane.start();
+
             // loop
             g.id = window.setInterval(g.frame, 1000);
         },
@@ -56,6 +59,29 @@ var g = {
             g.tick = g.tick + 1;
         }
     }
+// data
+var fane = {
+    "start": function() {
+        fane.a = rand.list(16);
+    },
+    "poisson": function(p0, d0) {
+        // return indicies
+        // of points nearest
+        // and furthest from input
+    }
+}
+// rand
+var rand = {
+    "list": function(n0) {
+        // return n rand nums
+        var r0 = [];
+        for (var i = 0; i < n0; i++) {
+            var f0 = Math.random();
+            r0.push(f0);
+        }
+        return r0;
+    }
+}
     // dom
     var dom = {
         "init": function() {
