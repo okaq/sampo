@@ -62,11 +62,18 @@ var g = {
 // data
 var fane = {
     "start": function() {
-        fane.a = rand.list(16);
+        fane.n = 16;
+        fane.a = rand.list(fane.n);
         console.log(fane.a);
-        fane.b
+        fane.b = rand.Points(fane.n);
+        console.log(fane.b);
+        // center point
+        var x0 = (1920 / 2) >>> 0;
+        var y0 = (1080 / 2) >>> 0;
+        var p0 = [x0, y0];
+        fane.c = fane.pois(fane.b);
     },
-    "poisson": function(p0, d0) {
+    "pois": function(p0, d0) {
         // return indicies
         // of points nearest
         // and furthest from input
