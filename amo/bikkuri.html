@@ -58,6 +58,8 @@ var g = {
             }
             // per tick plot and render
             ren.clear();
+            ren.cent();
+            // intervals for poisson calculation
             // black points on white bkgd
             g.tick = g.tick + 1;
         }
@@ -116,16 +118,24 @@ var sce = {
         sce.a = {};
         sce.a.r = [1920,1080,0,0];
         sce.a.c = dom.canvas(sce.a.r);
-        sce.a.d = rgba.rmon();
+        // sce.a.d = rgba.rmon();
+        sce.a.d = rgba.css([255,255,255,1.0]);
 
         dom.add(sce.a.c);
 
         sce.b = {};
         sce.b.r = [960,540,480,270];
         sce.b.c = dom.canvas(sce.b.r);
-        sce.b.d = rgba.rmon();
+        // sce.b.d = rgba.rmon();
+        sce.b.d = rgba.css([215,215,215,1.0]);
 
-        dom.add(sce.b.c);
+        // dom.add(sce.b.c);
+
+        // point draw rgba
+        sce.d = rgba.css([0,0,0,1.0]);
+        sce.e = [];
+        sce.e[0] = sce.b.r[0];
+        sce.e[1] = sce.b.r[1];
     }
 }
 // render
@@ -135,8 +145,12 @@ var ren = {
         sce.a.c.con.fillStyle = sce.a.d;
         sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
 
-        sce.b.c.con.fillStyle = sce.b.d;
-        sce.b.c.con.fillRect(0,0,sce.b.c.can.width,sce.b.c.can.height);
+        // sce.b.c.con.fillStyle = sce.b.d;
+        // sce.b.c.con.fillRect(0,0,sce.b.c.can.width,sce.b.c.can.height);
+    },
+    "cent": function() {
+        sce.a.c.con.fillStyle = sce.d;
+        sce.a.c.con.fillRect(sce.e[0]-2,sce.e[1]-2,4,4);
     }
 }
     // dom
