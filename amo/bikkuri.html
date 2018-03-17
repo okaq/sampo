@@ -60,6 +60,7 @@ var g = {
             ren.clear();
             ren.cent();
             // intervals for poisson calculation
+            var id0 = window.setInterval(ren.data, 300);
             // black points on white bkgd
             g.tick = g.tick + 1;
         }
@@ -82,6 +83,11 @@ var fane = {
         // return indicies
         // of points nearest
         // and furthest from input
+
+        // cycle poisson
+        // use the last data point as input
+        // for the next round
+        // to determine the furthest distance
     }
 }
 // rand
@@ -151,6 +157,15 @@ var ren = {
     "cent": function() {
         sce.a.c.con.fillStyle = sce.d;
         sce.a.c.con.fillRect(sce.e[0]-2,sce.e[1]-2,4,4);
+    },
+    "data": function() {
+        sce.a.c.con.fillStyle = sce.d;
+        for (var i = 0; i < fane.b.length; i++) {
+            var p0 = fane.b[i];
+            var x0 = p0[0];
+            var y0 = p0[1];
+            sce.a.c.con.fillRect(x0,y0,2,2);
+        }
     }
 }
     // dom
