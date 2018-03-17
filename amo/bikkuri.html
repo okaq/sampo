@@ -89,12 +89,20 @@ var fane = {
         // for the next round
         // to determine the furthest distance
 
-        var p0 = [0,0];
+        var p0 = [[0,0],[1920,1080]];
         var min = 2000;
         var max = 0;
         for (var i - 0; i < d0.length; i++) {
             var p1 = d0[i];
             var dist = fane.cart(p0, p1);
+            if (dist >= max) {
+                max = dist;
+                p0[1] = p1;
+            }
+            if (dist <= min) {
+                min = dist
+                p0[0] = p1;
+            }
         }
         return p0;
     },
