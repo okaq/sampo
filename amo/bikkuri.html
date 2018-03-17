@@ -81,6 +81,28 @@ var fane = {
         var p0 = [x0, y0];
         fane.c = fane.pois(p0, fane.b);
         console.log(fane.c);
+        // setup accumulators
+        fane.d = [];
+        fane.d[0] = p0;
+        fane.e = [];
+        fane.f = [];
+        // each step add furthest point
+        // use that as next origin
+    },
+    "step": function() {
+        // index
+        var i0 = fane.d.length;
+        var i1 = i0 - 1;
+        // rand points
+        fane.e[i1] = rand.points(fane.n);
+        // last point
+        var p0 = fane.d[i1];
+        // distance
+        var d0 = fane.pois(p0, fane.e[i1]);
+        fane.f[i1] = d0;
+        // furthest point in new set
+        var p1 = d0[1];
+        fane.d.push(p1);
     },
     "pois": function(p0, d0) {
         // return indicies
@@ -107,7 +129,7 @@ var fane = {
                 p2[0] = p1;
             }
         }
-        console.log(min, max);
+        // console.log(min, max);
         return p2;
     },
     "cart": function(p0, p1) {
