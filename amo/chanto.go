@@ -12,7 +12,7 @@ const (
     INDEX = "chanto.html"
 )
 
-func ChanHander(w http.ResponseWriter, r *http.Request) {
+func ChanHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(r)
     http.ServeFile(w, r, INDEX)
 }
