@@ -57,7 +57,7 @@ var g = {
                 window.clearInterval(g.id);
             }
             // per tick plot and render
-            ren.clear();
+            // ren.clear();
             // ren.cent();
             // intervals for poisson calculation
             // var id0 = window.setTimeout(ren.data, 300);
@@ -67,7 +67,12 @@ var g = {
             // step
             fane.step();
             console.log(fane.d);
-            var id0 = window.setTimeout(ren.fine, 300);
+            var id0 = window.setTimeout(ren.fine, 100);
+
+            // current step algo
+            // produces a ping pong like clustering
+            // calculating max distance
+            // from previous point
 
             // black points on white bkgd
             g.tick = g.tick + 1;
@@ -227,6 +232,15 @@ var ren = {
     },
     "fine": function() {
         ren.clear();
+        sce.a.c.con.fillStyle = sce.d;
+        for (var i = 0; i < fane.d.length; i++) {
+            var p0 = fane.d[i];
+            var x0 = p0[0];
+            var y0 = p0[1];
+            var s0 = 16;
+            var s1 = (s0 / 2) >>> 0;
+            sce.a.c.con.fillRect(x0-s1,y0-s1,s0,s0);
+        }
     }
 }
     // dom
