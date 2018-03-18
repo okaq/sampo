@@ -58,11 +58,17 @@ var g = {
             }
             // per tick plot and render
             ren.clear();
-            ren.cent();
+            // ren.cent();
             // intervals for poisson calculation
-            var id0 = window.setTimeout(ren.data, 300);
+            // var id0 = window.setTimeout(ren.data, 300);
             // determination of new point
-            var id1 = window.setTimeout(ren.point, 300);
+            // var id1 = window.setTimeout(ren.point, 300);
+
+            // step
+            fane.step();
+            console.log(fane.d);
+            var id0 = window.setTimeout(ren.fine, 300);
+
             // black points on white bkgd
             g.tick = g.tick + 1;
         }
@@ -218,6 +224,9 @@ var ren = {
             var y0 = p0[1];
             sce.a.c.con.fillRect(x0,y0,2,2);
         }
+    },
+    "fine": function() {
+        ren.clear();
     }
 }
     // dom
