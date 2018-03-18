@@ -74,6 +74,15 @@ var g = {
             // calculating max distance
             // from previous point
 
+            // rectangles require collision
+            // avoidance as well
+            // for large candidate sets, N = 100
+            // computation will be onerous
+
+            // instead simply subdivide space
+            // make random margins and
+            // position internally in grid
+
             // black points on white bkgd
             g.tick = g.tick + 1;
         }
