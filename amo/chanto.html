@@ -41,6 +41,7 @@ var g = {
         "start": function() {
             g.tick = 0;
             // get net counter
+            net.start();
             // sync sub division model
         }
     }
@@ -50,7 +51,9 @@ var net = {
         net.urls = [
             "http://localhost:8080/s"
         ];
-
+    },
+    "start": function() {
+        // create xhr object
         net.a = new XMLHttpRequest();
 
         net.a.addEventListener("progress", net.prog, false);
@@ -68,6 +71,12 @@ var net = {
     "load": function(e) {
         // load handler
         console.log(e);
+        // obtain count
+        var j0 = e.target.response;
+        net.c = JSON.parse(j0);
+        console.log(j0);
+        console.log(net.c);
+        console.log("server count: " + net.c.count);
     },
     "erro": function(e) {
         // error handler

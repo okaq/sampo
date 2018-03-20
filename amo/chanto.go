@@ -4,6 +4,7 @@
 package main
 
 import (
+    "encoding/json"
     "fmt"
     "net/http"
     "sync/atomic"
@@ -32,7 +33,7 @@ func StatHandler(w http.ResponseWriter, r *http.Request) {
     c1 := struct {
         Count uint64 `json:"count"`
     } {
-        c0
+        c0,
     }
     j0, err := json.Marshal(c1)
     if err != nil {
