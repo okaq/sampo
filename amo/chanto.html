@@ -50,6 +50,32 @@ var net = {
         net.urls = [
             "http://localhost:8080/s"
         ];
+
+        net.a = new XMLHttpRequest();
+
+        net.a.addEventListener("progress", net.prog, false);
+        net.a.addEventListener("load", net.load, false);
+        net.a.addEventListener("error", net.erro, false);
+        net.a.addEventListener("abort", net.abor, false);
+
+        net.a.open("GET", net.urls[0], true);
+        net.a.send();
+    },
+    "prog": function(e) {
+        // progress handler
+        console.log(e);
+    },
+    "load": function(e) {
+        // load handler
+        console.log(e);
+    },
+    "erro": function(e) {
+        // error handler
+        console.log(e);
+    },
+    "abor": function(e) {
+        // abort handler
+        console.log(e);
     }
 }
 // scene
