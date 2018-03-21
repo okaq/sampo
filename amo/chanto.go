@@ -7,6 +7,7 @@ import (
     "encoding/json"
     "fmt"
     "net/http"
+    "sync"
     "sync/atomic"
 )
 
@@ -16,7 +17,19 @@ const (
 
 var (
     Counter uint64
+    Cach *Cache
 )
+
+type Cache struct {
+    C map[string]string
+    *sync.Mutex
+}
+
+func NewCache() *Cache {
+    c0 := &Cache{}
+    c0.C = make(map[string]string)
+    return c0
+}
 
 func ChanHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(r)
@@ -51,6 +64,7 @@ func Count() {
 func main() {
     fmt.Println("web serving on localhost:8080")
     Count()
+    Cach = NewCache()
     http.HandleFunc("/", ChanHandler)
     http.HandleFunc("/s", StatHandler)
     http.ListenAndServe(":8080", nil)
