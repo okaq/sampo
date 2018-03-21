@@ -56,6 +56,21 @@ var mod = {
         // node value contains rect data
         // two edges list: input and output
         // grand list is in breadth first order
+
+        // key of the form: "id_row#_col#"
+        // graphs are really bitmaps
+        // adjacency matrix alternate implementation
+
+        // create root node
+        mod.s["po_0_0"] = {};
+        // rect
+        mod.s["po_0_0"].r = [1920,1080,0,0];
+        // input (parent nodes)
+        mod.s["po_0_0"].s = null;
+        // output (child nodes)
+        mod.s["po_0_0"].t = ["po_1_0","po_1_1"];
+        // list
+        mod.r = [];
     }
 }
 // xhr
