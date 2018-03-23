@@ -44,6 +44,20 @@ var g = {
             net.start();
             // sync sub division model
 
+            // loop mod subdivision
+            g.tick = 0;
+            g.id = window.setInterval(g.frame, 1000);
+
+        },
+        "frame": function() {
+            // next iteration
+            console.log("tick count: " + g.tick);
+
+            if (g.tick >= 8) {
+                console.log("loop done");
+                window.clearInterval(g.id);
+            }
+            g.tick = g.tick + 1;
         }
     }
 // data
