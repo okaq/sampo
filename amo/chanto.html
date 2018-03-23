@@ -52,6 +52,7 @@ var g = {
         "frame": function() {
             // next iteration
             console.log("tick count: " + g.tick);
+            mod.step();
 
             if (g.tick >= 8) {
                 console.log("loop done");
@@ -94,6 +95,24 @@ var mod = {
         // return list of neighbors
 
         // methods for descendant operations
+    },
+    "step": function() {
+        // depth level
+        var d0 = g.tick + 1;
+        // level node list
+        var n0 = mod.level(d0);
+    },
+    "level": function(d0) {
+        // return list of nodes
+        // at input level
+        var r0 = [];
+        for (var k0 in mod.s) {
+            console.log(k0);
+            if (k0[4] == d0) {
+                r0.push(k0);
+            }
+        }
+        return r0;
     }
 }
 // xhr
