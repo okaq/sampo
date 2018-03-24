@@ -52,7 +52,8 @@ var g = {
         "frame": function() {
             // next iteration
             console.log("tick count: " + g.tick);
-            mod.step();
+            // mod.step();
+            mod.step2();
 
             if (g.tick >= 8) {
                 console.log("loop done");
@@ -68,8 +69,18 @@ var mod = {
         mod.v = [];
         mod.v[0] = [];
         mod.v[0][0] = {};
+        mod.v[0][0].r = [1920,1080,0,0];
+        mod.v[0][0].d = rgba.rmon();
         // if the tree is binary
         // indicies determine edges
+    },
+    "step2": function() {
+        // iterate by level
+        var d0 = g.tick;
+        var d1 = mod.v[d0];
+        // create new level
+        var d2 = d0 + 1;
+        mod.v[d2] = [];
     },
     "init2": function() {
         // graph representation
