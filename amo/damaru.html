@@ -42,6 +42,20 @@ var g = {
             g.tick = 0;
 
             ren.clear();
+
+            g.tick = 0;
+            g.max = (Math.random() * 1024) >>> 0;
+            g.id = window.setInterval(g.frame, 1000);
+        },
+        "frame": function() {
+            console.log("drawing rand rect #" + g.tick + " out of " + g.max);
+            sce.step();
+            ren.step();
+            g.tick = g.tick + 1;
+            if (g.tick >= g.max) {
+                console.log("rand rect done!");
+                window.clearInterval(g.id);
+            }
         }
     }
 // render
@@ -49,6 +63,12 @@ var ren = {
     "clear": function() {
         var c0 = sce.a.c;
         c0.con.fillStyle = sce.a.d;
+        c0.con.fillRect(0,0,c0.can.width,c0.can.height);
+    },
+    "step": function() {
+        var c0 = sce.b[g.tick].c;
+        var d0 = sce.b[g.tick].d
+        c0.con.fillStyle = d0;
         c0.con.fillRect(0,0,c0.can.width,c0.can.height);
     }
 }
@@ -62,6 +82,32 @@ var ren = {
             sce.a.d = rgba.rmon();
 
             dom.add(sce.a.c);
+
+            // rand list
+            sce.b = [];
+        },
+        "step": function() {
+            // add rand rect
+            // origin
+            var x0 = (Math.random() * 1920) >>> 0;
+            var y0 = (Math.random() * 1080) >>> 0;
+            // dims
+            var w0 = (1920 - x0) >>> 0;
+            var h0 = (1080 - y0) >>> 0;
+            var w1 = (Math.random() * w0);
+            var h1 = (Math.random() * h0);
+            // rect
+            var r0 = {};
+            r0.r = [w1,h1,x0,y0];
+            r0.c = dom.canvas(r0.r);
+            r0.d = rgba.rmon();
+
+            sce.b[g.tick] = r0;
+            dom.add(sce.b[g.tick].c);
+
+            // no need for z-index
+            // rects rendered and displayed
+            // in canvas add order
         }
     }
         // dom
