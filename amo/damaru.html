@@ -40,8 +40,18 @@ var g = {
         },
         "start": function() {
             g.tick = 0;
+
+            ren.clear();
         }
     }
+// render
+var ren = {
+    "clear": function() {
+        var c0 = sce.a.c;
+        c0.con.fillStyle = sce.a.d;
+        c0.con.fillRect(0,0,c0.can.width,c0.can.height);
+    }
+}
     // scene
     var sce = {
         "init": function() {
@@ -50,6 +60,8 @@ var g = {
             sce.a.r = [1920,1080,0,0];
             sce.a.c = dom.canvas(sce.a.r);
             sce.a.d = rgba.rmon();
+
+            dom.add(sce.a.c);
         }
     }
         // dom
