@@ -30,7 +30,7 @@ var g = {
             console.log("do damaru");
 
             // subs
-            g.subs = [dom,sce];
+            g.subs = [dom,sce,db];
             g.subs.forEach(function(el){el.init();});
 
             window.setTimeout(g.start, 1000);
@@ -58,6 +58,23 @@ var g = {
             }
         }
     }
+// data
+var db = {
+    "init": function() {
+        // triangle list
+        db.a = [];
+    },
+    "geom": function(s0) {
+        // input square
+        // output random layout
+        var w0 = (1920 - s0) >>> 0;
+        var h0 = (1080 - s0) >>> 0;
+        var x0 = (Math.random() * w0) >>> 0;
+        var y0 = (Math.random() + h0) >>> 0;
+        var r0 = [w0,h0,x0,y0];
+        return r0;
+    }
+}
 // render
 var ren = {
     "clear": function() {
