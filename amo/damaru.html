@@ -49,8 +49,12 @@ var g = {
         },
         "frame": function() {
             console.log("drawing rand rect #" + g.tick + " out of " + g.max);
-            sce.step();
-            ren.step();
+            // sce.step();
+            // ren.step();
+            // add box to list
+            db.tock();
+            console.log(db.a[0]);
+            // render border
             g.tick = g.tick + 1;
             if (g.tick >= g.max) {
                 console.log("rand rect done!");
@@ -71,8 +75,13 @@ var db = {
         var h0 = (1080 - s0) >>> 0;
         var x0 = (Math.random() * w0) >>> 0;
         var y0 = (Math.random() + h0) >>> 0;
-        var r0 = [w0,h0,x0,y0];
+        // var r0 = [w0,h0,x0,y0];
+        var r0 = [s0,s0,x0,y0];
         return r0;
+    },
+    "tock": function() {
+        // static update of rect per frame
+        db.a[0] = db.geom(512);
     }
 }
 // render
