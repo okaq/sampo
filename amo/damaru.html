@@ -81,7 +81,7 @@ var db = {
         var w0 = (1920 - s0) >>> 0;
         var h0 = (1080 - s0) >>> 0;
         var x0 = (Math.random() * w0) >>> 0;
-        var y0 = (Math.random() + h0) >>> 0;
+        var y0 = (Math.random() * h0) >>> 0;
         // var r0 = [w0,h0,x0,y0];
         var r0 = [s0,s0,x0,y0];
         return r0;
@@ -103,6 +103,12 @@ var ren = {
         var d0 = sce.b[g.tick].d
         c0.con.fillStyle = d0;
         c0.con.fillRect(0,0,c0.can.width,c0.can.height);
+    },
+    "marg": function() {
+        var c0 = sce.b[0].c;
+        c0.con.strokeStyle = rgba.css([0,0,0,1.0]);
+        c0.con.lineWidth = 16;
+        c0.con.strokeRect(0,0,c0.can.width,c0.can.height);
     }
 }
     // scene
