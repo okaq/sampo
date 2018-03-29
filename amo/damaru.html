@@ -51,10 +51,17 @@ var g = {
             console.log("drawing rand rect #" + g.tick + " out of " + g.max);
             // sce.step();
             // ren.step();
+
             // add box to list
             db.tock();
             console.log(db.a[0]);
+
+            // add to dom
+            sce.port();
+
             // render border
+            ren.marg();
+
             g.tick = g.tick + 1;
             if (g.tick >= g.max) {
                 console.log("rand rect done!");
@@ -134,6 +141,15 @@ var ren = {
             // no need for z-index
             // rects rendered and displayed
             // in canvas add order
+        },
+        "port": function() {
+            // add the current rect to the dom
+            sce.b[0] = {};
+            sce.b[0].r = db.a[0];
+            sce.b[0].c = dom.canvas(sce.b[0].r);
+            sce.b[0].d = rgba.rmon();
+
+            dom.add(sce.b[0].c);
         }
     }
         // dom
