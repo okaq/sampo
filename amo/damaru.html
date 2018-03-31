@@ -95,9 +95,13 @@ var db = {
     "met": function() {
         // angle
         db.b = {};
-        db.b.a = (Math.random() * Math.PI);
+        // db.b.a = (Math.random() * Math.PI);
+        db.a = [];
+        db.a[0] = (Math.random() * Math.PI);
         // radius
-        db.b.r = (Math.random() * (512 / 2)) >>> 0;
+        // db.b.r = (Math.random() * (512 / 2)) >>> 0;
+        db.b = [];
+        db.b[0] = (Math.random() * {512 / 2}) >>> 0;
 
         // random walk for r, theta
         // as we walk around the circle
