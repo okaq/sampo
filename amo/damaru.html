@@ -62,6 +62,8 @@ var g = {
             // render border
             ren.marg();
 
+            // setup the meteor
+
             g.tick = g.tick + 1;
             if (g.tick >= g.max) {
                 console.log("rand rect done!");
@@ -89,6 +91,18 @@ var db = {
     "tock": function() {
         // static update of rect per frame
         db.a[0] = db.geom(512);
+    },
+    "met": function() {
+        // angle
+        db.b = {};
+        db.b.a = (Math.random() * Math.PI);
+        // radius
+        db.b.r = (Math.random() * (512 / 2)) >>> 0;
+
+        // random walk for r, theta
+        // as we walk around the circle
+
+        // methods for cartesian polar transform
     }
 }
 // render
