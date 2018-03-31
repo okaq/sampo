@@ -96,17 +96,31 @@ var db = {
         // angle
         db.b = {};
         // db.b.a = (Math.random() * Math.PI);
-        db.a = [];
-        db.a[0] = (Math.random() * Math.PI);
+        db.b.a = [];
+        db.b.a[0] = (Math.random() * Math.PI);
         // radius
         // db.b.r = (Math.random() * (512 / 2)) >>> 0;
-        db.b = [];
-        db.b[0] = (Math.random() * {512 / 2}) >>> 0;
+        db.b.r = [];
+        db.b.r[0] = (Math.random() * {512 / 2}) >>> 0;
 
         // random walk for r, theta
         // as we walk around the circle
 
         // methods for cartesian polar transform
+    },
+    "step": function() {
+        // tick indicies
+        var i0 = g.tick + 1;
+        var i1 = db.b.a.length - 1;
+        // last radius
+        var r0 = db.b.a[i1];
+        // radius delta
+        var r1 = (512 / 16) >>> 0;
+        // radius step
+        var r2 = (Math.random() * r1) >>> 0;
+        // pos neg flip
+        // jump dist
+        // floor
     }
 }
 // render
