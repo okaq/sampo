@@ -119,8 +119,22 @@ var db = {
         // radius step
         var r2 = (Math.random() * r1) >>> 0;
         // pos neg flip
+        var r3 = Math.random();
+        var r4 = 1.0;
+        if (r3 <= 0.5) {
+            r4 = -1.0;
+        }
         // jump dist
+        var r5 = (r2 * r4);
+        var r6 = (r0 + r5) >>> 0;
         // floor
+        if (r6 < 0) {
+            r6 = -1.0 * r6;
+        }
+        if (r6 >= 512) {
+            r6 = 512 - (r6 - 512);
+        }
+        db.b.a.push(r6);
     },
     "step2": function() {
         // angle walk
