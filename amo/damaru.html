@@ -111,13 +111,13 @@ var db = {
     "step": function() {
         // tick indicies
         var i0 = g.tick + 1;
-        var i1 = db.b.a.length - 1;
+        var i1 = db.b.r.length - 1;
         // last radius
-        var r0 = db.b.a[i1];
+        var r0 = db.b.r[i1];
         // radius delta
         var r1 = (512 / 16) >>> 0;
         // radius step
-        var r2 = (Math.random() * r1) >>> 0;
+        var r2 = (Math.random() * r1);
         // pos neg flip
         var r3 = Math.random();
         var r4 = 1.0;
@@ -126,7 +126,7 @@ var db = {
         }
         // jump dist
         var r5 = (r2 * r4);
-        var r6 = (r0 + r5) >>> 0;
+        var r6 = (r0 + r5);
         // floor
         if (r6 < 0) {
             r6 = -1.0 * r6;
@@ -134,10 +134,36 @@ var db = {
         if (r6 >= 512) {
             r6 = 512 - (r6 - 512);
         }
-        db.b.a.push(r6);
+        db.b.r.push(r6);
     },
     "step2": function() {
         // angle walk
+        // ticks
+        var i0 = g.tick + 1;
+        var i1 = db.b.a.length - 1;
+        // last angle
+        var t0 = db.b.a[i1];
+        // angle delta
+        var t1 = (Math.PI * 2 / 16) >>> 0;
+        // angle step
+        var t2 = (Math.random() * t1);
+        // parity flip
+        var t3 = Math.random();
+        var t4 = 1.0;
+        if (t3 <= 0.5) {
+            t4 = -1.0;
+        }
+        // jump dist (non-neg for angle)
+        // var t5 = (t2 * t4);
+        var t5 = (t2 * 1.0);
+        var t6 = (t0 + t5);
+        // floor
+        if (t6 >= Math.PI * 2) {
+            t6 = 0;
+        }
+        db.b.a.push(t6);
+        // leave high precise data
+        // convert at pixel time
     }
 }
 // render
