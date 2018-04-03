@@ -44,8 +44,10 @@ var g = {
             ren.clear();
 
             g.tick = 0;
-            g.max = (Math.random() * 1024) >>> 0;
-            g.id = window.setInterval(g.frame, 1000);
+            // g.max = (Math.random() * 1024) >>> 0;
+            g.max = 4;
+            // g.id = window.setInterval(g.frame, 1000);
+            g.id = window.setInterval(g.frame2, 1000);
         },
         "frame": function() {
             console.log("drawing rand rect #" + g.tick + " out of " + g.max);
@@ -63,6 +65,21 @@ var g = {
             ren.marg();
 
             // setup the meteor
+
+            g.tick = g.tick + 1;
+            if (g.tick >= g.max) {
+                console.log("rand rect done!");
+                window.clearInterval(g.id);
+            }
+        },
+        "frame2": function() {
+            console.log("drawing rand rect #" + g.tick + " out of " + g.max);
+
+            // centered square
+            // add new meteor vertex
+            // polar transoform
+            // draw vertex
+            // connect paths
 
             g.tick = g.tick + 1;
             if (g.tick >= g.max) {
@@ -97,11 +114,13 @@ var db = {
         db.b = {};
         // db.b.a = (Math.random() * Math.PI);
         db.b.a = [];
-        db.b.a[0] = (Math.random() * Math.PI);
+        // db.b.a[0] = (Math.random() * Math.PI);
+        // begin at origin
+        db.b.a[0] = 0;
         // radius
         // db.b.r = (Math.random() * (512 / 2)) >>> 0;
         db.b.r = [];
-        db.b.r[0] = (Math.random() * {512 / 2}) >>> 0;
+        db.b.r[0] = (Math.random() * (512 / 2)) >>> 0;
 
         // random walk for r, theta
         // as we walk around the circle
@@ -144,7 +163,8 @@ var db = {
         // last angle
         var t0 = db.b.a[i1];
         // angle delta
-        var t1 = (Math.PI * 2 / 16) >>> 0;
+        // var t1 = (Math.PI * 2 / 16) >>> 0;
+        var t1 = (Math.PI / 2);
         // angle step
         var t2 = (Math.random() * t1);
         // parity flip
