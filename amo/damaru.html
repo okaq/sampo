@@ -41,7 +41,9 @@ var g = {
         "start": function() {
             g.tick = 0;
 
-            ren.clear();
+            sce.cent();
+            // ren.clear();
+            ren.clear2();
 
             g.tick = 0;
             // g.max = (Math.random() * 1024) >>> 0;
@@ -204,6 +206,17 @@ var ren = {
         c0.con.strokeStyle = rgba.css([0,0,0,1.0]);
         c0.con.lineWidth = 16;
         c0.con.strokeRect(0,0,c0.can.width,c0.can.height);
+    },
+    "cent": function() {
+        var c0 = sce.b[0].c;
+        var d0 = sce.b[0].d
+        c0.con.fillStyle = d0;
+        c0.con.fillRect(0,0,c0.can.width,c0.can.height);
+    },
+    "clear2": function() {
+        ren.clear();
+        ren.cent();
+        ren.marg();
     }
 }
     // scene
@@ -257,7 +270,7 @@ var ren = {
             sce.b[0].r = [600,600,660,240];
             // 88 px margin
             sce.b[0].c = dom.canvas(sce.b[0].r);
-            sce.b[0].d = rgba.css([0,0,0,1.0]);
+            sce.b[0].d = rgba.css([255,255,255,1.0]);
 
             dom.add(sce.b[0].c);
         }
