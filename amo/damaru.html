@@ -251,6 +251,15 @@ var ren = {
             sce.b[0].d = rgba.rmon();
 
             dom.add(sce.b[0].c);
+        },
+        "cent": function() {
+            sce.b[0] = {};
+            sce.b[0].r = [600,600,660,240];
+            // 88 px margin
+            sce.b[0].c = dom.canvas(sce.b[0].r);
+            sce.b[0].d = rgba.css([0,0,0,1.0]);
+
+            dom.add(sce.b[0].c);
         }
     }
         // dom
