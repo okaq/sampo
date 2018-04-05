@@ -196,6 +196,15 @@ var db = {
         db.b.a.push(t6);
         // leave high precise data
         // convert at pixel time
+    },
+    "polar": function(p0) {
+        // polar to cartesian transform
+        // input point [radius,angle]
+        // output point [x,y]
+        // in canvas space
+    },
+    "shift": function(p0) {
+        // translate to center origin
     }
 }
 // render
