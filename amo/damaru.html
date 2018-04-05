@@ -45,6 +45,12 @@ var g = {
             // ren.clear();
             ren.clear2();
 
+            // generate asteroid
+            db.met();
+            // db.step();
+            // db.step2();
+            // console.log(db.b);
+
             g.tick = 0;
             // g.max = (Math.random() * 1024) >>> 0;
             g.max = 4;
@@ -83,8 +89,12 @@ var g = {
             // draw vertex
             // connect paths
 
+            db.step();
+            db.step2();
+
             g.tick = g.tick + 1;
             if (g.tick >= g.max) {
+                console.log(db.b);
                 console.log("rand rect done!");
                 window.clearInterval(g.id);
             }
