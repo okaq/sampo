@@ -202,9 +202,21 @@ var db = {
         // input point [radius,angle]
         // output point [x,y]
         // in canvas space
+        var r0 = p0[0];
+        var t0 = p0[1];
+        var x0 = r0 * Math.cos(t0);
+        var y0 = r0 * Math.sin(r0);
+        var p1 = [x0,y0];
+        return p1;
     },
     "shift": function(p0) {
         // translate to center origin
+        var x0 = p0[0];
+        var y0 = p0[1];
+        var x1 = (x0 + 256) >>> 0;
+        var y1 = (y0 + 256) >>> 0;
+        var p1 = [x1,y1];
+        return p1;
     }
 }
 // render
