@@ -138,6 +138,17 @@ var db = {
         // as we walk around the circle
 
         // methods for cartesian polar transform
+        // x-coords
+        db.b.x = [];
+        // y-coords
+        db.b.y = [];
+        var p0 = [];
+        p0[0] = db.b.r[0];
+        p0[1] = db.b.r[1];
+        var p1 = db.polar(p0);
+        var p2 = db.shift(p1);
+        db.b.x[0] = p2[0];
+        db.b.y[0] = p2[1];
     },
     "step": function() {
         // tick indicies
