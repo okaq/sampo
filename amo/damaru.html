@@ -91,6 +91,8 @@ var g = {
 
             db.step();
             db.step2();
+            // x-y transform
+            db.step3();
 
             g.tick = g.tick + 1;
             if (g.tick >= g.max) {
@@ -207,6 +209,25 @@ var db = {
         db.b.a.push(t6);
         // leave high precise data
         // convert at pixel time
+    },
+    "step3": function() {
+        // cartesian coords
+        // tick
+        var i0 = g.tick + 1;
+        var i1 = db.b.x.length - 1;
+        var i2 = db.b.y.length - 1;
+        // current angle radius
+        var t0 = db.b.a[i0];
+        var r0 = db.b.r[i0];
+        // transformed point
+        var p0 = [r0,t0];
+        var p1 = db.polar(p0);
+        var p2 = db.shift(p1);
+        // add to list
+        var x0 = p2[0];
+        var y0 = p2[1];
+        db.b.x.push(x0);
+        db.b.y.push(y0);
     },
     "polar": function(p0) {
         // polar to cartesian transform
