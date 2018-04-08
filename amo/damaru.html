@@ -93,6 +93,8 @@ var g = {
             db.step2();
             // x-y transform
             db.step3();
+            // render points one by one
+            ren.pts();
 
             g.tick = g.tick + 1;
             if (g.tick >= g.max) {
@@ -280,6 +282,10 @@ var ren = {
         ren.clear();
         ren.cent();
         ren.marg();
+    },
+    "pts": function() {
+        // point at g.tick index
+        
     }
 }
     // scene
