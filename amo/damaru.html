@@ -91,6 +91,12 @@ var g = {
 
             db.step();
             db.step2();
+            // check circle complete
+            var a0 = db.b.a[db.b.a.length-1];
+            if (a0 >= (Math.PI * 2.0)) {
+                console.log(a0, a0-(Math.PI*2.0));
+                console.log("circle complete, end iteration");
+            }
             // x-y transform
             db.step3();
             // render points one by one
