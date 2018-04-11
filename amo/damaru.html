@@ -53,7 +53,7 @@ var g = {
 
             g.tick = 0;
             // g.max = (Math.random() * 1024) >>> 0;
-            g.max = 4;
+            g.max = 8;
             // g.id = window.setInterval(g.frame, 1000);
             g.id = window.setInterval(g.frame2, 1000);
         },
@@ -148,7 +148,7 @@ var db = {
         db.b.y = [];
         var p0 = [];
         p0[0] = db.b.r[0];
-        p0[1] = db.b.r[1];
+        p0[1] = db.b.a[0];
         var p1 = db.polar(p0);
         var p2 = db.shift(p1);
         db.b.x[0] = p2[0];
@@ -211,6 +211,8 @@ var db = {
         db.b.a.push(t6);
         // leave high precise data
         // convert at pixel time
+
+        // signal stop when we reach 2 * PI
     },
     "step3": function() {
         // cartesian coords
@@ -239,8 +241,10 @@ var db = {
         var r0 = p0[0];
         var t0 = p0[1];
         var x0 = r0 * Math.cos(t0);
-        var y0 = r0 * Math.sin(r0);
-        var p1 = [x0,y0];
+        var y0 = r0 * Math.sin(t0);
+        var y1 = -1.0 * y0;
+        // var p1 = [x0,y0];
+        var p1 = [x0,y1];
         return p1;
     },
     "shift": function(p0) {
