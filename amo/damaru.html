@@ -108,6 +108,40 @@ var g = {
                 console.log("rand rect done!");
                 window.clearInterval(g.id);
             }
+        },
+        "frame3": function() {
+            console.log("point #" + g.tick + " of " + g.max);
+
+            // radius and angle walk
+            // plus cartesian transform
+            g.walk();
+
+            // circle complete check
+            g.circle();
+
+            // end loop or continue
+            g.send();
+
+            g.tick = g.tick + 1;
+        },
+        "walk": function() {
+            // the next step
+            db.step();
+            db.step2();
+            db.step3();
+        },
+        "circle": function() {
+            // if the circle is complete
+            // set the flag
+            g.blip = false;
+        },
+        "send": function() {
+            if (g.blip) {
+                console.log(db.b);
+                console.log("walk complete in " + db.b.length + "steps!");
+                window.clearInterval(g.id);
+            }
+            // draw the rays
         }
     }
 // data
