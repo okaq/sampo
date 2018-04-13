@@ -133,7 +133,13 @@ var g = {
         "circle": function() {
             // if the circle is complete
             // set the flag
-            g.blip = false;
+            var a0 = db.b.a[db.b.a.length-1];
+            if (a0 >= (Math.PI * 2.0)) {
+                console.log(a0, a0-(Math.PI*2.0));
+                console.log("circle complete");
+                g.blip = true;
+            }
+            // g.blip = false;
         },
         "send": function() {
             if (g.blip) {
