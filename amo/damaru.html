@@ -353,6 +353,19 @@ var ren = {
     },
     "spoke": function() {
         // center to next iteration point
+        // ren.clear2();
+        var c0 = sce.b[0].c;
+        var x0 = db.b.x[g.tick];
+        var y0 = db.b.y[g.tick];
+        var x1 = (c0.can.width / 2) >>> 0;
+        var y1 = (c0.can.height / 2) >>> 0;
+        // draw line
+        c0.con.strokeStyle = rgba.css([0,0,0,1.0]);
+        c0.con.beginPath();
+        c0.con.moveTo(x1,y1);
+        c0.con.lineTo(x0,y0);
+        c0.con.closePath();
+        c0.con.stroke();
     },
     "rays": function() {
         // connected boundary of the asteroid
