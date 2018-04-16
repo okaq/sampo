@@ -153,10 +153,11 @@ var g = {
         "send": function() {
             if (g.blip) {
                 console.log(db.b);
-                console.log("walk complete in " + db.b.length + "steps!");
+                console.log("walk complete in " + db.b.a.length + " steps!");
                 window.clearInterval(g.id);
             }
             // draw the rays
+            // angle step must always be positive!
         }
     }
 // data
@@ -259,10 +260,13 @@ var db = {
         // var t5 = (t2 * t4);
         var t5 = (t2 * 1.0);
         var t6 = (t0 + t5);
+        /*
         // floor
         if (t6 >= Math.PI * 2) {
             t6 = 0;
         }
+        */
+        // floor handled by loop
         db.b.a.push(t6);
         // leave high precise data
         // convert at pixel time
