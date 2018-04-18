@@ -50,6 +50,9 @@ var g = {
             // db.step();
             // db.step2();
             // console.log(db.b);
+            // ren.pts();
+            ren.pts2();
+            ren.spoke();
 
             g.tick = 0;
             // g.max = (Math.random() * 1024) >>> 0;
@@ -116,7 +119,8 @@ var g = {
             // radius and angle walk
             // plus cartesian transform
             g.walk();
-            ren.pts();
+            // ren.pts();
+            ren.pts2();
             ren.spoke();
             // ren.rays();
 
@@ -354,6 +358,18 @@ var ren = {
         c0.con.fillStyle = rgba.css([0,0,0,1.0]);
         c0.con.fillRect(x0,y0,8,8);
         // correction in angle, y inverse needed
+    },
+    "pts2": function() {
+        // clear
+        ren.clear2();
+        // point list
+        var c0 = sce.b[0].c;
+        c0.con.fillStyle = rgba.css([0,0,0,1.0]);
+        for (var i = 0; i < g.tick + 1; i++) {
+            var x0 = db.b.x[i];
+            var y0 = db.b.y[i];
+            c0.con.fillRect(x0,y0,8,8);
+        }
     },
     "spoke": function() {
         // center to next iteration point
