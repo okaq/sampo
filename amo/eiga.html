@@ -49,6 +49,12 @@ var g = {
 
             // https://fonts.google.com/specimen/Gugi
             // reflects hanguls visual characteristics
+
+            sce.block();
+            // target sample size
+            // draw glyph in 1024x1024 canvas
+            // pixel block size is 32x32
+            // can then be rendered as product of 32 pixels
         }
     }
 // data
@@ -68,6 +74,11 @@ var sce = {
         sce.a.d = rgba.rmon();
 
         dom.add(sce.a.c);
+    },
+    "block": function() {
+        // text size tests
+        var t0 = [32,32*2,32*3,32*4,32*5];
+
     }
 }
 // xhr
