@@ -30,7 +30,7 @@ var g = {
             console.log("bitmap sampler and encoder");
 
             // subs
-            g.subs = [dom,sce,db];
+            g.subs = [dom,sce,db,net];
             g.subs.forEach(function(el){el.init();});
 
             window.setTimeout(g.start, 1000);
@@ -40,6 +40,15 @@ var g = {
         },
         "start": function() {
             g.tick = 0;
+
+            // start net conn to server
+            // get session id, timestamp, sync
+
+            // load google font
+            // begin loop on font load complete
+
+            // https://fonts.google.com/specimen/Gugi
+            // reflects hanguls visual characteristics
         }
     }
 // data
@@ -59,6 +68,17 @@ var sce = {
         sce.a.d = rgba.rmon();
 
         dom.add(sce.a.c);
+    }
+}
+// xhr
+var net = {
+    "init": function() {
+        // establish conn to server
+        net.urls = [
+            "http://localhost:8080/a",
+            "http://localhost:8080/b"
+        ];
+        net.a = new XMLHttpRequest();
     }
 }
     // dom
