@@ -55,6 +55,11 @@ var g = {
             // draw glyph in 1024x1024 canvas
             // pixel block size is 32x32
             // can then be rendered as product of 32 pixels
+
+            // pids and server sync
+            // restrict web app to singleton state
+            // only one client is allowed to generate bitmaps
+            net.sync();
         }
     }
 // data
@@ -67,7 +72,7 @@ var db = {
 var sce = {
     "init": function() {
         // bkgd
-        sce.a. = {};
+        sce.a = {};
         sce.a.r = [1920,1080,0,0];
         sce.a.c = dom.canvas(sce.a.r);
         // sce.a.d = rgba.css([255,255,255,1.0]);
@@ -77,8 +82,12 @@ var sce = {
     },
     "block": function() {
         // text size tests
-        var t0 = [32,32*2,32*3,32*4,32*5];
-
+        // var t0 = [32,32*2,32*3,32*4,32*5];
+        var t0 = [32];
+        for (var i = 1; i < 8; i++) {
+            t0[i] = (t0[0] * (i+1)) >>> 0;
+        }
+        console.log(t0);
     }
 }
 // xhr
@@ -87,9 +96,33 @@ var net = {
         // establish conn to server
         net.urls = [
             "http://localhost:8080/a",
-            "http://localhost:8080/b"
+            "http://localhost:8080/b",
+            "http://localhost:8080/c"
         ];
         net.a = new XMLHttpRequest();
+        console.log(net.a);
+    },
+    "sync": function() {
+        // generate client pids
+        net.p = {};
+        net.p["time"] = Date.now();
+        console.log("client time: " + net.p["time"]);
+        net.p["session"] = (Number.MAX_SAFE_INTEGER * Math.random()) >>> 0;
+        console.log("client session: " + net.p["session"]);
+        net.pj = JSON.stringify(net.p);
+        // console.log(net.pj);
+        // send json data
+        net.a.open("POST", net.urls[0], true);
+        net.a.requestType = "json";
+        net.a.addEventListener("load", net.sid, false);
+        net.a.send(net.pj);
+    },
+    "sid": function(e) {
+        console.log(e);
+        // server pid handler
+        var j0 = JSON.parse(e.target.response);
+        console.log(j0);
+        net.q = {};
     }
 }
     // dom

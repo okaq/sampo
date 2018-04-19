@@ -63,7 +63,7 @@ func Session() {
     m0 := NewMessage()
     m0.K = "session"
     m0.V = s0
-    go func() { M <- m0 }()
+    // go func() { M <- m0 }()
     // channel with type key,val strings
     t0 := time.Now().UnixNano()
     s1 := strconv.FormatInt(t0, 10)
@@ -71,21 +71,25 @@ func Session() {
     m1 := NewMessage()
     m1.K = "time"
     m1.V = s1
-    go func() { M <- m1 }()
+    go func() {
+        M <- m0
+        M <- m1
+    }()
 }
 
 func Receiver() {
     // start the channel
-    M := make(chan *Message)
-    fmt.Println(M)
+    M = make(chan *Message)
+    // fmt.Println(M)
     go func() {
         for {
             m0 := <-M
-            fmt.Println(m0)
-            C.Lock()
+            // fmt.Println(m0.K)
+            // C.Lock()
             C.S[m0.K] = m0.V
-            C.Unlock()
-            fmt.Println(C)
+            // C.Unlock()
+            // fmt.Println(C)
+            // mutex lock or chan
         }
     }()
 }
@@ -119,10 +123,10 @@ func main() {
     fmt.Printf("json path located at %s\n", JSON)
     fmt.Printf("img path located at %s\n", IMG)
     C = NewCache()
-    fmt.Println(C)
+    // fmt.Println(C)
     Receiver()
     Session()
-    time.Sleep(10)
+    time.Sleep(100*time.Millisecond)
     fmt.Printf("session id %s\n", C.S["session"])
     fmt.Printf("session time %s\n", C.S["time"])
     // Receiver()
@@ -132,3 +136,5 @@ func main() {
     http.HandleFunc("/c", JsonHandler)
     http.ListenAndServe(":8080", nil)
 }
+
+
