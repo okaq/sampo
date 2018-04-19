@@ -4,7 +4,7 @@
 package main
 
 import (
-    // "encoding/json"
+    "encoding/json"
     "fmt"
     "math/rand"
     "net/http"
@@ -112,7 +112,26 @@ func JsonHandler(w http.ResponseWriter, r *http.Request) {
 func PidHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(r)
     // endpoint for session id
-    // 
+    p0 := struct {
+        Time uint64 `json:"time"`
+        Session uint64 `json:"session"`
+    } {
+        0,
+        0,
+    }
+    err := json.NewDecoder(r.Body).Decode(&p0)
+    if err != nil {
+        fmt.Println(err)
+    }
+    fmt.Println(p0)
+    s0 := strconv.FormatUint(p0.Time, 10)
+    s1 := strconv.FormatUint(p0.Session, 10)
+    m0 := NewMessage()
+    // coordinate pid schema
+    // client id, server id
+    // each pid of form [time,session]
+    // abstract to key, value cache on server
+    // maintain singleton state for pid #1
 }
 
 func main() {
