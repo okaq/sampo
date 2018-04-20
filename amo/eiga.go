@@ -25,6 +25,10 @@ var (
     Rng *rand.Rand
     C *Cache
     M chan *Message
+    // atomic pid counter
+    N uint64
+    // chronological keys
+    K []string
 )
 
 type Cache struct {
@@ -127,6 +131,9 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
     s0 := strconv.FormatUint(p0.Time, 10)
     s1 := strconv.FormatUint(p0.Session, 10)
     m0 := NewMessage()
+    atomic.AddUint64(&N, 1)
+    // update pids keys list
+
     // coordinate pid schema
     // client id, server id
     // each pid of form [time,session]
@@ -137,6 +144,8 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
     t0 := time.Now()
     fmt.Printf("okaq eiga web serve started at %s\n", t0.String())
+    N = 0
+    fmt.Printf("atomic counter init with server process = %d\n", N)
     Rando()
     fmt.Printf("rand test %d\n", Rng.Int())
     fmt.Printf("json path located at %s\n", JSON)
