@@ -10,6 +10,7 @@ import (
     "net/http"
     "strconv"
     "sync"
+    "sync/atomic"
     "time"
 )
 
@@ -130,9 +131,19 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(p0)
     s0 := strconv.FormatUint(p0.Time, 10)
     s1 := strconv.FormatUint(p0.Session, 10)
-    m0 := NewMessage()
+    // m0 := NewMessage()
     atomic.AddUint64(&N, 1)
     // update pids keys list
+    // server session id
+    f0 := Rng.Uint32()
+    f1 := uint64(f0)
+    s2 := strconv.FormatUint(f1, 10)
+    // server time stamp
+    t0 := time.Now().UnixNano()
+    s3 := strconv.FormatInt(t0, 10)
+    s4 := fmt.Sprintf("%s:%s;%s:%s", s2, s3, s1, s0)
+    s5 := atomic.LoadUint64(&N)
+    fmt.Printf("pid key for user #%s: %s\n", s5, s4)
 
     // coordinate pid schema
     // client id, server id
