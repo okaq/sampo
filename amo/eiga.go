@@ -143,7 +143,13 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
     s3 := strconv.FormatInt(t0, 10)
     s4 := fmt.Sprintf("%s:%s;%s:%s", s2, s3, s1, s0)
     s5 := atomic.LoadUint64(&N)
-    fmt.Printf("pid key for user #%s: %s\n", s5, s4)
+    fmt.Printf("pid key for user # %d: %s\n", s5, s4)
+    // set the key, synchronously
+    K = append(K, s4)
+    fmt.Println(K)
+    // send as text, todo: marshal json
+    w.Header().Set("Content-Type", "text/plain")
+    w.Write([]byte(s4))
 
     // coordinate pid schema
     // client id, server id

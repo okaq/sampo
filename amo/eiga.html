@@ -120,9 +120,12 @@ var net = {
     "sid": function(e) {
         console.log(e);
         // server pid handler
-        var j0 = JSON.parse(e.target.response);
-        console.log(j0);
+        // var j0 = JSON.parse(e.target.response);
+        // console.log(j0);
+        var t0 = e.target.responseText;
+        console.log("grand pid: " + t0);
         net.q = {};
+        net.q.pid = t0;
     }
 }
     // dom
