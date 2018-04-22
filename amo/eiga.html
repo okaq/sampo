@@ -106,12 +106,13 @@ var sce = {
             sce.b.c[i] = [];
             sce.b.d[i] = [];
             var y0 = 0;
-            for (var j = i; j >= 0; j--) {
+            for (var j = i; j > 0; j--) {
                 var y1 = 2 * m0;
-                var y2 = t0[j] + y1;
-                var y3 = y2 + m0;
-                y0 = (y0 + y3) >>> 0;
+                var y2 = t0[j-1] + y1;
+                // var y3 = y2 + m0;
+                y0 = (y0 + y2) >>> 0;
             }
+            y0 = (y0 + m0) >>> 0;
             for (var j = 0; j < 4; j++) {
                 var x0 = 2 * m0;
                 var x1 = t0[i] + x0;
