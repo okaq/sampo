@@ -150,6 +150,36 @@ var sce = {
             }
         }
         console.log(sce.b.d);
+
+        // render
+        for (var i = 0; i < sce.b.c.length; i++) {
+            for (var j = 0; j < sce.b.c[i].length; j++) {
+                var c0 = sce.b.c[i][j];
+                // c0.con.fillStyle = rgba.css([0,0,0,1.0]);
+                // c0.con.fillRect(0,0,c0.can.width,c0.can.height);
+                var t1 = (t0[i] * t0[i]) >>> 0;
+                var t2 = (t0[i] / 32) >>> 0;
+                var t3 = (t2 * t2) >>> 0;
+                var t4 = (t1 / t3) >>> 0;
+                var d0 = sce.b.d[i][j];
+                for (var k = 0; k < d0.length; k++) {
+                    if (d0[k] == 0) {
+                        c0.con.fillStyle = rgba.css([0,0,0,1.0]);
+                    } else {
+                        c0.con.fillStyle = rgba.css([255,255,255,1.0]);
+                    }
+                    var x0 = k % 32;
+                    var y0 = (k / 32) >>> 0;
+                    var x1 = (x0 * t2) >>> 0;
+                    var y1 = (y0 * t2) >>> 0;
+                    c0.con.fillRect(x1,y1,t2,t2);
+                }
+            }
+        }
+
+        // block size render test passed ok
+        // looks terrific even at all scales
+
     }
 }
 // xhr
