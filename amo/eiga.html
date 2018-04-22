@@ -100,6 +100,7 @@ var sce = {
         sce.b.d = [];
         // margin
         var m0 = 16;
+        // get rect
         for (var i = 0; i < t0.length; i++) {
             sce.b.r[i] = [];
             sce.b.c[i] = [];
@@ -116,11 +117,39 @@ var sce = {
                 var x1 = t0[i] + x0;
                 var x2 = (x1 * j);
                 var x3 = (x2 + m0) >>> 0;
-                sce.b.r[i][j]
+                sce.b.r[i][j] = [t0[i],t0[i],x3,y0];
             }
         }
+        console.log(sce.b.r);
+
         // add to DOM
-        // render
+        for (var i = 0; i < sce.b.r.length; i++) {
+            for (var j = 0; j < sce.b.r[i].length; j++) {
+                sce.b.c[i][j] = dom.canvas(sce.b.r[i][j]);
+                dom.add(sce.b.c[i][j]);
+            }
+        }
+        console.log(sce.b.c);
+
+        // random data
+        for (var i = 0; i < sce.b.c.length; i++) {
+            for (var j = 0; j < sce.b.c[i].length; j++) {
+                sce.b.d[i][j] = [];
+                var t1 = (t0[i] * t0[i]) >>> 0;
+                var t2 = (t0[i] / 32) >>> 0;
+                var t3 = (t2 * t2) >>> 0;
+                var t4 = (t1 / t3) >>> 0;
+                // console.log("Each block is " + t0[i] + "x" + t0[i] + " pixels.");
+                // console.log("Total size = " + t2 + ". Square length = " + t3);
+                // console.log("Number of blocks is " + t4);
+                // data size is 1024 in each case
+                for (var k = 0; k < t4; k++) {
+                    var f0 = Math.random();
+                    sce.b.d[i][j][k] = f0 >= 0.5 ? 1 : 0;
+                }
+            }
+        }
+        console.log(sce.b.d);
     }
 }
 // xhr
