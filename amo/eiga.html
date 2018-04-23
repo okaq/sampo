@@ -114,6 +114,30 @@ var g = {
 
             sce.clear();
             sce.pane();
+
+            window.setTimeout(g.start2, 1000);
+
+            // off screen buffer
+            // display render and sample to user
+            // but compute from pixel data
+        },
+        "start2": function() {
+            g.tick = 0;
+            g.txt = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            g.sts = g.txt.split("");
+            console.log(g.txt,g.sts);
+            // loop
+            g.id =  window.setInterval(g.frame, 1000);
+        },
+        "frame": function() {
+            console.log("Tick Count: " + g.tick + " Glyph: " + g.sts[g.tick]);
+            if (g.tick >= (g.sts - 1)) {
+                console.log("Sample finsihed!");
+                window.clearInterval(g.id);
+                // send finish code to server
+                // begin stitch final output
+            }
+            g.tick = g.tick + 1;
         }
     }
 // data
