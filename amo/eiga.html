@@ -79,9 +79,20 @@ var g = {
                     console.log(e);
                     // canvas font draw text
                     sce.hoot();
+
+                    // begin the process
+                    window.setTimeout(g.easy, 1000);
                 },
                 "inactive": function(e) {
                     console.log(e);
+                },
+                "fontactive": function(familyName, fvd) {
+                    console.log(familyName, fvd);
+                    // window.setTimeout(g.easy, 2000);
+
+                    // bug? gugi never fires "active event"
+                    // must load twice for Gugi to be available
+                    // to canvas context 2d renderer
                 }
             };
 
@@ -92,6 +103,17 @@ var g = {
             // restrict web app to singleton state
             // only one client is allowed to generate bitmaps
             net.sync();
+        },
+        "easy": function() {
+            // clear the rect
+            // add render panel
+            // start loop
+
+            // canvas font draw text
+            // sce.hoot();
+
+            sce.clear();
+            sce.pane();
         }
     }
 // data
@@ -235,6 +257,29 @@ var sce = {
         sce.a.c.con.font = "96px Gugi";
         var s0 = "/`~`\\";
         sce.a.c.con.fillText(s0, 48, 556);
+    },
+    "clear": function() {
+        sce.a.c.con.fillStyle = rgba.css([255,255,255,1.0]);
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+    },
+    "pane": function() {
+        // center glyph panel
+        sce.c = {};
+        sce.c.r = [1024,1024,448,28];
+        sce.c.c = dom.canvas(sce.c.r);
+        sce.c.d = rgba.rmon();
+        dom.add(sce.c.c);
+        // ren test
+        sce.c.c.con.fillStyle = sce.c.d;
+        sce.c.c.con.fillRect(0,0,sce.c.c.can.width,sce.c.c.can.height);
+    },
+    "clear2": function() {
+        // bkgd
+        sce.a.c.con.fillStyle = rgba.css([255,255,255,1.0]);
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+        // pane
+        sce.c.c.con.fillStyle = rgba.css([255,255,255,1.0]);
+        sce.c.c.con.fillRect(0,0,sce.c.c.can.width,sce.c.c.can.height);
     }
 }
 // xhr
