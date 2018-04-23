@@ -131,12 +131,17 @@ var g = {
         },
         "frame": function() {
             console.log("Tick Count: " + g.tick + " Glyph: " + g.sts[g.tick]);
-            if (g.tick >= (g.sts - 1)) {
+            if (g.tick >= (g.sts.length - 1)) {
                 console.log("Sample finsihed!");
                 window.clearInterval(g.id);
                 // send finish code to server
                 // begin stitch final output
             }
+            // console.log("Tick Count: " + g.tick + " Glyph: " + g.sts[g.tick]);
+            // draw text glyph
+            sce.paint();
+            // get pixel data
+            // threshold
             g.tick = g.tick + 1;
         }
     }
@@ -304,6 +309,19 @@ var sce = {
         // pane
         sce.c.c.con.fillStyle = rgba.css([255,255,255,1.0]);
         sce.c.c.con.fillRect(0,0,sce.c.c.can.width,sce.c.c.can.height);
+    },
+    "paint": function() {
+        sce.clear2();
+        sce.c.c.con.fillStyle = rgba.css([0,0,0,1.0]);
+        sce.c.c.con.font = "512px Gugi";
+        sce.c.c.con.textBaseline = "bottom";
+        sce.c.c.con.fillText(g.sts[g.tick], 128, 600);
+        sce.d = sce.c.c.con.measureText(g.sts[g.tick]);
+        console.log(sce.d);
+        // center from metadata
+        // use actualBoundingBox values
+        // to center glyph
+        // set baseline to alphabetic
     }
 }
 // xhr
