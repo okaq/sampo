@@ -307,16 +307,23 @@ var sce = {
         sce.a.c.con.fillStyle = rgba.css([255,255,255,1.0]);
         sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
         // pane
-        sce.c.c.con.fillStyle = rgba.css([255,255,255,1.0]);
+        sce.c.c.con.fillStyle = rgba.css([205,205,205,1.0]);
         sce.c.c.con.fillRect(0,0,sce.c.c.can.width,sce.c.c.can.height);
     },
     "paint": function() {
         sce.clear2();
         sce.c.c.con.fillStyle = rgba.css([0,0,0,1.0]);
-        sce.c.c.con.font = "512px Gugi";
-        sce.c.c.con.textBaseline = "bottom";
-        sce.c.c.con.fillText(g.sts[g.tick], 128, 600);
+        // sce.c.c.con.font = "512px Gugi";
+        sce.c.c.con.font = "768px Gugi";
+        // sce.c.c.con.textBaseline = "bottom";
+        sce.c.c.con.textAlign = "center";
         sce.d = sce.c.c.con.measureText(g.sts[g.tick]);
+        // check bounding rect fits in pane
+        // width from text metrics width propert
+        var w0 = sce.d.width;
+        var x0 = ((1024 - w0) / 2) >>> 0;
+        sce.c.c.con.fillText(g.sts[g.tick], w0, 900);
+        // sce.d = sce.c.c.con.measureText(g.sts[g.tick]);
         console.log(sce.d);
         // center from metadata
         // use actualBoundingBox values
