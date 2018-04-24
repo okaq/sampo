@@ -314,15 +314,19 @@ var sce = {
         sce.clear2();
         sce.c.c.con.fillStyle = rgba.css([0,0,0,1.0]);
         // sce.c.c.con.font = "512px Gugi";
-        sce.c.c.con.font = "768px Gugi";
+        // sce.c.c.con.font = "768px Gugi";
+        sce.c.c.con.font = "800px Gugi";
         // sce.c.c.con.textBaseline = "bottom";
-        sce.c.c.con.textAlign = "center";
+        sce.c.c.con.textAlign = "left";
         sce.d = sce.c.c.con.measureText(g.sts[g.tick]);
         // check bounding rect fits in pane
         // width from text metrics width propert
         var w0 = sce.d.width;
         var x0 = ((1024 - w0) / 2) >>> 0;
-        sce.c.c.con.fillText(g.sts[g.tick], w0, 900);
+        var h0 = sce.d.actualBoundingBoxAscent + sce.d.actualBoundingBoxDescent;
+        var y0 = (1024 - h0) / 2;
+        var y1 = (h0 + y0) >>> 0;
+        sce.c.c.con.fillText(g.sts[g.tick], x0, y1);
         // sce.d = sce.c.c.con.measureText(g.sts[g.tick]);
         console.log(sce.d);
         // center from metadata
