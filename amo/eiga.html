@@ -141,6 +141,7 @@ var g = {
             // draw text glyph
             sce.paint();
             // get pixel data
+            db.samp();
             // threshold
             g.tick = g.tick + 1;
         }
@@ -149,6 +150,21 @@ var g = {
 var db = {
     "init": function() {
         db.a = {};
+    },
+    "samp": function() {
+        var p0 = sce.c.c.con.getImageData(0,0,sce.c.c.can.width,sce.c.c.can.height);
+        var p1 = p0.data;
+        console.log(p1.length);
+        var p2 = [0,0]; // [0,255]
+        for (var i = 0; i < p1.length; i+=4) {
+            var p3 = p1[i];
+            if (p3 == 0) {
+                p2[0] = p2[0] + 1;
+            } else {
+                p2[1] = p2[1] + 1;
+            }
+        }
+        console.log(p2);
     }
 }
 // scene
@@ -304,10 +320,10 @@ var sce = {
     },
     "clear2": function() {
         // bkgd
-        sce.a.c.con.fillStyle = rgba.css([255,255,255,1.0]);
+        sce.a.c.con.fillStyle = rgba.css([215,215,215,1.0]);
         sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
         // pane
-        sce.c.c.con.fillStyle = rgba.css([205,205,205,1.0]);
+        sce.c.c.con.fillStyle = rgba.css([255,255,255,1.0]);
         sce.c.c.con.fillRect(0,0,sce.c.c.can.width,sce.c.c.can.height);
     },
     "paint": function() {
