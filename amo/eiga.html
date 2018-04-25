@@ -145,6 +145,8 @@ var g = {
             // db.samp();
             db.samp2();
             // threshold
+            db.yote();
+            consoel.log(db.a);
             g.tick = g.tick + 1;
         }
     }
@@ -186,6 +188,25 @@ var db = {
         }
         console.log(p2);
         // 32 x 32 blocks, 1024 total
+    },
+    "samp2": function() {
+        var k0 = g.sts[g.tick];
+        var p0 = sce.c.c.con.getImageData(0,0,sce.c.c.can.width,sce.c.c.can.height);
+        var p1 = p0.data;
+        db.a[k0].p = p1;
+        db.a[k0].b = [0,0]; // [black,white]
+        for (var i = 0; i < db.a[k0].p.length; i+=4) {
+            var p2 = db.a[k0].p[i];
+            if (p2 == 0) {
+                db.a[k0].b[0] = db.a[k0].b[0] + 1;
+            } else {
+                db.a[k0].b[1] = db.a[k0].b[1] + 1;
+            }
+        }
+    },
+    "yote": function() {
+        // threshold
+        var k0 = g.sts[g.tick];
     }
 }
 // scene
