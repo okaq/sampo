@@ -126,6 +126,7 @@ var g = {
             g.txt = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             g.sts = g.txt.split("");
             console.log(g.txt,g.sts);
+            db.init2();
             // loop
             g.id =  window.setInterval(g.frame, 1000);
         },
@@ -141,7 +142,8 @@ var g = {
             // draw text glyph
             sce.paint();
             // get pixel data
-            db.samp();
+            // db.samp();
+            db.samp2();
             // threshold
             g.tick = g.tick + 1;
         }
@@ -150,6 +152,24 @@ var g = {
 var db = {
     "init": function() {
         db.a = {};
+        // blocks size = 1024
+        // threshold = 60%
+        db.t = (1024 * 0.60) >>> 0;
+    },
+    "init2": function() {
+        for (var i = 0; i < g.sts.length; i++) {
+            var k0 = g.sts[i];
+            db.a[k0] = {};
+            // raw pixel data
+            db.a[k0].p = [];
+            // 32x32 block count
+            // [black,white] = [0,1]
+            // recall: bkgd is white, fore is black
+            db.a[k0].b = [];
+            // block sample value
+            // computed from threshold
+            db.a[k0].s = [];
+        }
     },
     "samp": function() {
         var p0 = sce.c.c.con.getImageData(0,0,sce.c.c.can.width,sce.c.c.can.height);
@@ -165,6 +185,7 @@ var db = {
             }
         }
         console.log(p2);
+        // 32 x 32 blocks, 1024 total
     }
 }
 // scene
