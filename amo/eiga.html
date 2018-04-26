@@ -146,7 +146,7 @@ var g = {
             db.samp2();
             // threshold
             db.yote();
-            consoel.log(db.a);
+            console.log(db.a);
             g.tick = g.tick + 1;
         }
     }
@@ -164,13 +164,17 @@ var db = {
             db.a[k0] = {};
             // raw pixel data
             db.a[k0].p = [];
-            // 32x32 block count
+            // raw pixel count
             // [black,white] = [0,1]
             // recall: bkgd is white, fore is black
             db.a[k0].b = [];
+            // 32x32 pixel block data
+            db.a[k0].c = [];
+            // block counts
+            db.a[k0].s = [];
             // block sample value
             // computed from threshold
-            db.a[k0].s = [];
+            db.a[k0].t = [];
         }
     },
     "samp": function() {
