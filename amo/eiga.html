@@ -144,6 +144,8 @@ var g = {
             // get pixel data
             // db.samp();
             db.samp2();
+            // subdivide blocks data
+            db.block();
             // threshold
             db.yote();
             console.log(db.a);
@@ -169,7 +171,7 @@ var db = {
             // recall: bkgd is white, fore is black
             db.a[k0].b = [];
             // 32x32 pixel block data
-            db.a[k0].c = [];
+            db.a[k0].d = [];
             // block counts
             db.a[k0].s = [];
             // block sample value
@@ -207,6 +209,24 @@ var db = {
                 db.a[k0].b[1] = db.a[k0].b[1] + 1;
             }
         }
+    },
+    "block": function() {
+        // rgba pixel data for sub blocks
+        var k0 = g.sts[g.tick];
+        for (var i = 0; i < 1024; i++) {
+            db.a[k0].d[i] = [];
+            // yx loop
+            for (var y0 = 0; y0 < 32; y0++) {
+                for (var x0 = 0; x0 < 32; x0++) {
+                    var y1 = (y0 * 32 * 1024 * 4) >>> 0;
+                    var x1 = (x0 * 32 * 4) >>> 0;
+                    var b0 = db.div(i0);
+                }
+            }
+        }
+    },
+    "div": function(i0) {
+        // return 32x32 sub block at index
     },
     "yote": function() {
         // threshold
