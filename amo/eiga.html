@@ -128,7 +128,7 @@ var g = {
             console.log(g.txt,g.sts);
             db.init2();
             // loop
-            g.id =  window.setInterval(g.frame, 1000);
+            g.id =  window.setInterval(g.frame, 5000);
         },
         "frame": function() {
             console.log("Tick Count: " + g.tick + " Glyph: " + g.sts[g.tick]);
@@ -214,26 +214,62 @@ var db = {
         // rgba pixel data for sub blocks
         var k0 = g.sts[g.tick];
         for (var i = 0; i < 1024; i++) {
-            db.a[k0].d[i] = [];
+            // db.a[k0].d[i] = [];
+            /*
             // yx loop
             for (var y0 = 0; y0 < 32; y0++) {
                 for (var x0 = 0; x0 < 32; x0++) {
                     var y1 = (y0 * 32 * 1024 * 4) >>> 0;
                     var x1 = (x0 * 32 * 4) >>> 0;
+                    var i0 = (y0 + x0) >>> 0;
                     var b0 = db.div(i0);
                 }
             }
+            */
+            var x0 = i % 32;
+            var y0 = (i / 32) >>> 0;
+            var y1 = (y0 * 32 * 1024 * 4) >>> 0;
+            var x1 = (x0 * 32 * 4) >>> 0;
+            var i0 = (y0 + x0) >>> 0;
+            var b0 = db.div(i0);
+            db.a[k0].d[i] = b0;
         }
     },
     "div": function(i0) {
         // return 32x32 sub block at index
-    },
-    "yote": function() {
-        // threshold
         var k0 = g.sts[g.tick];
-        if (db.a[k0].b[0] >= db.t) {
-            // bug: resample on get 32x32 blocks
+        var p0 = db.a[k0].p;
+        var r0 = [];
+        /*
+        for (var y0 = 0; y0 < 32; y0++) {
+            for (var x0 = 0; x0 < 32; x0++) {
+
+            }
         }
+        */
+        // or
+        for (var i = 0; i < 1024; i++) {
+            var x0 = i % 32;
+            var y0 = (i / 32) >>> 0;
+            var x1 = (x0 * 4) >>> 0;
+            var y1 = (y0 * 1024 * 4) >>> 0;
+            var i1 = (x1 + y1) >>> 0;
+            r0.push(p0[i1+0]);
+            r0.push(p0[i1+1]);
+            r0.push(p0[i1+2]);
+            r0.push(p0[i1+3]);
+        }
+        return r0;
+    },
+    "yote": function(b0) {
+        // threshold
+        // var k0 = g.sts[g.tick];
+        // if (db.a[k0].b[0] >= db.t) {
+            // bug: resample on get 32x32 blocks
+        // }
+
+        // count sub block [black,white]
+        // return threshold pass bool 
     }
 }
 // scene
