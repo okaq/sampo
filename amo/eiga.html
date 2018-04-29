@@ -128,7 +128,7 @@ var g = {
             console.log(g.txt,g.sts);
             db.init2();
             // loop
-            g.id =  window.setInterval(g.frame, 5000);
+            g.id =  window.setInterval(g.frame, 2000);
         },
         "frame": function() {
             console.log("Tick Count: " + g.tick + " Glyph: " + g.sts[g.tick]);
@@ -137,6 +137,9 @@ var g = {
                 window.clearInterval(g.id);
                 // send finish code to server
                 // begin stitch final output
+                console.log(db.a);
+                // begin sample data render loop
+                window.setTimeout(g.start3, 1000);
             }
             // console.log("Tick Count: " + g.tick + " Glyph: " + g.sts[g.tick]);
             // draw text glyph
@@ -147,8 +150,22 @@ var g = {
             // subdivide blocks data
             db.block();
             // threshold
-            db.yote();
-            console.log(db.a);
+            // db.yote();
+            // console.log(db.a);
+            g.tick = g.tick + 1;
+        },
+        "start3": function() {
+            g.tick = 0;
+            g.id = window.setInterval(g.frame2, 1000);
+        },
+        "frame2": function() {
+            console.log("Tick Count: " + g.tick + " Glyph: " + g.sts[g.tick]);
+            if (g.tick >= (g.sts.length - 1)) {
+                console.log("Render finsihed!");
+                window.clearInterval(g.id);
+            }
+            // render sample data
+            sce.mode();
             g.tick = g.tick + 1;
         }
     }
@@ -232,11 +249,14 @@ var db = {
             var x1 = (x0 * 32 * 4) >>> 0;
             var i0 = (y0 + x0) >>> 0;
             var b0 = db.div(i0);
+            // console.log(b0);
             db.a[k0].d[i] = b0;
             var b1 = db.yote(b0);
             db.a[k0].s[i] = b1;
+            // console.log(b1);
             var b2 = db.torq(b1);
             db.a[k0].t[i] = b2;
+            // console.log(b2);
         }
     },
     "div": function(i0) {
@@ -253,15 +273,17 @@ var db = {
         */
         // or
         for (var i = 0; i < 1024; i++) {
+            // var i1 = (i + i0) >>> 0;
             var x0 = i % 32;
             var y0 = (i / 32) >>> 0;
             var x1 = (x0 * 4) >>> 0;
             var y1 = (y0 * 1024 * 4) >>> 0;
             var i1 = (x1 + y1) >>> 0;
-            r0.push(p0[i1+0]);
-            r0.push(p0[i1+1]);
-            r0.push(p0[i1+2]);
-            r0.push(p0[i1+3]);
+            var i2 = (i0 + i1) >>> 0;
+            r0.push(p0[i2+0]);
+            r0.push(p0[i2+1]);
+            r0.push(p0[i2+2]);
+            r0.push(p0[i2+3]);
         }
         return r0;
     },
@@ -280,11 +302,11 @@ var db = {
         var r0 = [0,0];
         for (var i = 0; i < 1024; i++) {
             var i0 = (i * 4) >>> 0;
-            var b1 = b0[i];
-            if (b1 == 0) {
-                r0[0] = r0[0] + 1;
-            } else {
+            var b1 = b0[i0];
+            if (b1 == 255) {
                 r0[1] = r0[1] + 1;
+            } else {
+                r0[0] = r0[0] + 1;
             }
         }
         return r0;
@@ -293,7 +315,7 @@ var db = {
         // threshold
         var b1 = b0[0];
         var b2 = b0[1];
-        if (b1 >= b2) {
+        if (b1 >= 1) {
             return 0;
         } else {
             return 1;
@@ -482,6 +504,23 @@ var sce = {
         // use actualBoundingBox values
         // to center glyph
         // set baseline to alphabetic
+    },
+    "mode": function() {
+        sce.clear2();
+        sce.c.c.con.fillStyle = rgba.css([0,0,0,1.0]);
+        var k0 = g.sts[g.tick];
+        var b0 = db.a[k0].t;
+        for (var i = 0; i < 1024; i++) {
+            var b1 = b0[i];
+            if (b1 == 1) {
+                continue;
+            }
+            var x0 = i % 32;
+            var y0 = (i / 32) >>> 0;
+            var x1 = (x0 * 32) >>> 0;
+            var y1 = (y0 * 32) >>> 0;
+            sce.c.c.con.fillRect(x1, y1, 32, 32);
+        }
     }
 }
 // xhr
