@@ -247,7 +247,8 @@ var db = {
             var y0 = (i / 32) >>> 0;
             var y1 = (y0 * 32 * 1024 * 4) >>> 0;
             var x1 = (x0 * 32 * 4) >>> 0;
-            var i0 = (y0 + x0) >>> 0;
+            var i0 = (y1 + x1) >>> 0;
+            // console.log(i0);
             var b0 = db.div(i0);
             // console.log(b0);
             db.a[k0].d[i] = b0;
