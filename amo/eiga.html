@@ -235,7 +235,8 @@ var db = {
             db.a[k0].d[i] = b0;
             var b1 = db.yote(b0);
             db.a[k0].s[i] = b1;
-            
+            var b2 = db.torq(b1);
+            db.a[k0].t[i] = b2;
         }
     },
     "div": function(i0) {
@@ -287,6 +288,16 @@ var db = {
             }
         }
         return r0;
+    },
+    "torq": function(b0) {
+        // threshold
+        var b1 = b0[0];
+        var b2 = b0[1];
+        if (b1 >= b2) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 }
 // scene
