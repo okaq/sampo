@@ -163,6 +163,8 @@ var g = {
             if (g.tick >= (g.sts.length - 1)) {
                 console.log("Render finsihed!");
                 window.clearInterval(g.id);
+
+                // compile json bitmap data for upload
             }
             // render sample data
             sce.mode();
@@ -316,11 +318,16 @@ var db = {
         // threshold
         var b1 = b0[0];
         var b2 = b0[1];
-        if (b1 >= 1) {
+        var b3 = b1 / b2;
+        if (b3 >= 0.5) {
             return 0;
         } else {
             return 1;
         }
+        // ratio control
+        // under or over weight
+        // 0.25 is acceptable
+        // not much diff > 0.5
     }
 }
 // scene
