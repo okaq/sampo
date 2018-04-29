@@ -233,6 +233,9 @@ var db = {
             var i0 = (y0 + x0) >>> 0;
             var b0 = db.div(i0);
             db.a[k0].d[i] = b0;
+            var b1 = db.yote(b0);
+            db.a[k0].s[i] = b1;
+            
         }
     },
     "div": function(i0) {
@@ -269,7 +272,21 @@ var db = {
         // }
 
         // count sub block [black,white]
-        // return threshold pass bool 
+        // return threshold pass bool
+
+        // place threshold in another function
+        // sub block count (only r-values)
+        var r0 = [0,0];
+        for (var i = 0; i < 1024; i++) {
+            var i0 = (i * 4) >>> 0;
+            var b1 = b0[i];
+            if (b1 == 0) {
+                r0[0] = r0[0] + 1;
+            } else {
+                r0[1] = r0[1] + 1;
+            }
+        }
+        return r0;
     }
 }
 // scene
