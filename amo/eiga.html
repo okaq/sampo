@@ -319,7 +319,7 @@ var db = {
         var b1 = b0[0];
         var b2 = b0[1];
         var b3 = b1 / b2;
-        if (b3 >= 0.5) {
+        if (b3 >= 0.60) {
             return 0;
         } else {
             return 1;
@@ -553,7 +553,7 @@ var net = {
         net.pj = JSON.stringify(net.p);
         // console.log(net.pj);
         // send json data
-        console.log("sending client pids to server...")
+        console.log("sending client pids to server...");
         net.a.open("POST", net.urls[0], true);
         net.a.requestType = "json";
         net.a.addEventListener("load", net.sid, false);
@@ -578,6 +578,24 @@ var net = {
         // as well as create custom events
         // to be handled, fired, sequenced
         // by a dedicated manager
+    },
+    "samp": function() {
+        // post bitmap sample data
+        net.s = {};
+        net.s.a = new XMLHttpRequest();
+        net.s.d = {};
+        for (var k0 in db.a) {
+            net.s.d[k0] = db.a[k0].t;
+        }
+        net.s.j = JSON.stringify(net.s.d);
+        console.log("sending bitmap sample data to server");
+        net.s.a.open("POST", net.urls[1], true);
+        net.s.a.requestType = "json";
+        net.s.a.addEventListener("load", net.pams, false);
+        net.s.a.send(net.s.j);
+    },
+    "pams": function(e) {
+        console.log(e);
     }
 }
     // dom
