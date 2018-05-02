@@ -588,13 +588,28 @@ var net = {
         for (var k0 in db.a) {
             net.s.d[k0] = db.a[k0].t;
         }
-        net.s.j = JSON.stringify(net.s.d);
-        console.log(net.s.d, net.s.j);
+        // net.s.j = JSON.stringify(net.s.d);
+        // console.log(net.s.d, net.s.j);
+        // compress
+        net.s.k = {};
+        for (var k0 in net.s.d) {
+            var d0 = net.s.d[k0];
+            var d1 = net.comp(d0);
+            net.s.k[k0] = d1;
+        }
+        net.s.n = JSON.stringify(net.s.k);
+        console.log(net.s.n);
         console.log("sending bitmap sample data to server");
         net.s.a.open("POST", net.urls[2], true);
         net.s.a.requestType = "json";
         net.s.a.addEventListener("load", net.pams, false);
-        net.s.a.send(net.s.j);
+        // net.s.a.send(net.s.j);
+        net.s.a.send(net.s.n);
+    },
+    "comp": function() {
+        // compress bit array to byte array
+        var r0 = [];
+        return r0;
     },
     "pams": function(e) {
         console.log(e);

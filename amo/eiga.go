@@ -114,10 +114,17 @@ func JsonHandler(w http.ResponseWriter, r *http.Request) {
     // endpoint for json storage
     d0 := json.NewDecoder(r.Body)
     var j0 map[string][]byte
-    err := d0.Decode(&j0)
+    var err error
+    var b0 []byte
+    err = d0.Decode(&j0)
     if err != nil {
         fmt.Println(err)
     }
+    b0, err = json.Marshal(j0)
+    if err != nil {
+        fmt.Println(err)
+    }
+    fmt.Println(string(b0))
     // fmt.Println(j0["0"])
     // ok, byte array encoded as base64 string
     // stich via format to json for disk save 
