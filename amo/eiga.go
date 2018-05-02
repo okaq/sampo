@@ -6,6 +6,7 @@ package main
 import (
     "encoding/json"
     "fmt"
+    "io/ioutil"
     "math/rand"
     "net/http"
     "strconv"
@@ -127,8 +128,14 @@ func JsonHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(string(b0))
     // fmt.Println(j0["0"])
     // ok, byte array encoded as base64 string
-    // stich via format to json for disk save 
-    w.Write([]byte("Json bitmap data decoded"))
+    // stich via format to json for disk save
+    f0 := fmt.Sprintf("%s/%s", JSON, "gugi.json")
+    err = ioutil.WriteFile(f0, b0, 0644)
+    if err != nil {
+        fmt.Println(err)
+    }
+    // w.Write([]byte("Json bitmap data decoded"))
+    w.Write(b0)
 }
 
 func PidHandler(w http.ResponseWriter, r *http.Request) {

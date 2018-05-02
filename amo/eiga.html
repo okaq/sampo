@@ -619,6 +619,10 @@ var net = {
     },
     "pams": function(e) {
         console.log(e);
+        net.t = e.target.responseText;
+        // total size of gugi bitmap json base64 encoded
+        // 6.4 kB on disk and over wire
+        
         // []byte will encode to base64 string
         // data is map[string][]byte
         // ready as is for save / import
