@@ -606,9 +606,15 @@ var net = {
         // net.s.a.send(net.s.j);
         net.s.a.send(net.s.n);
     },
-    "comp": function() {
+    "comp": function(d0) {
         // compress bit array to byte array
         var r0 = [];
+        for (var i = 0; i < 1024; i+=8) {
+            var r1 = d0.slice(i,i+8);
+            var r2 = r1.join('');
+            var r3 = parseInt(r2, 2);
+            r0.push(r3);
+        }
         return r0;
     },
     "pams": function(e) {
