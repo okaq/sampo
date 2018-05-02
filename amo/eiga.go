@@ -112,6 +112,16 @@ func ImgHandler(w http.ResponseWriter, r *http.Request) {
 func JsonHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(r)
     // endpoint for json storage
+    d0 := json.NewDecoder(r.Body)
+    var j0 map[string][]byte
+    err := d0.Decode(&j0)
+    if err != nil {
+        fmt.Println(err)
+    }
+    // fmt.Println(j0["0"])
+    // ok, byte array encoded as base64 string
+    // stich via format to json for disk save 
+    w.Write([]byte("Json bitmap data decoded"))
 }
 
 func PidHandler(w http.ResponseWriter, r *http.Request) {
