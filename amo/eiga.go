@@ -4,12 +4,14 @@
 package main
 
 import (
+    "bytes"
     "encoding/json"
     "fmt"
     "io/ioutil"
     "math/rand"
     "net/http"
     "strconv"
+    "strings"
     "sync"
     "sync/atomic"
     "time"
@@ -129,8 +131,40 @@ func JsonHandler(w http.ResponseWriter, r *http.Request) {
     // fmt.Println(j0["0"])
     // ok, byte array encoded as base64 string
     // stich via format to json for disk save
-    f0 := fmt.Sprintf("%s/%s", JSON, "gugi.json")
-    err = ioutil.WriteFile(f0, b0, 0644)
+    // f0 := fmt.Sprintf("%s/%s", JSON, "gugi.json")
+    // err = ioutil.WriteFile(f0, b0, 0644)
+    // pretty print
+    var j1 map[string]string
+    err = json.Unmarshal(b0, &j1)
+    if err != nil {
+        fmt.Println(err)
+    }
+    fmt.Println(j1)
+    // bytes.Buffer WriteString to concatenate
+    var b1 bytes.Buffer
+    b1.WriteString("var gugi = {\n")
+    // out of order
+    /*
+    for k0 := range j1 {
+        s0 := fmt.Sprintf("\t\"%s\": \"%s\",\n", k0, j1[k0])
+        b1.WriteString(s0)
+    }
+    */
+    // in order
+    s1 := "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    s2 := strings.Split(s1, "")
+    for i := 0; i < len(s2); i++ {
+        k0 := s2[i]
+        s0 := fmt.Sprintf("\t\"%s\": \"%s\",\n", k0, j1[k0])
+        b1.WriteString(s0)
+    }
+    b1.WriteString("}\n\n")
+    if err != nil {
+        fmt.Println(err)
+    }
+    fmt.Println(b1.String())
+    f1 := fmt.Sprintf("%s/%s", JSON, "gugi2.json")
+    err = ioutil.WriteFile(f1, b1.Bytes(), 0644)
     if err != nil {
         fmt.Println(err)
     }
