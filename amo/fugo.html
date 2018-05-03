@@ -46,14 +46,78 @@ var g = {
             bmp.init();
             console.log("bmp decode time: " + (window.performance.now() - t0) + "ms.");
             // approx 45ms for 36 chars, acceptable
-            
+
             ren.clear();
+
+            // loop
+            g.id = window.setInterval(g.frame, 1000);
+        },
+        "frame": function() {
+            console.log("tick count: " + g.tick);
+            if (g.tick >= g.max) {
+                window.clearInterval(g.id);
+                console.log("animation finished");
+            }
+            db.next();
+            ren.clear();
+
+            g.tick = g.tick + 1;
         }
     }
 // data
 var db = {
     "init": function() {
         db.a = {};
+        db.a.a = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        // keys
+        db.a.b = db.a.a.split("");
+        // history
+        db.a.c = [];
+        // squares
+        db.a.d = [];
+        for (var i = 1; i < 33; i++) {
+            var w0 = (i * 32) >>> 0;
+            db.a.d.push(w0);
+        }
+    },
+    "next": function() {
+        // {key,rect}
+        var k0 = db.rank();
+        var r0 = db.rect();
+        var b0 = {};
+        b0["key"] = k0;
+        b0["rect"] = r0;
+        console.log(b0);
+        db.a.c.push(b0);
+    },
+    "rank": function() {
+        var f0 = (Math.random() * db.a.b.length) >>> 0;
+        var k0 = db.a.b[f0];
+        return k0;
+    },
+    "rect": function() {
+        var r0 = [];
+
+        // choose
+        var f0 = (Math.random() * db.a.d.length) >>> 0;
+        var w0 = db.a.d[f0];
+        var h0 = w0;
+        var x0 = (1920 - w0) >>> 0;
+        var x1 = (x0 / 2) >>> 0;
+        var x2 = (Math.random() * x1) >>> 0;
+        var y0 = (1080 - h0) >>> 0;
+        var y1 = (y0 / 2) >>> 0;
+        var y2 = (Math.random() * y1) >>> 0;
+        // width
+        r0[0] = w0;
+        // height
+        r0[1] = h0;
+        // x-pos
+        r0[2] = x2;
+        // y-pos
+        r0[3] = y2;
+
+        return r0;
     }
 }
 // scene
