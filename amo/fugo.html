@@ -50,16 +50,21 @@ var g = {
             ren.clear();
 
             // loop
-            g.id = window.setInterval(g.frame, 1000);
+            g.id = window.setInterval(g.frame, 2000);
         },
         "frame": function() {
-            console.log("tick count: " + g.tick);
+            // console.log("tick count: " + g.tick);
             if (g.tick >= g.max) {
                 window.clearInterval(g.id);
                 console.log("animation finished");
             }
             db.next();
+            sce.flip();
+            sce.star();
             ren.clear();
+
+            // 1 fps performance degradation
+            // perhaps it is the DOM update
 
             g.tick = g.tick + 1;
         }
@@ -87,7 +92,7 @@ var db = {
         var b0 = {};
         b0["key"] = k0;
         b0["rect"] = r0;
-        console.log(b0);
+        // console.log(b0);
         db.a.c.push(b0);
     },
     "rank": function() {
@@ -102,20 +107,22 @@ var db = {
         var f0 = (Math.random() * db.a.d.length) >>> 0;
         var w0 = db.a.d[f0];
         var h0 = w0;
-        var x0 = (1920 - w0) >>> 0;
+        var x0 = (1024 - w0) >>> 0;
         var x1 = (x0 / 2) >>> 0;
         var x2 = (Math.random() * x1) >>> 0;
-        var y0 = (1080 - h0) >>> 0;
+        var x3 = (x2 + 448) >>> 0;
+        var y0 = (1024 - h0) >>> 0;
         var y1 = (y0 / 2) >>> 0;
         var y2 = (Math.random() * y1) >>> 0;
+        var y3 = (y2 + 28) >>> 0;
         // width
         r0[0] = w0;
         // height
         r0[1] = h0;
         // x-pos
-        r0[2] = x2;
+        r0[2] = x3;
         // y-pos
-        r0[3] = y2;
+        r0[3] = y3;
 
         return r0;
     }
@@ -147,6 +154,13 @@ var sce = {
         sce.a.d = rgba.rmon();
         sce.b.d = rgba.rmon();
         sce.c.d = [rgba.rmon(),rgba.rmon()];
+    },
+    "star": function() {
+        dom.remove(sce.c.c);
+        var r0 = db.a.c[g.tick]["rect"];
+        sce.c.r = r0;
+        sce.c.c = dom.canvas(sce.c.r);
+        dom.add(sce.c.c);
     }
 }
 // render
