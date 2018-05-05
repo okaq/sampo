@@ -40,12 +40,29 @@ var g = {
         },
         "start": function() {
             g.tick = 0;
+            ren.clear();
         }
     }
 // data
 var db = {
     "init": function() {
         db.a = {};
+        // app state
+    }
+}
+// xhr
+var net = {
+    "open": function() {
+        net.urls = [
+            http://localhost:8080/a
+        ];
+        net.a = {};
+        net.a.id = (Math.random * Number.MAX_SAFE_INTEGER) >>> 0;
+        net.b = new XMLHttpRequest();
+        // response type blob for image/png
+    },
+    "load": function() {
+
     }
 }
 // scene
@@ -69,6 +86,17 @@ var sce = {
     "click": function(e) {
         console.log(e);
     }
+ }
+ // render
+ var ren = {
+     "clear": function() {
+         var e0 = [sce.a,sce.b];
+         for (var i = 0; i < e0.length; i++) {
+             var c0 = e0.c;
+             c0.con.fillStyle = e0.d;
+             c0.con.fillRect(0,0,c0.can.width,c0.can.height);
+         }
+     }
  }
     // dom
     var dom = {
