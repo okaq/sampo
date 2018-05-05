@@ -42,6 +42,34 @@ var g = {
             g.tick = 0;
         }
     }
+// data
+var db = {
+    "init": function() {
+        db.a = {};
+    }
+}
+// scene
+var sce = {
+    "init": function() {
+        // bkgd
+        sce.a = {};
+        sce.a.r = [1920,1080,0,0];
+        sce.a.c = dom.canvas(sce.a.r);
+        dom.add(sce.a.c);
+        sce.a.d = rgba.rmon();
+        // pane
+        sce.b = {};
+        sce.b.r = [1024,1024,448,28];
+        sce.b.c = dom.canvas(sce.b.r);
+        dom.add(sce.b.c);
+        sce.b.d = rgba.rmon();
+        sce.b.c.can.datset.x = "pic_0";
+        sce.b.c.can.addEventListener("click", sce.click, false);
+    },
+    "click": function(e) {
+        console.log(e);
+    }
+ }
     // dom
     var dom = {
         "init": function() {
