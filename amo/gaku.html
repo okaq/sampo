@@ -45,6 +45,7 @@ var g = {
             ren.clear();
 
             // draw text in rect function
+            sce.text("hello world", [11*32,32,16,16]);
         }
     }
 // data
@@ -89,6 +90,30 @@ var sce = {
     },
     "click": function(e) {
         console.log(e);
+    },
+    "text": function(t0, r0) {
+        // draw text in rect
+        // single rect canvas
+        // or a DOM canvas for each letter
+
+        // style convention
+        // black bkgd, white text
+        sce.c = {};
+        sce.c.r = r0;
+        sce.c.c = dom.canvas(sce.c.r);
+        dom.add(sce.c.c);
+        sce.c.d = [rgba.css([0,0,0,1.0]),rgba.css(255,255,255,1.0)];
+
+        // bkgd fill
+        sce.c.c.con.fillStyle = sce.c.d[0];
+        sce.c.c.con.fillRect(0,0,sce.c.c.can.width,sce.c.c.can.height);
+
+        for (var i = 0; i < t0.length; i++) {
+            console.log(t0[i]);
+        }
+
+        // manage text canvas add remove
+        // upon scene changes
     }
  }
  // render
