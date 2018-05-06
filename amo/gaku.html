@@ -47,6 +47,7 @@ var g = {
             bmp.init();
             console.log("bitmap font decode time: " + (window.performance.now() - t0) + "ms.");
 
+            /*
             // draw text in rect function
             // sce.text("HELLO MUJI", [10*32,32,16,32]);
             var t1 = {};
@@ -58,8 +59,10 @@ var g = {
             t2.r = [32*12,32,1888-(32*12),256];
             t2.t = "IMPORT READY";
             db.texa("field", t2);
+            */
 
             ren.clear();
+            ren.text();
 
             // move text init to db
         }
@@ -71,6 +74,20 @@ var db = {
         db.a = {};
         // text state
         db.a.t = {};
+        db.init2();
+    },
+    "init2": function() {
+        // draw text in rect function
+        // sce.text("HELLO MUJI", [10*32,32,16,32]);
+        var t1 = {};
+        t1.r = [64*9,64,1888-(64*9),32];
+        t1.t = "GAKU OKAQ";
+        db.texa("title", t1);
+
+        var t2 = {};
+        t2.r = [32*12,32,1888-(32*12),256];
+        t2.t = "IMPORT READY";
+        db.texa("field", t2);
     },
     "texa": function(k0, t0) {
         // text manager
@@ -211,6 +228,36 @@ var sce = {
              c0.con.fillStyle = sce.t[k].d[0];
              c0.con.fillRect(0,0,c0.can.width,c0.can.height);
          }
+     },
+     "text": function() {
+         // complete text render
+         for (var k in sce.t) {
+             var c0 = sce.t[k].c;
+             var t0 = db.a.t[k].t;
+             var h0 = db.a.t[k].r[1];
+             var w0 = h0;
+             var w1 = (w0 / 32) >>> 0;
+             c0.con.fillStyle = sce.t[k].d[1];
+             for (var i = 0; i < t0.length; i++) {
+                 if (t0[i] == " ") {
+                     continue;
+                 }
+                 var x0 = (i * w0) >>> 0;
+                 var b0 = bmp.a[t0[i]];
+                 for (var j = 0; j < 1024; j++) {
+                     if (b0[j] == 1) {
+                         continue;
+                     }
+                     var x1 = j % 32;
+                     var x2 = (x1 * w1) >>> 0;
+                     var x3 = (x0 + x2) >>> 0;
+                     var y0 = (j / 32) >>> 0;
+                     var y1 = (y0 * w1) >>> 0;
+                     c0.con.fillRect(x3,y1,w1,w1);
+                 }
+             }
+         }
+         // first render beautiful!
      }
  }
     // dom
