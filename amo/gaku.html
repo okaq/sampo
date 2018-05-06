@@ -35,12 +35,16 @@ var g = {
 
             window.setTimeout(g.start, 1000);
 
+            // bmp decode split
+
             // stats
             console.log("total render time: " + (window.performance.now() - t0) + "ms.");
         },
         "start": function() {
             g.tick = 0;
             ren.clear();
+
+            // draw text in rect function
         }
     }
 // data
@@ -80,7 +84,7 @@ var sce = {
         sce.b.c = dom.canvas(sce.b.r);
         dom.add(sce.b.c);
         sce.b.d = rgba.rmon();
-        sce.b.c.can.datset.x = "pic_0";
+        sce.b.c.can.dataset.x = "pic_0";
         sce.b.c.can.addEventListener("click", sce.click, false);
     },
     "click": function(e) {
