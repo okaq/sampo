@@ -40,7 +40,7 @@ var g = {
         },
         "start": function() {
             g.tick = 0;
-            ren.clear();
+            // ren.clear();
 
             // bmp decode split
             var t0 = window.performance.now();
@@ -48,14 +48,45 @@ var g = {
             console.log("bitmap font decode time: " + (window.performance.now() - t0) + "ms.");
 
             // draw text in rect function
-            sce.text("HELLO MUJI", [10*32,32,16,32]);
+            // sce.text("HELLO MUJI", [10*32,32,16,32]);
+            var t1 = {};
+            t1.r = [64*9,64,1888-(64*9),32];
+            t1.t = "GAKU OKAQ";
+            db.texa("title", t1);
+
+            var t2 = {};
+            t2.r = [32*12,32,1888-(32*12),256];
+            t2.t = "IMPORT READY";
+            db.texa("field", t2);
+
+            ren.clear();
+
+            // move text init to db
         }
     }
 // data
 var db = {
     "init": function() {
-        db.a = {};
         // app state
+        db.a = {};
+        // text state
+        db.a.t = {};
+    },
+    "texa": function(k0, t0) {
+        // text manager
+        // each text object has a key
+        // pointing to a text object value
+        // text objects contain
+        // text (caps,letters,numbers,spaces)
+        // get height from input rect
+        db.a.t[k0] = {};
+        db.a.t[k0].r = t0.r;
+        db.a.t[k0].t = t0.t;
+        sce.texa(k0, db.a.t[k0].r);
+    },
+    "texr": function(k0) {
+        // remove from manager
+        // hide / show in display state
     }
 }
 // xhr
@@ -84,12 +115,16 @@ var sce = {
         sce.a.d = rgba.rmon();
         // pane
         sce.b = {};
-        sce.b.r = [1024,1024,448,28];
+        // sce.b.r = [1024,1024,448,28];
+        sce.b.r = [1024,1024,28,28];
         sce.b.c = dom.canvas(sce.b.r);
         dom.add(sce.b.c);
         sce.b.d = rgba.rmon();
         sce.b.c.can.dataset.x = "pic_0";
         sce.b.c.can.addEventListener("click", sce.click, false);
+
+        // text
+        sce.t = {};
     },
     "click": function(e) {
         console.log(e);
@@ -137,15 +172,43 @@ var sce = {
 
         // manage text canvas add remove
         // upon scene changes
+
+        // print small (32) and large (64)
+        // move pane to left
+        // justify text to right
+    },
+    "texa": function(k0, r0) {
+        // add text canvas to collection
+        sce.t[k0] = {};
+        sce.t[k0].r = r0;
+        sce.t[k0].c = dom.canvas(sce.t[k0].r);
+        dom.add(sce.t[k0].c);
+        sce.t[k0].d = [rgba.css([0,0,0,1.0]),rgba.css([255,255,255,1.0])];
+        sce.t[k0].c.can.dataset.x = k0;
+        sce.t[k0].c.can.addEventListener("click", sce.act, false);
+        // adding click event turns text canvas into button
+
+        // separate functions for DOM manage
+    },
+    "act": function(e) {
+        // button user input handler
+        console.log(e);
     }
  }
  // render
  var ren = {
      "clear": function() {
+         // elements
          var e0 = [sce.a,sce.b];
          for (var i = 0; i < e0.length; i++) {
              var c0 = e0[i].c;
              c0.con.fillStyle = e0[i].d;
+             c0.con.fillRect(0,0,c0.can.width,c0.can.height);
+         }
+         // text objects
+         for (var k in sce.t) {
+             var c0 = sce.t[k].c;
+             c0.con.fillStyle = sce.t[k].d[0];
              c0.con.fillRect(0,0,c0.can.width,c0.can.height);
          }
      }
