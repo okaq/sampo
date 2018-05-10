@@ -38,9 +38,10 @@ func files() {
     fmt.Printf("Found %d image files\n", len(f0))
     Images = make([]string, len(f0))
     for i,f1 := range f0 {
-        fmt.Println(f1.Name)
-        Images[i] = f1.Name
+        // fmt.Println(f1.Name())
+        Images[i] = f1.Name()
     }
+    fmt.Println(Images)
 }
 
 func GakuHandler(w http.ResponseWriter, r *http.Request) {
@@ -51,15 +52,22 @@ func GakuHandler(w http.ResponseWriter, r *http.Request) {
 func ImgHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(r)
     // static png server for import into sampler
-    fmt.Println(http.StripPrefix(r.URL))
+    // fmt.Println(http.StripPrefix(r.URL))
+    // fmt.Println(r.URL.String())
+    // url of form "/a/pic.png"
+    // fmt.Println(r.URL.String()[3:])
+    s0 := fmt.Sprintf("%s%s",IMG,r.URL.String()[3:])
+    // strip prefix, add dir, serve img file
+    fmt.Println(s0)
     // http.ServeFile(w,r,IMG+png)
+    http.ServeFile(w,r,s0)
 }
 
 func main() {
     motd()
     files()
     http.HandleFunc("/", GakuHandler)
-    http.HandleFunc("/a", ImgHandler)
+    http.HandleFunc("/a/", ImgHandler)
     http.ListenAndServe(":8080", nil)
 }
 
