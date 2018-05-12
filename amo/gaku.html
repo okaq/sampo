@@ -65,6 +65,9 @@ var g = {
             ren.text();
 
             // move text init to db
+
+            // server sync
+            net.sync();
         }
     }
 // data
@@ -112,10 +115,13 @@ var net = {
         net.urls = [
             "http://localhost:8080/a",
         ];
-        net.a = {};
-        net.a.id = (Math.random * Number.MAX_SAFE_INTEGER) >>> 0;
+        // net.a = {};
+        // net.a.id = (Math.random * Number.MAX_SAFE_INTEGER) >>> 0;
         net.b = new XMLHttpRequest();
         // response type blob for image/png
+    },
+    "pid": function() {
+        // onl load generate and send pid
     },
     "load": function() {
         // load image file names from server
@@ -125,6 +131,21 @@ var net = {
         // button to save
         // server can keep track of sampled history
         // by comparing png and json files
+    },
+    "sync": function() {
+        // generate client pid
+        net.p = {};
+        net.p.a = (Math.random() * Number.MAX_SAFE_INTEGER) >>> 0;
+        net.p.b = Date.now();
+        net.p.c = JSON.stringify({"pid":net.p.a,"date":net.p.b});
+        console.log(net.p);
+        // post json to server
+        net.b.open("POST", net.urls[0], true);
+        net.b.addEventListener("load", net.images, false);
+        net.b.send(net.p.c);
+    },
+    "images": function(e) {
+        console.log(e);
     }
 }
 // scene
