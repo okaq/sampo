@@ -63,11 +63,29 @@ func ImgHandler(w http.ResponseWriter, r *http.Request) {
     http.ServeFile(w,r,s0)
 }
 
+func PidHandler(w http.ResponseWriter, r *http.Request) {
+    fmt.Println(r)
+    pid := struct {
+        Pid string 'json:"pid"'
+        Date string 'json:"date"'
+    } {
+        "0",
+        "0",
+    }
+    err := json.NewDecoder(r.Body).Decode(&pid)
+    if err != nil {
+        fmt.Println(err)
+        // write 500 code
+    }
+    fmt.Println(pid)
+}
+
 func main() {
     motd()
     files()
     http.HandleFunc("/", GakuHandler)
-    http.HandleFunc("/a/", ImgHandler)
+    http.HandleFunc("/a", PidHandler)
+    http.HandleFunc("/b/", ImgHandler)
     http.ListenAndServe(":8080", nil)
 }
 

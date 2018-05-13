@@ -68,6 +68,13 @@ var g = {
 
             // server sync
             net.sync();
+
+            // who me?
+            g.wm = "¯\_(ツ)_/¯";
+
+            // function to generate a clcik button
+            // allocates are for bitmap text
+            // clcik handler, renderer
         }
     }
 // data
@@ -114,6 +121,7 @@ var net = {
     "open": function() {
         net.urls = [
             "http://localhost:8080/a",
+            "http://localhost:8080/b",
         ];
         // net.a = {};
         // net.a.id = (Math.random * Number.MAX_SAFE_INTEGER) >>> 0;
