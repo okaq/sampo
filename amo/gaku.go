@@ -5,9 +5,12 @@
 package main
 
 import (
+    "encoding/json"
     "fmt"
     "io/ioutil"
+    "math/rand"
     "net/http"
+    "strconv"
     "time"
 )
 
@@ -24,6 +27,8 @@ var (
     Images []string
     // pid cache
     Pids []string
+    // random
+    R *rand.Rand
 )
 
 func motd() {
@@ -44,6 +49,14 @@ func files() {
         Images[i] = f1.Name()
     }
     fmt.Println(Images)
+}
+
+func rng() {
+    t0 := time.Now().UnixNano()
+    s0 := rand.NewSource(t0)
+    R = rand.New(s0)
+    // test
+    fmt.Sprintf("rng test max int: %d\n", R.Uint32())
 }
 
 func GakuHandler(w http.ResponseWriter, r *http.Request) {
@@ -68,8 +81,8 @@ func ImgHandler(w http.ResponseWriter, r *http.Request) {
 func PidHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(r)
     pid := struct {
-        Pid string 'json:"pid"'
-        Date string 'json:"date"'
+        Pid string `json:"pid"`
+        Date string `json:"date"`
     } {
         "0",
         "0",
@@ -80,12 +93,15 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
         // write 500 code
     }
     fmt.Println(pid)
-    Pids = append(Pids, pid)
+    // not concurrency safe
+    // Pids = append(Pids, pid)
     p0 := struct {
         Pid string
         Date string
     } {
         // rand time generators
+        strconv.FormatUint(uint64(R.Uint32()),10),
+        strconv.FormatInt(time.Now().UnixNano(),10),
     }
     s0 := fmt.Sprintf("%s:%s;%s:%s",pid.Pid,pid.Date,p0.Pid,p0.Date)
     w.Write([]byte(s0))
@@ -93,6 +109,7 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
     motd()
+    rng()
     files()
     http.HandleFunc("/", GakuHandler)
     http.HandleFunc("/a", PidHandler)
