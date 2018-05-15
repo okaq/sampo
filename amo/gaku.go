@@ -22,6 +22,8 @@ const (
 var (
     // file list
     Images []string
+    // pid cache
+    Pids []string
 )
 
 func motd() {
@@ -78,6 +80,15 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
         // write 500 code
     }
     fmt.Println(pid)
+    Pids = append(Pids, pid)
+    p0 := struct {
+        Pid string
+        Date string
+    } {
+        // rand time generators
+    }
+    s0 := fmt.Sprintf("%s:%s;%s:%s",pid.Pid,pid.Date,p0.Pid,p0.Date)
+    w.Write([]byte(s0))
 }
 
 func main() {
