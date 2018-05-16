@@ -62,7 +62,7 @@ var g = {
             */
 
             ren.clear();
-            ren.text();
+            // ren.text();
 
             // move text init to db
 
@@ -77,11 +77,22 @@ var g = {
             // clcik handler, renderer
         },
         "images": function() {
+            g.img = {};
             for (var i = 0; i < net.c.Images.length; i++) {
                 var im0 = net.c.Images[i];
                 var im1 = im0.split(".")[0];
-                console.log(im0, im1);
+                var im2 = net.urls[1].concat("/",im0);
+                var im3 = im1.toUpperCase();
+                // console.log(im0, im1, im2);
+                g.img[im3] = im2;
             }
+            console.log(g.img);
+
+            db.init3();
+            ren.clear();
+            ren.text();
+            // proper state change
+            // scene management, dom add remove
 
             // store names
             // longest determines text button max width
@@ -91,7 +102,7 @@ var g = {
             // "click render to sample"
 
             // 32x32 image text button function
-            
+
         }
     }
 // data
@@ -101,7 +112,7 @@ var db = {
         db.a = {};
         // text state
         db.a.t = {};
-        db.init2();
+        // db.init2();
     },
     "init2": function() {
         // draw text in rect function
@@ -115,6 +126,27 @@ var db = {
         t2.r = [32*12,32,1888-(32*12),256];
         t2.t = "IMPORT READY";
         db.texa("field", t2);
+    },
+    "init3": function() {
+        // state banner
+        var t1 = {};
+        t1.r = [64*11,64,1888-(64*11),32];
+        t1.t = "CLICK IMAGE";
+        db.texa("state", t1);
+
+        // image list
+        var y0 = 0;
+        var y1 = 3 * 64;
+        for (var k in g.img) {
+            var t0 = {};
+            var y2 = (y0 * (32*3)) + y1 + 32;
+            var x0 = (32 * k.length);
+            var x1 = 1888 - x0;
+            t0.r = [x0,32,x1,y2]
+            t0.t = k;
+            db.texa(k, t0);
+            y0 = y0 + 1;
+        }
     },
     "texa": function(k0, t0) {
         // text manager
@@ -139,6 +171,7 @@ var net = {
         net.urls = [
             "http://localhost:8080/a",
             "http://localhost:8080/b",
+            "http://localhost:8080/c",
         ];
         // net.a = {};
         // net.a.id = (Math.random * Number.MAX_SAFE_INTEGER) >>> 0;

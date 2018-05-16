@@ -116,6 +116,10 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
     w.Write(b0)
 }
 
+func SaveHandler(w http.ResponseWriter, r *http.Request) {
+    fmt.Println(r)
+}
+
 func main() {
     motd()
     rng()
@@ -123,6 +127,7 @@ func main() {
     http.HandleFunc("/", GakuHandler)
     http.HandleFunc("/a", PidHandler)
     http.HandleFunc("/b/", ImgHandler)
+    http.HandleFunc("/c", SaveHandler)
     http.ListenAndServe(":8080", nil)
 }
 
