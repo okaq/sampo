@@ -218,6 +218,9 @@ var net = {
     "well": function(e) {
         console.log(e);
         // window blob to img object
+        var im0 = e.target.response;
+        var im1 = URL.createObjectURL(im0);
+        ren.well(im1);
     }
 }
 // scene
@@ -361,6 +364,14 @@ var sce = {
              }
          }
          // first render beautiful!
+     },
+     "well": function(im0) {
+         var c0 = sce.b.c;
+         var im1 = new Image();
+         im1.src = im0;
+         im1.addEventListener("load", function(e){
+             c0.con.drawImage(im1,0,0);
+        }, false);
      }
  }
     // dom
