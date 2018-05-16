@@ -207,6 +207,17 @@ var net = {
         console.log(e);
         net.c = e.target.response;
         g.images();
+    },
+    "img": function(d0) {
+        net.d = new XMLHttpRequest();
+        net.d.open("GET", d0, true);
+        net.d.addEventListener("load", net.well, false);
+        net.d.responseType = "blob";
+        net.d.send();
+    },
+    "well": function(e) {
+        console.log(e);
+        // window blob to img object
     }
 }
 // scene
@@ -298,6 +309,10 @@ var sce = {
     "act": function(e) {
         // button user input handler
         console.log(e);
+        var d0 = e.target.dataset.x;
+        var d1 = g.img[d0];
+        // net fetch as blob
+        net.img(d1);
     }
  }
  // render
