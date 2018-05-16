@@ -81,11 +81,11 @@ func ImgHandler(w http.ResponseWriter, r *http.Request) {
 func PidHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(r)
     pid := struct {
-        Pid string `json:"pid"`
-        Date string `json:"date"`
+        Pid int `json:"pid"`
+        Date int `json:"date"`
     } {
-        "0",
-        "0",
+        0,
+        0,
     }
     err := json.NewDecoder(r.Body).Decode(&pid)
     if err != nil {
@@ -98,13 +98,22 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
     p0 := struct {
         Pid string
         Date string
+        Images []string
     } {
         // rand time generators
         strconv.FormatUint(uint64(R.Uint32()),10),
         strconv.FormatInt(time.Now().UnixNano(),10),
+        Images,
     }
-    s0 := fmt.Sprintf("%s:%s;%s:%s",pid.Pid,pid.Date,p0.Pid,p0.Date)
-    w.Write([]byte(s0))
+    // s0 := fmt.Sprintf("%d:%d;%s:%s",pid.Pid,pid.Date,p0.Pid,p0.Date)
+    // s1 := json.Marshal(p0)
+    // w.Write([]byte(s0))
+    b0, err := json.Marshal(p0)
+    if err != nil {
+        fmt.Println(err)
+    }
+    w.Header().Set("Content-Type", "application/json")
+    w.Write(b0)
 }
 
 func main() {
