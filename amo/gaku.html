@@ -75,6 +75,23 @@ var g = {
             // function to generate a clcik button
             // allocates are for bitmap text
             // clcik handler, renderer
+        },
+        "images": function() {
+            for (var i = 0; i < net.c.Images.length; i++) {
+                var im0 = net.c.Images[i];
+                var im1 = im0.split(".")[0];
+                console.log(im0, im1);
+            }
+
+            // store names
+            // longest determines text button max width
+
+            // 64x64 instruction text block
+            // two states, "click image to smaple"
+            // "click render to sample"
+
+            // 32x32 image text button function
+            
         }
     }
 // data
@@ -155,6 +172,8 @@ var net = {
     },
     "images": function(e) {
         console.log(e);
+        net.c = e.target.response;
+        g.images();
     }
 }
 // scene
