@@ -107,6 +107,12 @@ var g = {
         "samp": function() {
             // add click handler
             sce.most();
+        },
+        "samp2": function() {
+            // sample monochrome pixel data
+            db.samp();
+            // post json sample to server
+            // for encode and storage
         }
     }
 // data
@@ -117,6 +123,8 @@ var db = {
         // text state
         db.a.t = {};
         // db.init2();
+        // sample data
+        db.a.p = {};
     },
     "init2": function() {
         // draw text in rect function
@@ -167,6 +175,25 @@ var db = {
     "texr": function(k0) {
         // remove from manager
         // hide / show in display state
+    },
+    "samp": function() {
+        // sample data
+        // only first pixel of each block
+        db.a.p[g.key] = [];
+        // check existance
+        var d0 = sce.b.p.data;
+        for (var i = 0; i < 1024; i++) {
+            var x0 = i % 32;
+            var y0 = (i / 32) >>> 0;
+            var i1 = ((y0 * 131072) + (x0 * 128)) >>> 0;
+            var d1 = d0[i1];
+            if (d1 == 0) {
+                db.a.p[g.key][i] = 0;
+            } else {
+                db.a.p[g.key][i] = 1;
+            }
+        }
+        console.log(db.a.p);
     }
 }
 // xhr
@@ -335,6 +362,7 @@ var sce = {
         sce.b.p = sce.b.c.con.getImageData(0,0,sce.b.c.can.width,sce.b.c.can.height);
         console.log(sce.b.p);
         console.log(sce.b.p.data.length);
+        g.samp2();
     }
  }
  // render
