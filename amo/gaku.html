@@ -103,6 +103,10 @@ var g = {
 
             // 32x32 image text button function
 
+        },
+        "samp": function() {
+            // add click handler
+            sce.most();
         }
     }
 // data
@@ -313,9 +317,24 @@ var sce = {
         // button user input handler
         console.log(e);
         var d0 = e.target.dataset.x;
+        // store as current key
+        g.key = d0;
         var d1 = g.img[d0];
         // net fetch as blob
         net.img(d1);
+    },
+    "most": function() {
+        // sampler handler
+        sce.b.c.can.removeEventListener("click", sce.click);
+        sce.b.c.can.addEventListener("click", sce.post, false);
+    },
+    "post": function(e) {
+        console.log(e);
+        // begin sampling
+        // get pixels
+        sce.b.p = sce.b.c.con.getImageData(0,0,sce.b.c.can.width,sce.b.c.can.height);
+        console.log(sce.b.p);
+        console.log(sce.b.p.data.length);
     }
  }
  // render
@@ -371,6 +390,8 @@ var sce = {
          im1.src = im0;
          im1.addEventListener("load", function(e){
              c0.con.drawImage(im1,0,0);
+             // add pane click handler
+             g.samp();
         }, false);
      }
  }
