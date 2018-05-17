@@ -113,6 +113,12 @@ var g = {
             db.samp();
             // post json sample to server
             // for encode and storage
+        },
+        "wrap": function() {
+            g.fine = {};
+            g.fine.key = g.key;
+            g.fine.data = db.a.p[g.key];
+            net.club();
         }
     }
 // data
@@ -194,6 +200,8 @@ var db = {
             }
         }
         console.log(db.a.p);
+
+        g.wrap();
     }
 }
 // xhr
@@ -252,6 +260,16 @@ var net = {
         var im0 = e.target.response;
         var im1 = URL.createObjectURL(im0);
         ren.well(im1);
+    },
+    "club": function() {
+        net.f = new XMLHttpRequest();
+        net.f.open("POST", net.urls[2], true);
+        net.f.addEventListener("load", net.pole, false);
+        var j0 = JSON.stringify(g.fine);
+        net.f.send(j0);
+    },
+    "pole": function(e) {
+        console.log(e);
     }
 }
 // scene

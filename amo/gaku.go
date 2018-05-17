@@ -11,6 +11,7 @@ import (
     "math/rand"
     "net/http"
     "strconv"
+    "strings"
     "time"
 )
 
@@ -118,6 +119,23 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
 
 func SaveHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(r)
+    d0 := struct {
+        Key string `json:"key"`
+        Data []byte `json:"data"`
+    } {
+        "0",
+        []byte{},
+    }
+    err := json.NewDecoder(r.Body).Decode(&d0)
+    if err != nil {
+        fmt.Println(err)
+    }
+    s0 := fmt.Sprintf("decoded %d bytes for %s image", len(d0.Data), d0.Key)
+    b0 := []byte(s0)
+    s1 := strings.ToLower(d0.Key)
+    s2 := fmt.Sprintf("img/%s.png", s1)
+    fmt.Printf("writing %s image to file %s\n", s1, s2)
+    w.Write(b0)
 }
 
 func main() {
