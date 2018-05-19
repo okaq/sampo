@@ -1,5 +1,10 @@
 # data assets directory 
 amo/data/
-# images directory
-amo/img
+# current images directory
+amo/img/
+# bkup images directory
+amo/imga/
+# json directory
+amo/imgb/
+
 

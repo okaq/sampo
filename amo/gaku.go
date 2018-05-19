@@ -21,6 +21,10 @@ const (
     IMG = "img/"
     // data dir path
     DATA = "data/"
+    // backup dir path
+    IMGA = "imga/"
+    // json dir path
+    IMGB = "imgb/"
 )
 
 var (
