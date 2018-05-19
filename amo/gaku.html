@@ -117,7 +117,8 @@ var g = {
         "wrap": function() {
             g.fine = {};
             g.fine.key = g.key;
-            g.fine.data = db.a.p[g.key];
+            // g.fine.data = db.a.p[g.key];
+            g.fine.data = db.a.r[g.key];
             net.club();
         }
     }
@@ -131,6 +132,8 @@ var db = {
         // db.init2();
         // sample data
         db.a.p = {};
+        // byte data
+        db.a.r = {};
     },
     "init2": function() {
         // draw text in rect function
@@ -199,9 +202,23 @@ var db = {
                 db.a.p[g.key][i] = 1;
             }
         }
-        console.log(db.a.p);
+        // compress bit array to byte stream
+        db.a.r[g.key] = db.comp(db.a.p[g.key]);
+
+        console.log(db.a);
 
         g.wrap();
+    },
+    "comp": function(d0) {
+        // compress bit array to byte array
+        var r0 = [];
+        for (var i = 0; i < 1024; i+=8) {
+            var r1 = d0.slice(i,i+8);
+            var r2 = r1.join('');
+            var r3 = parseInt(r2, 2);
+            r0.push(r3);
+        }
+        return r0;
     }
 }
 // xhr

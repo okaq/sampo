@@ -139,6 +139,14 @@ func SaveHandler(w http.ResponseWriter, r *http.Request) {
     s1 := strings.ToLower(d0.Key)
     s2 := fmt.Sprintf("img/%s.png", s1)
     fmt.Printf("writing %s image to file %s\n", s1, s2)
+    // base64 enc
+    var b1 []byte
+    b1, err = json.Marshal(d0.Data)
+    if err != nil {
+        fmt.Println(err)
+    }
+    fmt.Println(string(b1))
+    // uncompressed bits
     w.Write(b0)
 }
 
