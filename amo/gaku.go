@@ -147,6 +147,16 @@ func SaveHandler(w http.ResponseWriter, r *http.Request) {
     }
     fmt.Println(string(b1))
     // uncompressed bits
+    // output to file
+    // format var key = base64 string
+    s3 := fmt.Sprintf("var %s = %s", s1, string(b1))
+    fmt.Println(s3)
+    s4 := fmt.Sprintf("%s%s.json", IMGB, s1)
+    fmt.Println(s4)
+    err = ioutil.WriteFile(s4, []byte(s3), 0644)
+    if err != nil {
+        fmt.Println(err)
+    }
     w.Write(b0)
 }
 
