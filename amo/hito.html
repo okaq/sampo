@@ -37,6 +37,24 @@ var g = {
 
             // stats
             console.log("total render time: " + (window.performance.now() - t0) + "ms.");
+        },
+        "start": function() {
+            net.pid();
+        },
+        "begin": function() {
+            g.tick = 0;
+            // loop
+            g.id = window.setInterval(g.frame, 1000);
+        },
+        "frame": function() {
+            console.log("tick count: " + g.tick);
+            if (g.tick >= db.a.img.length) {
+                console.log("thats all!");
+                window.clearInterval(g.id);
+                // repeat?
+            }
+            console.log("image: " + db.a.img[g.tick]);
+            g.tick = g.tick + 1;
         }
     }
 // scene
@@ -57,8 +75,27 @@ var db = {
 var net = {
     "init": function() {
         net.urls = [
-            "http://localhost:8080/a"
+            "http://localhost:8080/a",
+            "http://localhost:8080/b/"
         ];
+    },
+    "pid": function() {
+        net.a = new XMLHttpRequest();
+        net.a.open("POST", net.urls[0], true);
+        net.a.addEventListener("load", net.img, false);
+        net.b = {};
+        net.b.pid = (Math.random() * Number.MAX_SAFE_INTEGER) >>> 0;
+        net.b.date = Date.now();
+        net.c = JSON.stringify(net.b);
+        net.a.responseType = "json";
+        net.a.send(net.c);
+    },
+    "img": function(e) {
+        console.log(e);
+        net.d = e.target.response;
+        console.log(typeof(net.d));
+        db.a.img = net.d;
+        g.begin();
     }
 }
 // dom

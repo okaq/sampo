@@ -52,12 +52,14 @@ func HitoHandler(w http.ResponseWriter, r *http.Request) {
     http.ServeFile(w,r,INDEX)
 }
 
-func PathHandler(w http.ResponseWriter, r *http.Request) {
+func JsonHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(r)
 }
 
-func JsonHandler(w http.ResponseWriter, r *http.Request) {
+func PathHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(r)
+    w.Header().Set("Content-Type", "application/json")
+    w.Write(J)
 }
 
 func main() {
