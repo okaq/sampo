@@ -51,6 +51,7 @@ var g = {
             if (g.tick >= db.a.img.length) {
                 console.log("thats all!");
                 window.clearInterval(g.id);
+                return;
                 // repeat?
             }
             console.log("image: " + db.a.img[g.tick]);
@@ -72,7 +73,7 @@ var sce = {
         sce.a.c = dom.canvas(sce.a.r);
         dom.add(sce.a.c);
         sce.a.c.can.dataset.x = "bkgd";
-        sce.a.c.can.addEventlistener("click", sce.click, false);
+        sce.a.c.can.addEventListener("click", sce.click, false);
         sce.a.d = [];
         sce.a.d[0] = rgba.rmon();
         sce.a.d[1] = rgba.css([0,0,0,1.0]);
@@ -84,7 +85,7 @@ var sce = {
         sce.b.c = dom.canvas(sce.b.r);
         dom.add(sce.b.c);
         sce.b.c.can.dataset.x = "pane";
-        sce.b.c.can.addEventlistener("click", sce.click, false);
+        sce.b.c.can.addEventListener("click", sce.click, false);
         sce.b.d = [];
         sce.b.d[0] = rgba.rmon();
         sce.b.d[1] = rgba.css([0,0,0,1.0]);
@@ -96,7 +97,7 @@ var sce = {
         sce.c.c = dom.canvas(sce.c.r);
         dom.add(sce.c.c);
         sce.c.c.can.dataset.x = "text";
-        sce.c.c.can.addEventlistener("click", sce.click, false);
+        sce.c.c.can.addEventListener("click", sce.click, false);
         sce.c.d = [];
         sce.c.d[0] = rgba.rmon();
         sce.c.d[1] = rgba.css([0,0,0,1.0]);
@@ -140,10 +141,26 @@ var net = {
 // render
 var ren = {
     "test" : function() {
-
+        // bkgd
+        sce.a.c.con.fillStyle = sce.a.d[0];
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+        // pane
+        sce.b.c.con.fillStyle = sce.b.d[0];
+        sce.b.c.con.fillRect(0,0,sce.b.c.can.width,sce.b.c.can.height);
+        // text
+        sce.c.c.con.fillStyle = sce.c.d[0];
+        sce.c.c.con.fillRect(0,0,sce.c.c.can.width,sce.c.c.can.height);
     },
     "clear": function() {
-        
+        // bkgd
+        sce.a.c.con.fillStyle = sce.a.d[2];
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+        // pane
+        sce.b.c.con.fillStyle = sce.b.d[1];
+        sce.b.c.con.fillRect(0,0,sce.b.c.can.width,sce.b.c.can.height);
+        // text
+        sce.c.c.con.fillStyle = sce.c.d[1];
+        sce.c.c.con.fillRect(0,0,sce.c.c.can.width,sce.c.c.can.height);
     }
 }
 // dom
