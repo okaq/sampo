@@ -54,6 +54,22 @@ func HitoHandler(w http.ResponseWriter, r *http.Request) {
 
 func JsonHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(r)
+    b0, err := ioutil.ReadAll(r.Body)
+    if err != nil {
+        fmt.Println(err)
+    }
+    s0 := string(b0)
+    fmt.Println(s0)
+    // sanity check
+    for _, f0 := range F {
+        if f0 == s0 {
+            http.ServeFile(w,r,s0)
+        } /* else {
+            w.Write([]byte("bad file"))
+        }
+        */
+    }
+    w.Write([]byte("bad file"))
 }
 
 func PathHandler(w http.ResponseWriter, r *http.Request) {
