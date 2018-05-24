@@ -55,13 +55,15 @@ var g = {
                 // repeat?
             }
             console.log("image: " + db.a.img[g.tick]);
-            // get json and render
+            // get json, decode bmp and render
             g.ren();
             g.tick = g.tick + 1;
         },
         "ren": function() {
-            ren.test();
-            // ren.clear();
+            // ren.test();
+            ren.clear();
+            // text
+            ren.text();
         }
     }
 // scene
@@ -161,6 +163,26 @@ var ren = {
         // text
         sce.c.c.con.fillStyle = sce.c.d[1];
         sce.c.c.con.fillRect(0,0,sce.c.c.can.width,sce.c.c.can.height);
+    },
+    "text": function() {
+        // break word into squares
+        // call ren.glyph per unit
+        // test, 10 letter word size limit
+        var w0 = "APHRODISIA";
+        var w1 = w0.split("");
+        console.log(w0, w1);
+        for (var i = 0; i < w1.length; i++) {
+            var r0 = [];
+            r0[0] = 32;
+            r0[1] = 32;
+            r0[2] = (32 * i) >>> 0;
+            r0[3] = 0;
+            ren.glyph(w1[i], r0);
+        }
+    },
+    "glyph": function(g0, r0) {
+        var b0 = bmp.a[g0];
+        console.log(g0, r0, b0);
     }
 }
 // dom
