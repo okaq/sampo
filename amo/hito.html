@@ -170,7 +170,7 @@ var ren = {
         // test, 10 letter word size limit
         var w0 = "APHRODISIA";
         var w1 = w0.split("");
-        console.log(w0, w1);
+        // console.log(w0, w1);
         for (var i = 0; i < w1.length; i++) {
             var r0 = [];
             r0[0] = 32;
@@ -182,7 +182,18 @@ var ren = {
     },
     "glyph": function(g0, r0) {
         var b0 = bmp.a[g0];
-        console.log(g0, r0, b0);
+        // console.log(g0, r0, b0);
+        var x0 = r0[2];
+        sce.c.c.con.fillStyle = sce.c.d[2];
+        for (var i = 0; i < b0.length; i++) {
+            if (b0[i] == 1) {
+                continue;
+            }
+            var x1 = i % 32;
+            var y0 = (i / 32);
+            var x2 = (x1 + x0) >>> 0;
+            sce.c.c.con.fillRect(x2,y0,1,1);
+        }
     }
 }
 // dom
