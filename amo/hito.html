@@ -63,7 +63,15 @@ var g = {
             // ren.test();
             ren.clear();
             // text
-            ren.text();
+            // ren.text();
+            var w0 = db.a.img[g.tick];
+            var w1 = w0.split("/");
+            var w2 = w1[1].split(".");
+            var w3 = w2[0];
+            var w4 = w3.toUpperCase();
+            console.log(w0,w1,w2,w3,w4);
+            // clamp first ten letters
+            ren.text1(w4);
         }
     }
 // scene
@@ -169,6 +177,22 @@ var ren = {
         // call ren.glyph per unit
         // test, 10 letter word size limit
         var w0 = "APHRODISIA";
+        var w1 = w0.split("");
+        // console.log(w0, w1);
+        for (var i = 0; i < w1.length; i++) {
+            var r0 = [];
+            r0[0] = 32;
+            r0[1] = 32;
+            r0[2] = (32 * i) >>> 0;
+            r0[3] = 0;
+            ren.glyph(w1[i], r0);
+        }
+    },
+    "text1": function(w0) {
+        // break word into squares
+        // call ren.glyph per unit
+        // test, 10 letter word size limit
+        // var w0 = "APHRODISIA";
         var w1 = w0.split("");
         // console.log(w0, w1);
         for (var i = 0; i < w1.length; i++) {
