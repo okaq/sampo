@@ -56,7 +56,10 @@ var g = {
             }
             console.log("image: " + db.a.img[g.tick]);
             // get json, decode bmp and render
+            // render title
             g.ren();
+            // json get
+            net.sing()
             g.tick = g.tick + 1;
         },
         "ren": function() {
@@ -72,6 +75,12 @@ var g = {
             console.log(w0,w1,w2,w3,w4);
             // clamp first ten letters
             ren.text1(w4);
+        },
+        "turn": function() {
+            // two ways to fetch images
+            // in one batch, one conn get
+            // and decode in sequence
+
         }
     }
 // scene
@@ -126,7 +135,7 @@ var net = {
     "init": function() {
         net.urls = [
             "http://localhost:8080/a",
-            "http://localhost:8080/b/"
+            "http://localhost:8080/b"
         ];
     },
     "pid": function() {
@@ -146,6 +155,21 @@ var net = {
         console.log(typeof(net.d));
         db.a.img = net.d;
         g.begin();
+    },
+    "sing": function() {
+        // get singlw json bitmap by file name
+        net.e = new XMLHttpRequest();
+        // net.f = net.urls[1] + db.a.img[g.tick];
+        net.f = db.a.img[g.tick];
+        net.e.open("POST", net.urls[1], false);
+        net.e.addEventListener("load", net.ring, false);
+        net.e.send(net.f);
+    },
+    "ring": function(e) {
+        console.log(e);
+    },
+    "bag": function() {
+        // get all json bitmaps in one go
     }
 }
 // render

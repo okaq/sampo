@@ -64,6 +64,7 @@ func JsonHandler(w http.ResponseWriter, r *http.Request) {
     for _, f0 := range F {
         if f0 == s0 {
             http.ServeFile(w,r,s0)
+            return
         } /* else {
             w.Write([]byte("bad file"))
         }
@@ -85,7 +86,7 @@ func main() {
     pack()
     http.HandleFunc("/", HitoHandler)
     http.HandleFunc("/a", PathHandler)
-    http.HandleFunc("/b/", JsonHandler)
+    http.HandleFunc("/b", JsonHandler)
     http.ListenAndServe(":8080", nil)
 }
 
