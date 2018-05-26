@@ -167,6 +167,10 @@ var net = {
     },
     "ring": function(e) {
         console.log(e);
+        net.g = e.target.response;
+        console.log(net.g);
+        net.h = JSON.parse(net.g);
+        console.log(net.h);
     },
     "bag": function() {
         // get all json bitmaps in one go

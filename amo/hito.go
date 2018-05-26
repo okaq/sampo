@@ -90,4 +90,10 @@ func main() {
     http.ListenAndServe(":8080", nil)
 }
 
+// valid json
+// {"bitmap_name":"base64_string_encoding"}
+// or simply "base64_string" in file name
+// and file name itself "asteroid.png"
+// is the object key
+
 
