@@ -51,8 +51,11 @@ var g = {
             if (g.tick >= db.a.img.length) {
                 console.log("thats all!");
                 window.clearInterval(g.id);
+                console.log(db.b);
                 return;
                 // repeat?
+                // longer loop times
+                // bitmap visualization tool and load done
             }
             console.log("image: " + db.a.img[g.tick]);
             // db.a.b[db.a.img[g.tick]] = {};
@@ -73,7 +76,7 @@ var g = {
             var w2 = w1[1].split(".");
             var w3 = w2[0];
             var w4 = w3.toUpperCase();
-            console.log(w0,w1,w2,w3,w4);
+            // console.log(w0,w1,w2,w3,w4);
             // clamp first ten letters
             ren.text1(w4);
         },
@@ -174,7 +177,7 @@ var net = {
     "ring": function(e) {
         console.log(e);
         net.g = e.target.response;
-        console.log(net.g);
+        // console.log(net.g);
         // net.h = JSON.parse(net.g);
         // console.log(net.h);
         var b0 = bmp.flat(net.g);
@@ -188,7 +191,8 @@ var net = {
         db.b[k3].json = net.g;
         db.b[k3].bmp = b0;
         // ren bmp
-        console.log(db.b);
+        ren.bmp(k3);
+        // console.log(db.b);
     },
     "bag": function() {
         // get all json bitmaps in one go
@@ -263,6 +267,20 @@ var ren = {
             var y0 = (i / 32);
             var x2 = (x1 + x0) >>> 0;
             sce.c.c.con.fillRect(x2,y0,1,1);
+        }
+    },
+    "bmp": function(k0) {
+        var b0 = db.b[k0].bmp;
+        sce.b.c.con.fillStyle = sce.b.d[2];
+        for (var i = 0; i < b0.length; i++) {
+            if (b0[i] == 1) {
+                continue;
+            }
+            var x0 = i % 32;
+            var y0 = (i / 32) >>> 0;
+            var x1 = (x0 * 32) >>> 0;
+            var y1 = (y0 * 32) >>> 0;
+            sce.b.c.con.fillRect(x1,y1,32,32);
         }
     }
 }
