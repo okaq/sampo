@@ -55,6 +55,7 @@ var g = {
                 // repeat?
             }
             console.log("image: " + db.a.img[g.tick]);
+            // db.a.b[db.a.img[g.tick]] = {};
             // get json, decode bmp and render
             // render title
             g.ren();
@@ -128,6 +129,11 @@ var sce = {
 var db = {
     "init": function() {
         db.a = {};
+        db.b = {};
+        // image list db.a.img
+        // image data
+        // db.b[name].json
+        // db.b[name].bmp
     }
 }
 // xhr
@@ -169,8 +175,20 @@ var net = {
         console.log(e);
         net.g = e.target.response;
         console.log(net.g);
-        net.h = JSON.parse(net.g);
-        console.log(net.h);
+        // net.h = JSON.parse(net.g);
+        // console.log(net.h);
+        var b0 = bmp.flat(net.g);
+        // console.log(b0);
+        var k0 = db.a.img[g.tick];
+        var k1 = k0.split("/");
+        var k2 = k1[1].split(".");
+        var k3 = k2[0].toUpperCase();
+        db.b[k3] = {};
+        db.b[k3].file = k0;
+        db.b[k3].json = net.g;
+        db.b[k3].bmp = b0;
+        // ren bmp
+        console.log(db.b);
     },
     "bag": function() {
         // get all json bitmaps in one go
@@ -343,6 +361,12 @@ var bmp = {
             }
         }
         return r0;
+    },
+    "flat": function(s0) {
+        // stand alone decoder
+        var b0 = base64DecToArr(s0);
+        var b1 = bmp.exp(b0);
+        return b1;
     }
 }
 // gugi bitmap font
