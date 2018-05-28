@@ -24,9 +24,15 @@ func JiyuHandler(w http.ResponseWriter, r *http.Request) {
     http.ServeFile(w,r,INDEX)
 }
 
+func StatHandler(w http.ResponseWriter, r *http.Request) {
+    fmt.Println(r)
+    // accumulator
+}
+
 func main() {
     motd()
     http.HandleFunc("/", JiyuHandler)
+    http.HandleFunc("/a", StatHandler)
     http.ListenAndServe(":8080", nil)
 }
 

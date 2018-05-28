@@ -41,6 +41,39 @@ var g = {
         "start": function() {
         }
     }
+// data
+var db = {
+    "init": function() {
+        db.a = {};
+    }
+}
+// scene
+var sce = {
+    "init": function() {
+        // scene graph management
+        sce.a = {};
+    }
+}
+// stats
+var stat = {
+    "cookie": function() {
+        // types of cookies for histogram
+    },
+    "jars": function() {
+        // the number of jars to create
+    },
+    "shuffle": function() {
+        // sample from a large pile of types
+        // can begin with a uniform quantity of each
+    }
+}
+// xhr
+var net = {
+    "init": function() {
+        net.urls = ["http://localhost:8080/a"];
+        net.a = new XMLHttpRequest();
+    }
+}
     // dom
     var dom = {
         "init": function() {
