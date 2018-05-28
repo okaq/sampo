@@ -16,7 +16,7 @@ const (
 
 func motd() {
     fmt.Println("okaq starting on localhost:8080")
-    fmt.Printf("%s\n", time.Now().ToString())
+    fmt.Printf("%s\n", time.Now().String())
 }
 
 func JiyuHandler(w http.ResponseWriter, r *http.Request) {

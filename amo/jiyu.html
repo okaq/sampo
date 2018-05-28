@@ -39,6 +39,7 @@ var g = {
             console.log("total render time: " + (window.performance.now() - t0) + "ms.");
         },
         "start": function() {
+            stat.cookie();
         }
     }
 // data
@@ -58,6 +59,14 @@ var sce = {
 var stat = {
     "cookie": function() {
         // types of cookies for histogram
+        stat.t = [];
+        // initial number of each (uniform)
+        stat.n = [];
+        for (var k0 in bmp.a) {
+            stat.t.push(k0);
+            stat.n.push(1024);
+        }
+        console.log(stat.t,stat.n);
     },
     "jars": function() {
         // the number of jars to create
