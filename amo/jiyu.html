@@ -89,6 +89,15 @@ var stat = {
             stat.c[k0] = stat.s;
         }
         // remove key when count hits zero
+        stat.d = stat.t.slice();
+        // deterministic iterative loop :)
+        stat.e = (stat.d.length * stat.s) >>> 0;
+        for (var i = 0; i < stat.e; i++) {
+            // pick a cookie type
+            // decrement cookie count from pile
+            // check zero
+            // increment jar cookie count
+        }
     }
 }
 // xhr
