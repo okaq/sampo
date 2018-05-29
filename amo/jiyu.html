@@ -62,18 +62,33 @@ var stat = {
         stat.t = [];
         // initial number of each (uniform)
         stat.n = [];
+        stat.s = 1024;
         for (var k0 in bmp.a) {
             stat.t.push(k0);
-            stat.n.push(1024);
+            stat.n.push(stat.s);
         }
         console.log(stat.t,stat.n);
+        // check zero
     },
     "jars": function() {
         // the number of jars to create
+        stat.a = 16;
+        // jars as lists of cookies added
+        stat.b = [];
+        for (var i = 0; i < stat.a; i++) {
+            stat.b[i] = [];
+        }
     },
     "shuffle": function() {
         // sample from a large pile of types
         // can begin with a uniform quantity of each
+        // count copy
+        stat.c = {};
+        for (var i = 0; i < stat.t.length; i++) {
+            var k0 = stat.t[i];
+            stat.c[k0] = stat.s;
+        }
+        // remove key when count hits zero
     }
 }
 // xhr
