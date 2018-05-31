@@ -82,6 +82,8 @@ var stat = {
     "shuffle": function() {
         // sample from a large pile of types
         // can begin with a uniform quantity of each
+        // accumulated cookie types
+        stat.d = stat.t.slice();
         // count copy
         stat.c = {};
         for (var i = 0; i < stat.t.length; i++) {
@@ -89,7 +91,7 @@ var stat = {
             stat.c[k0] = stat.s;
         }
         // remove key when count hits zero
-        stat.d = stat.t.slice();
+        // stat.d = stat.t.slice();
         // deterministic iterative loop :)
         stat.e = (stat.d.length * stat.s) >>> 0;
         for (var i = 0; i < stat.e; i++) {
@@ -97,7 +99,19 @@ var stat = {
             // decrement cookie count from pile
             // check zero
             // increment jar cookie count
+            var k0 = stat.pick();
+            var b0 = stat.dec(k0);
         }
+    },
+    "pick": function() {
+        // random cookie type
+        var f0 = (Math.random() * stat.d.length) >>> 0;
+        var k0 = stat.d[f0];
+        return k0;
+    },
+    "dec": function(k0) {
+        // decrement from cookie count
+        // return true if count reaches zero
     }
 }
 // xhr
