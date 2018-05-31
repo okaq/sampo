@@ -101,6 +101,11 @@ var stat = {
             // increment jar cookie count
             var k0 = stat.pick();
             var b0 = stat.dec(k0);
+            if (b0) {
+                var i0 = stat.d.indexOf(k0);
+                stat.d = stat.d.splice(i0);
+            }
+            stat.place(k0);
         }
     },
     "pick": function() {
@@ -112,6 +117,15 @@ var stat = {
     "dec": function(k0) {
         // decrement from cookie count
         // return true if count reaches zero
+        stat.c[k0] = stat.c[k0] - 1;
+        if (stat.c[k0] <= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+    "place": function(k0) {
+        // place cookie in random jar
     }
 }
 // xhr
