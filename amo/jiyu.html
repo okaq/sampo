@@ -76,7 +76,13 @@ var stat = {
         // jars as lists of cookies added
         stat.b = [];
         for (var i = 0; i < stat.a; i++) {
-            stat.b[i] = [];
+            // stat.b[i] = [];
+            stat.b[i] = {};
+            for (var j = 0; j < stat.t.length; j++) {
+                // initialize
+                var k0 = stat.t[j];
+                stat.b[i][k0] = 0;
+            }
         }
     },
     "shuffle": function() {
