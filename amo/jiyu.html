@@ -40,19 +40,40 @@ var g = {
         },
         "start": function() {
             stat.cookie();
+            stat.jars();
+            stat.shuffle();
+            console.log(stat.b);
         }
     }
 // data
 var db = {
     "init": function() {
         db.a = {};
+        // compile stats
+        db.b = [];
+        // history
+    },
+    "stats": function() {
+        // min max avg per jar
     }
 }
 // scene
 var sce = {
     "init": function() {
         // scene graph management
+        // master element list
         sce.a = {};
+        // two letter element keys
+        // single char screen key
+        // bkgd
+        sce.a["bg"] = {};
+        sce.a["bg"].r = [1920,1080.0,0];
+        sce.a["bg"].c = dom.canvas(sce.a["bg"].r);
+        // dom element add remove on
+        // elements can be cleared and shared between scenes
+        // render functions can be resolution independant
+        // fill a color, plasma, or bitmap
+
     }
 }
 // stats
@@ -132,6 +153,8 @@ var stat = {
     },
     "place": function(k0) {
         // place cookie in random jar
+        var j0 = (Math.random() * stat.b.length) >>> 0;
+        stat.b[j0][k0]++;
     }
 }
 // xhr
