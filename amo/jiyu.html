@@ -58,6 +58,11 @@ var ev = {
         // el.addEventListener("demo", el.handler);
         // el.handler = function(e){};
         // el.dispatchEvent("demo");
+
+        // to pass data through the event
+        // that can be accessed via the handler
+        // ev.c = new CustomEvent("delta", {"detail":data});
+        // el.handle = function(e){console.log(e.detail)};
     }
 }
 // data
