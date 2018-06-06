@@ -43,6 +43,8 @@ var g = {
             stat.jars();
             stat.shuffle();
             console.log(stat.b);
+
+            ren.clear();
         }
     }
 // event
@@ -80,7 +82,7 @@ var db = {
 }
 // scene
 var sce = {
-    "init": function() {
+    "init2": function() {
         // scene graph management
         // master element list
         sce.a = {};
@@ -102,7 +104,7 @@ var sce = {
         sce.b["0"] = ["bg"];
         // fixed layout definition
     },
-    "init2": function() {
+    "init": function() {
         // bg
         sce.c = {};
         sce.c.r = [1920,1080,0,0];
@@ -120,27 +122,48 @@ var sce = {
         sce.d.c.can.addEventListener("click", sce.click, false);
         sce.d.c.can.dataset.x = "bf";
         // button_text
-        sce.d = {};
-        sce.d.t = "CLICK ME"; // alice
-        sce.d.r = [256,32,384,800];
-        sce.d.c = dom.canvas(sce.d.r);
-        dom.add(sce.d.c);
-        sce.d.d = rgba.rmon();
-        sce.d.c.can.addEventListener("click", sce.click, false);
-        sce.d.c.can.dataset.x = "be";
+        sce.e = {};
+        sce.e.t = "CLICK ME"; // alice
+        sce.e.r = [256,32,384,800];
+        sce.e.c = dom.canvas(sce.e.r);
+        dom.add(sce.e.c);
+        sce.e.d = rgba.rmon();
+        sce.e.c.can.addEventListener("click", sce.click2, false);
+        sce.e.c.can.dataset.x = "be";
         // intro_text
-        sce.d = {};
-        sce.d.t = "THIS IS THE COOKIE PROBLEM"; // alice
-        sce.d.r = [1664,64,128,952];
-        sce.d.c = dom.canvas(sce.d.r);
-        dom.add(sce.d.c);
-        sce.d.d = rgba.rmon();
-        sce.d.c.can.addEventListener("click", sce.click, false);
-        sce.d.c.can.dataset.x = "be";
+        sce.f = {};
+        sce.f.t = "THIS IS THE COOKIE PROBLEM"; // alice
+        sce.f.r = [1664,64,128,952];
+        sce.f.c = dom.canvas(sce.f.r);
+        dom.add(sce.f.c);
+        sce.f.d = rgba.rmon();
+        sce.f.c.can.addEventListener("click", sce.click, false);
+        sce.f.c.can.dataset.x = "be";
 
     },
     "textgrid": function(s0, r0) {
         // indiviual canvas rects for each text char
+    },
+    "click": function(e) {
+        // null handler for debug only
+        console.log(e);
+    },
+    "click2": function(e) {
+        // advance state
+        console.log(e);
+    }
+}
+// render
+var ren = {
+    "clear": function() {
+        // get the current screen
+        // determine visible set
+        var c0 = [sce.c.c,sce.d.c,sce.e.c,sce.f.c];
+        for (var i = 0; i < c0.length; i++) {
+            var c1 = c0[i];
+            c1.con.fillStyle = rgba.rmon();
+            c1.con.fillRect(0,0,c1.can.width,c1.can.height);
+        }
     }
 }
 // stats
