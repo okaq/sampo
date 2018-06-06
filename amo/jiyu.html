@@ -113,14 +113,31 @@ var sce = {
         sce.c.c.can.dataset.x = "bg";
         // button
         sce.d = {};
-        sce.d.r = [1920,1080,0,0];
+        sce.d.r = [512,512,256,256];
         sce.d.c = dom.canvas(sce.d.r);
         dom.add(sce.d.c);
         sce.d.d = rgba.rmon();
         sce.d.c.can.addEventListener("click", sce.click, false);
         sce.d.c.can.dataset.x = "bf";
         // button_text
+        sce.d = {};
+        sce.d.t = "CLICK ME"; // alice
+        sce.d.r = [256,32,384,800];
+        sce.d.c = dom.canvas(sce.d.r);
+        dom.add(sce.d.c);
+        sce.d.d = rgba.rmon();
+        sce.d.c.can.addEventListener("click", sce.click, false);
+        sce.d.c.can.dataset.x = "be";
         // intro_text
+        sce.d = {};
+        sce.d.t = "THIS IS THE COOKIE PROBLEM"; // alice
+        sce.d.r = [1664,64,128,952];
+        sce.d.c = dom.canvas(sce.d.r);
+        dom.add(sce.d.c);
+        sce.d.d = rgba.rmon();
+        sce.d.c.can.addEventListener("click", sce.click, false);
+        sce.d.c.can.dataset.x = "be";
+
     },
     "textgrid": function(s0, r0) {
         // indiviual canvas rects for each text char
