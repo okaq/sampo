@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head id="zeta">
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=1920,height=1080,initial-scale=1" />
+        <meta name="source" content="https://github.com/okaq/sampo" />
+        <meta name="author" content="AQ<aq@okaq.com>" />
+        <meta name="date" content="2018-06-06" />
+        <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGL5n9DAQEvARFPTRy0YtWDUglELRi0YtWDUglELRi0YtWDUAioCQAAAAP//YokCIkykmBgAAAAASUVORK5CYII=" />
+        <style type="text/css">
+            html,body{width:1920px;overflow:auto;height:1080px;margin:0px;border:0px;padding:0px;background-color:rgba(0,0,0,0);}
+        </style>
+        <script type="text/javascript">
+            // ok
+            console.log("okaq gira sampo amo dragon ok!");
+            // async load
+            (function() {
+                var a = {
+                    "load": function(e) {
+                        console.log(e);
+                        g.init();
+                    }
+                }
+                document.addEventListener("DOMContentLoaded", a.load, false);
+            })();
+// game
+var g = {
+        "init": function() {
+            var t0 = window.performance.now();
+
+            // subs
+            g.subs = [dom,bmp,sce,ren];
+            g.subs.forEach(function(el){el.init();});
+
+            // stats
+            console.log("total render time: " + (window.performance.now() - t0) + "ms.");
+        }
+    }
+// scene
+var sce = {
+    "init": function() {
+        // bkgd
+        sce.a = {};
+        sce.a.r = [1920,1080,0,0];
+        sce.a.c = dom.canvas(sce.a.r);
+        dom.add(sce.a.c);
+        sce.a.d = rgba.mono(255);
+        // logo
+        sce.b = {};
+        sce.b.r = [1024,1024,0,0];
+        sce.b.c = dom.canvas(sce.b.r);
+        dom.add(sce.b.c);
+        sce.b.d = [rgba.mono(0),rgba.mono(255)];
+    }
+}
+// render
+var ren = {
+    "init": function() {
+        ren.clear();
+        ren.logo();
+    },
+    "clear": function() {
+        sce.a.c.con.fillStyle = sce.a.d;
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+        sce.b.c.con.fillStyle = sce.b.d[1];
+        sce.b.c.con.fillRect(0,0,sce.b.c.can.width,sce.b.c.can.height);
+    },
+    "logo": function() {
+        var b0 = bmp.a["dragon"];
+        var c0 = sce.b.c;
+        c0.con.fillStyle = sce.b.d[0];
+        for (var i = 0; i < b0.length; i++) {
+            if (b0[i] == 1) {
+                continue;
+            }
+            var x0 = i % 32;
+            var x1 = (x0 * 32) >>> 0;
+            var y0 = (i / 32) >>> 0;
+            var y1 = (y0 * 32) >>> 0;
+            c0.con.fillRect(x1,y1,32,32);
+        }
+    }
+}
+    // dom
+    var dom = {
+        "init": function() {
+            dom.alpha = document.getElementById("alpha");
+            console.log(dom.alpha);
+        },
+        "canvas": function(r0) {
+            var c0 = {};
+            c0.can = document.createElement("canvas");
+            c0.con = c0.can.getContext("2d");
+            c0.can.width = r0[0];
+            c0.can.height = r0[1];
+            c0.can.style.position = "absolute";
+            c0.can.style.top = r0[3] + "px";
+            c0.can.style.left = r0[2] + "px";
+            return c0;
+        },
+        "add": function(c0) {
+            dom.alpha.appendChild(c0.can);
+        },
+        "remove": function(c0) {
+            dom.alpha.removeChild(c0.can);
+        }
+    }
+    // colors
+    var rgba = {
+        "rc": function() {
+            // return random rgba
+            var c0 = [
+                rgba.rb(),
+                rgba.rb(),
+                rgba.rb(),
+                1.0
+                ];
+            return c0;
+        },
+        "css": function(c0) {
+            // return css string
+            return "rgba(" + c0.join(",") + ")";
+        },
+        "rb": function() {
+            // random byte
+            return (Math.random() * 255) >>> 0;
+        },
+        "rba": function(size0) {
+            // random byte array length of input
+            var r0 = [];
+            for (var i = 0; i < size0; i++) {
+                r0.push(rgba.rb());
+            }
+            return r0;
+        },
+        "rand": function() {
+            return rgba.css(rgba.rc());
+        },
+        "mono": function(c0) {
+            return rgba.css([c0,c0,c0,1.0]);
+        },
+        "rmon": function() {
+            var c0 = rgba.rb();
+            return rgba.mono(c0);
+        }
+    }
+    // bitmap
+    var bmp = {
+        "init": function() {
+            // decode the dragon logo
+            bmp.a = {};
+            bmp.a["dragon"] = bmp.flat(dragon);
+            console.log("dragon logo decoded");
+            var s0 = (bmp.a["dragon"].length);
+            var s1 = Math.sqrt(s0);
+            console.log("dragon count: " + s0 + " (" + s1 + "x" + s1 + ")");
+        },
+        "exp": function(b0) {
+            // expansion of uint8array
+            // to string of bits
+            var r0 = [];
+            for (var i = 0; i < b0.length; i++) {
+                var b1 = b0[i];
+                var s0 = binStr(b1);
+                for (var j = 0; j < 8; j++) {
+                    var s1 = s0.charAt(j);
+                    var n0 = parseInt(s1, 10);
+                    r0.push(n0);
+                }
+            }
+            return r0;
+        },
+        "flat": function(s0) {
+            // stand alone decoder
+            var b0 = base64DecToArr(s0);
+            var b1 = bmp.exp(b0);
+            return b1;
+        }
+    }
+var dragon = "/////////////////////////////x////9P////Bf///wb///8/H///H4///h+H//4fx/v8H+f5/B///Pwf//44P///AD///8Af///+H////g////////////////////////////////////////////////////////////8=";
+    // string view
+    /*\
+    |*|
+    |*|  Base64 / binary data / UTF-8 strings utilities
+    |*|
+    |*|  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Base64_encoding_and_decoding
+    |*|
+    \*/
+    /* Array of bytes to base64 string decoding */
+    function b64ToUint6 (nChr) {
+     return nChr > 64 && nChr < 91 ?
+         nChr - 65
+         : nChr > 96 && nChr < 123 ?
+         nChr - 71
+         : nChr > 47 && nChr < 58 ?
+         nChr + 4
+         : nChr === 43 ?
+         62
+         : nChr === 47 ?
+         63
+         :
+         0;
+    }
+    function base64DecToArr (sBase64, nBlocksSize) {
+     var sB64Enc = sBase64.replace(/[^A-Za-z0-9\+\/]/g, ""), nInLen = sB64Enc.length,
+         nOutLen = nBlocksSize ? Math.ceil((nInLen * 3 + 1 >> 2) / nBlocksSize) * nBlocksSize : nInLen * 3 + 1 >> 2,
+         taBytes = new Uint8Array(nOutLen);
+     for (var nMod3, nMod4, nUint24 = 0, nOutIdx = 0, nInIdx = 0; nInIdx < nInLen; nInIdx++) {
+         nMod4 = nInIdx & 3;
+         nUint24 |= b64ToUint6(sB64Enc.charCodeAt(nInIdx)) << 18 - 6 * nMod4;
+         if (nMod4 === 3 || nInLen - nInIdx === 1) {
+                 for (nMod3 = 0; nMod3 < 3 && nOutIdx < nOutLen; nMod3++, nOutIdx++) {
+                         taBytes[nOutIdx] = nUint24 >>> (16 >>> nMod3 & 24) & 255;
+                 }
+                 nUint24 = 0;
+         }
+     }
+     return taBytes;
+    }
+    // bitwise ops
+    // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators
+    var binStr = function(nMask) {
+         // nMask must be between 0 and 255
+         for (var nFlag = 0, nShifted = nMask, sMask = ""; nFlag < 32;
+             nFlag++, sMask += String(nShifted >>> 31), nShifted <<= 1);
+         return sMask.slice(24);
+    }
+            </script>
+        </head>
+        <body id="alpha">
+        </body>
+    </html>

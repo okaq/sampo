@@ -12,6 +12,7 @@ import (
 
 const (
     INDEX = "jiyu.html"
+    DRAGON = "dragon.html"
 )
 
 func motd() {
@@ -22,6 +23,11 @@ func motd() {
 func JiyuHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Println(r)
     http.ServeFile(w,r,INDEX)
+}
+
+func DragonHandler(w http.ResponseWriter, r *http.Request) {
+    fmt.Println(r)
+    http.ServeFile(w,r,DRAGON)
 }
 
 func StatHandler(w http.ResponseWriter, r *http.Request) {
@@ -40,6 +46,7 @@ func main() {
     http.HandleFunc("/", JiyuHandler)
     http.HandleFunc("/a", StatHandler)
     http.HandleFunc("/b", JarHandler)
+    http.HandleFunc("/c", DragonHandler)
     http.ListenAndServe(":8080", nil)
 }
 

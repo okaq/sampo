@@ -63,6 +63,7 @@ var ev = {
         // that can be accessed via the handler
         // ev.c = new CustomEvent("delta", {"detail":data});
         // el.handle = function(e){console.log(e.detail)};
+
     }
 }
 // data
@@ -100,6 +101,29 @@ var sce = {
         sce.b = {};
         sce.b["0"] = ["bg"];
         // fixed layout definition
+    },
+    "init2": function() {
+        // bg
+        sce.c = {};
+        sce.c.r = [1920,1080,0,0];
+        sce.c.c = dom.canvas(sce.c.r);
+        dom.add(sce.c.c);
+        sce.c.d = rgba.rmon();
+        sce.c.c.can.addEventListener("click", sce.click, false);
+        sce.c.c.can.dataset.x = "bg";
+        // button
+        sce.d = {};
+        sce.d.r = [1920,1080,0,0];
+        sce.d.c = dom.canvas(sce.d.r);
+        dom.add(sce.d.c);
+        sce.d.d = rgba.rmon();
+        sce.d.c.can.addEventListener("click", sce.click, false);
+        sce.d.c.can.dataset.x = "bf";
+        // button_text
+        // intro_text
+    },
+    "textgrid": function(s0, r0) {
+        // indiviual canvas rects for each text char
     }
 }
 // stats
