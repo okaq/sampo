@@ -143,6 +143,8 @@ var sce = {
     },
     "textgrid": function(s0, r0) {
         // indiviual canvas rects for each text char
+        // now it makes sense to leave as single rect
+        // single key id, single click handler
     },
     "click": function(e) {
         // null handler for debug only
@@ -163,6 +165,20 @@ var ren = {
             var c1 = c0[i];
             c1.con.fillStyle = rgba.rmon();
             c1.con.fillRect(0,0,c1.can.width,c1.can.height);
+        }
+    },
+    "txt": function(c0, s0, x0) {
+        // render the given string
+        // using guji bmp font
+        // in the canvas at input size
+        for (var i = 0; i < s0.length; i++) {
+            var s1 = s0[i];
+            if (s1 == " ") {
+                continue;
+            }
+            // var b0 = guji[s1];
+            var x1 = (i * x0) >>> 0;
+            ren.glyph(c0, s1, x1);
         }
     }
 }
