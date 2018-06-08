@@ -47,6 +47,18 @@ var g = {
             // ren.clear();
             ren.rect();
             ren.write();
+
+            // dont activate button handlers until
+            // the scene gets generated, rendered
+
+            // state jump enumeration
+            // explicitly in game state class
+            g.state = 0;
+        },
+        "jump": function() {
+            g.state = g.state + 1;
+            // detach swan elements
+            // add histogram collection
         }
     }
 // event
@@ -121,7 +133,7 @@ var sce = {
         sce.d.c = dom.canvas(sce.d.r);
         dom.add(sce.d.c);
         sce.d.d = rgba.rmon();
-        sce.d.c.can.addEventListener("click", sce.click, false);
+        sce.d.c.can.addEventListener("click", sce.click2, false);
         sce.d.c.can.dataset.x = "bf";
         // button_text
         sce.e = {};
@@ -200,7 +212,7 @@ var ren = {
             }
             // var b0 = guji[s1];
             var x1 = (i * x0) >>> 0;
-            ren.glyph(c0, s1, x1, x0);
+            // ren.glyph(c0, s1, x1, x0);
         }
     },
     "glyph": function(c0, s0, x1, x0) {
@@ -224,7 +236,7 @@ var ren = {
     },
     "write": function() {
         // the text set
-        var c0 = [sce.e, sce.f,];
+        var c0 = [sce.e, sce.f];
         for (var i = 0; i < c0.length; i++) {
             var c1 = c0[i].c;
             var s0 = c0[i].t;
