@@ -188,8 +188,21 @@ var sce = {
         sce.h = {};
         // text (jars one)
         sce.h.t = {};
+        // rule of thirds
+        sce.h.t.r = [1920,360,0,0];
+        sce.h.t.c = dom.canvas(sce.h.t.r);
+        dom.add(sce.h.t.c);
+        sce.h.t.d = rgba.rmon();
+        // no listeners required
+        sce.h.t.c.can.dataset.x = "ht";
         // bars
         sce.h.b = {};
+        sce.h.b.n = 36;
+        sce.h.b.r = [];
+        sce.h.b.c = [];
+        for (var i = 0; i < sce.h.b.n; i++) {
+            // include margin in canvas
+        }
         // labels
         sce.h.a = {};
     }
