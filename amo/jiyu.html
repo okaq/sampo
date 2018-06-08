@@ -199,16 +199,23 @@ var ren = {
             }
             // var b0 = guji[s1];
             var x1 = (i * x0) >>> 0;
-            ren.glyph(c0, s1, x1);
+            ren.glyph(c0, s1, x1, x0);
         }
     },
-    "glyph": function(c0, s0, x0) {
+    "glyph": function(c0, s0, x1, x0) {
         // fast draw char in box
         // need pixel size info
+        // position = x1, size = x0
     },
     "write": function() {
         // the text set
-        var c0 = [sce.e.c, sce.f.c];
+        var c0 = [sce.e, sce.f,];
+        for (var i = 0; i < c0.length; i++) {
+            var c1 = c0[i].c;
+            var s0 = c0[i].t;
+            var x0 = c0[i].r[1];
+            ren.txt(c1,s0,x0);
+        }
     }
 }
 // stats
