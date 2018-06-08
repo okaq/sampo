@@ -177,6 +177,21 @@ var sce = {
         // with the same canvas elements
         // only the data changes and needs re-draw
         // state = time, data, element tuple
+    },
+    "hist": function() {
+        // detach currect set
+        var c0 = [sce.c.c,sce.d.c,sce.e.c,sce.f.c];
+        for (var i = 0; i < c0.length; i++) {
+            var c1 = c0[i];
+            dom.remove(c1);
+        }
+        sce.h = {};
+        // text (jars one)
+        sce.h.t = {};
+        // bars
+        sce.h.b = {};
+        // labels
+        sce.h.a = {};
     }
 }
 // render
