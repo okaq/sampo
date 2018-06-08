@@ -44,7 +44,9 @@ var g = {
             stat.shuffle();
             console.log(stat.b);
 
-            ren.clear();
+            // ren.clear();
+            ren.rect();
+            ren.write();
         }
     }
 // event
@@ -153,6 +155,16 @@ var sce = {
     "click2": function(e) {
         // advance state
         console.log(e);
+        // remove current dom
+        // jump to next state
+        // add new elements to dom
+        // update data and render
+
+        // for histogram cycles
+        // we encapsulate a single logical "screen"
+        // with the same canvas elements
+        // only the data changes and needs re-draw
+        // state = time, data, element tuple
     }
 }
 // render
@@ -164,6 +176,15 @@ var ren = {
         for (var i = 0; i < c0.length; i++) {
             var c1 = c0[i];
             c1.con.fillStyle = rgba.rmon();
+            c1.con.fillRect(0,0,c1.can.width,c1.can.height);
+        }
+    },
+    "rect": function() {
+        // white bkgd, black rects, white pixels
+        var c0 = [sce.c.c,sce.d.c,sce.e.c,sce.f.c];
+        for (var i = 0; i < c0.length; i++) {
+            var c1 = c0[i];
+            c1.con.fillStyle = rgba.css([0,0,0,1.0]);
             c1.con.fillRect(0,0,c1.can.width,c1.can.height);
         }
     },
@@ -180,6 +201,14 @@ var ren = {
             var x1 = (i * x0) >>> 0;
             ren.glyph(c0, s1, x1);
         }
+    },
+    "glyph": function(c0, s0, x0) {
+        // fast draw char in box
+        // need pixel size info
+    },
+    "write": function() {
+        // the text set
+        var c0 = [sce.e.c, sce.f.c];
     }
 }
 // stats
