@@ -200,11 +200,43 @@ var sce = {
         sce.h.b.n = 36;
         sce.h.b.r = [];
         sce.h.b.c = [];
+        sce.h.b.d = [];
+        var w0 = (1920 / sce.h.b.n) >>> 0;
         for (var i = 0; i < sce.h.b.n; i++) {
             // include margin in canvas
+            var x0 = (w0 * i) >>> 0;
+            // sce.h.b.r[i] = [w0,360,x0,360];
+            var m0 = 16;
+            var x1 = (x0 + 16) >>> 0;
+            var y1 = 376;
+            var w1 = (w0 - (2 * m0)) >>> 0;
+            var h1 = 328;
+            sce.h.b.r[i] = [w1,h1,x1,y1];
+            sce.h.b.c[i] = dom.canvas(sce.h.b.r[i]);
+            dom.add(sce.h.b.c[i]);
+            sce.h.b.d[i] = rgba.rmon();
         }
         // labels
         sce.h.a = {};
+        sce.h.a.n = 36;
+        sce.h.a.r = [];
+        sce.h.a.c = [];
+        sce.h.a.d = [];
+        for (var i = 0; i < sce.h.a.n; i++) {
+            var x0 = (w0 * i) >>> 0;
+            var y0 = 720;
+            var h0 = 360;
+            var w1 = 64;
+            var h1 = 64;
+            var mx = ((w0 - w1) / 2) >>> 0;
+            var my = ((h0 - h1) / 2) >>> 0;
+            var x1 = (x0 + mx) >>> 0;
+            var y1 = (y0 + my) >>> 0;
+            sce.h.a.r[i] = [w1,h1,x1,y1];
+            sce.h.a.c[i] = dom.canvas(sce.h.a.r[i]);
+            dom.add(sce.h.a.c[i]);
+            sce.h.a.d[i] = rgba.rmon();
+        }
     }
 }
 // render
