@@ -59,6 +59,8 @@ var g = {
             g.state = g.state + 1;
             // detach swan elements
             // add histogram collection
+            sce.hist();
+            ren.hist();
         }
     }
 // event
@@ -177,6 +179,8 @@ var sce = {
         // with the same canvas elements
         // only the data changes and needs re-draw
         // state = time, data, element tuple
+
+        g.jump();
     },
     "hist": function() {
         // detach currect set
