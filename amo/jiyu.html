@@ -307,6 +307,26 @@ var ren = {
             var x0 = c0[i].r[1];
             ren.txt(c1,s0,x0);
         }
+    },
+    "hist": function() {
+        // text
+        var c0 = sce.h.t.c;
+        c0.con.fillStyle = rgba.css([0,0,0,1.0]);
+        c0.con.fillRect(0,0,c0.can.width,c0.can.height);
+        // bars
+        var c1 = sce.h.b.c;
+        for (var i = 0; i < c1.length; i++) {
+            var c2 = c1[i];
+            c2.con.fillStyle = rgba.css([0,0,0,1.0]);
+            c2.con.fillRect(0,0,c2.can.width,c2.can.height);
+        }
+        // labels
+        var c3 = sce.h.b.c;
+        for (var i = 0; i < c3.length; i++) {
+            var c4 = c3[i];
+            c4.con.fillStyle = rgba.css([0,0,0,1.0]);
+            c4.con.fillRect(0,0,c4.can.width,c4.can.height);
+        }
     }
 }
 // stats
