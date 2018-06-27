@@ -29,6 +29,6 @@ func main() {
 	motd()
 	http.HandleFunc("/", KiyaHandler)
 	http.ListenAndServe(":8080", nil)
-)
+}
 
 
