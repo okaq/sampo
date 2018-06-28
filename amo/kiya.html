@@ -40,6 +40,18 @@ var g = {
         },
         "start": function() {
             console.log("starting now");
+
+            // phase field one
+            g.tick = 0;
+            g.id = window.setInterval(g.frame, 1000);
+        },
+        "frame": function() {
+            console.log("tick count: " + g.tick);
+            if (g.tick >= 16) {
+                console.log("animation finished");
+                window.clearTimeout(g.id);
+            }
+            g.tick = g.tick + 1;
         }
 }
 // data
