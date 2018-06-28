@@ -46,12 +46,20 @@ var g = {
 var db = {
     "init": function() {
         // global state
+        db.a = {};
     }
 }
 // scene
 var sce = {
     "init": function() {
         // view and input handling
+        sce.a = {};
+        sce.a.r = [1920,1080,0,0];
+        sce.a.c = dom.canvas(sce.a.r);
+        dom.add(sce.a.c);
+        sce.a.d = rgba.rmon();
+        // sce.a.r = ren.a;
+        // reference to rendering function
     }
 }
     // dom
