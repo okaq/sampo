@@ -85,7 +85,16 @@ var db = {
         db.a.a = {};
         // 32x32 pixel blocks
         // 60x30 with 120 px top margin
-        
+        for (var i = 0; i < 1800; i++) {
+            var x0 = i % 60;
+            var y0 = (i / 60) >>> 0;
+            var k0 = "";
+            k0 = k0 + x0;
+            k0 = k0 + ":";
+            k0 = k0 + y0;
+            db.a.a[k0] = {};
+        }
+        console.log(db);
     }
 }
 // scene
