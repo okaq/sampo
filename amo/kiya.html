@@ -48,7 +48,7 @@ var g = {
         "frame": function() {
             console.log("tick count: " + g.tick);
             // rand char test
-            console.log(char.pick);
+            // console.log(char.pick());
             if (g.tick >= 16) {
                 console.log("animation finished");
                 window.clearTimeout(g.id);
@@ -62,7 +62,12 @@ var char = {
         // text helper
         char.c = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         char.d = char.c.split("");
-        console.log(char);
+        // console.log(char);
+        // ok with uniform distribution
+        // high word formation probability
+        // if we match the natural
+        // ratio of consonants to vowels
+        // and discard unworthy bi-grams
     },
     "pick": function() {
         // select random
