@@ -30,7 +30,7 @@ var g = {
             console.log("cookies players grid");
 
             // subs
-            g.subs = [dom,db,sce];
+            g.subs = [dom,db,sce,char];
             g.subs.forEach(function(el){el.init();});
 
             window.setTimeout(g.start, 1000);
@@ -47,12 +47,29 @@ var g = {
         },
         "frame": function() {
             console.log("tick count: " + g.tick);
+            // rand char test
+            console.log(char.pick);
             if (g.tick >= 16) {
                 console.log("animation finished");
                 window.clearTimeout(g.id);
             }
             g.tick = g.tick + 1;
         }
+}
+// char
+var char = {
+    "init": function() {
+        // text helper
+        char.c = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        char.d = char.c.split("");
+        console.log(char);
+    },
+    "pick": function() {
+        // select random
+        var f0 = (Math.random() * char.d.length) >>> 0;
+        var c0 = char.d[f0];
+        return c0;
+    }
 }
 // data
 var db = {
@@ -63,6 +80,7 @@ var db = {
         db.a.a = {};
         // 32x32 pixel blocks
         // 60x30 with 120 px top margin
+        
     }
 }
 // scene
