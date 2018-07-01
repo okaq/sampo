@@ -93,6 +93,10 @@ var db = {
             k0 = k0 + ":";
             k0 = k0 + y0;
             db.a.a[k0] = {};
+            db.a.a[k0].x = (x0 * 32) >>> 0;
+            db.a.a[k0].y = (y0 * 32) >>> 0;
+            db.a.a[k0].s = 1;
+            // state: 0,1,2 ...
         }
         console.log(db);
     }
@@ -108,6 +112,10 @@ var sce = {
         sce.a.d = rgba.rmon();
         // sce.a.r = ren.a;
         // reference to rendering function
+        sce.grid();
+    },
+    "grid": function() {
+        // init grid from db
     }
 }
     // dom
