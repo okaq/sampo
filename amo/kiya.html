@@ -116,6 +116,15 @@ var sce = {
     },
     "grid": function() {
         // init grid from db
+        sce.b = {};
+        for (var k0 in db.a.a) {
+            sce.b[k0] = {};
+            sce.b[k0].r = [];
+            sce.b[k0].r[0] = 32;
+            sce.b[k0].r[1] = 32;
+            sce.b[k0].r[2] = db.a.a[k0].x;
+            sce.b[k0].r[3] = db.a.a[k0].y;
+        }
     }
 }
     // dom
