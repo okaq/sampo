@@ -48,6 +48,7 @@ var g = {
         "frame": function() {
             console.log("tick count: " + g.tick);
             // rand char test
+            ren.test();
             // console.log(char.pick());
             if (g.tick >= 16) {
                 console.log("animation finished");
@@ -125,6 +126,13 @@ var sce = {
             sce.b[k0].r[2] = db.a.a[k0].x;
             sce.b[k0].r[3] = db.a.a[k0].y;
         }
+    }
+}
+// render
+var ren = {
+    "test": function() {
+        sce.a.c.con.fillStyle = rgba.rmon();
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
     }
 }
     // dom
