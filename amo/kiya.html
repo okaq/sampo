@@ -120,11 +120,16 @@ var sce = {
         sce.b = {};
         for (var k0 in db.a.a) {
             sce.b[k0] = {};
+            // rect
             sce.b[k0].r = [];
             sce.b[k0].r[0] = 32;
             sce.b[k0].r[1] = 32;
             sce.b[k0].r[2] = db.a.a[k0].x;
             sce.b[k0].r[3] = db.a.a[k0].y;
+            // canvas
+            sce.b[k0].c = dom.canvas(sce.b[k0].r);
+            dom.add(sce.b[k0].c);
+            sce.b[k0].d = rgba.rmon();
         }
     }
 }
@@ -133,6 +138,7 @@ var ren = {
     "test": function() {
         sce.a.c.con.fillStyle = rgba.rmon();
         sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+        // grid
     }
 }
     // dom
