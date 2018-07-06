@@ -98,6 +98,7 @@ var db = {
             db.a.a[k0].y = (y0 * 32) >>> 0;
             db.a.a[k0].s = 1;
             // state: 0,1,2 ...
+            db.a.a[k0].c = char.pick();
         }
         console.log(db);
     }
@@ -139,10 +140,13 @@ var ren = {
         sce.a.c.con.fillStyle = rgba.css([0,0,0,1.0]); // rgba.rmon();
         sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
         // grid
+        var t0 = "";
         for (var k0 in sce.b) {
             sce.b[k0].c.con.fillStyle = rgba.rmon();
             sce.b[k0].c.con.fillRect(8,8,16,16);
+            t0 = t0 + db.a.a[k0].c;
         }
+        console.log(t0);
     }
 }
     // dom
