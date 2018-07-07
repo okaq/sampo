@@ -82,6 +82,14 @@ var g = {
             // pop it off
             var k0 = g.keys.splice(f0, 1);
             console.log("random key pick: " + k0);
+            // char from db
+            var c0 = db.a.a[k0].c;
+            console.log("grid character: " + c0);
+            // canvas in grid
+            var g0 = sce.b[k0].c;
+            console.log(g0.can.dataset.x);
+            // render char in canvas
+            // ren.bmp(b0, c0);
             window.setTimeout(g.skip, 1000);
         }
 }
@@ -162,6 +170,7 @@ var sce = {
             sce.b[k0].c = dom.canvas(sce.b[k0].r);
             dom.add(sce.b[k0].c);
             sce.b[k0].d = rgba.rmon();
+            sce.b[k0].c.can.dataset.x = k0;
         }
     }
 }
