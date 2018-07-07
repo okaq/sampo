@@ -50,7 +50,11 @@ var g = {
 
             // phase field one
             g.tick = 0;
-            g.id = window.setInterval(g.frame, 1000);
+            // g.id = window.setInterval(g.frame, 1000);
+
+            // accumulator
+            ren.clear();
+            window.setTimeout(g.skip, 1000);
         },
         "frame": function() {
             console.log("tick count: " + g.tick);
@@ -62,6 +66,10 @@ var g = {
                 window.clearTimeout(g.id);
             }
             g.tick = g.tick + 1;
+        },
+        "skip": function() {
+            // splice key from list
+
         }
 }
 // char
@@ -157,6 +165,10 @@ var ren = {
             t0 = t0 + db.a.a[k0].c;
         }
         console.log(t0);
+    },
+    "clear": function() {
+        sce.a.c.con.fillStyle = rgba.css([0,0,0,1.0]); // rgba.rmon();
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
     }
 }
     // dom
