@@ -69,7 +69,20 @@ var g = {
         },
         "skip": function() {
             // splice key from list
-
+            // sanity
+            if (g.keys.length >= 1) {
+                console.log("number of keys remaining: " + g.keys.length);
+            } else {
+                console.log("screen done");
+                return;
+            }
+            // repeat
+            // pick key at random
+            var f0 = (Math.random() * g.keys.length);
+            // pop it off
+            var k0 = g.keys.splice(f0, 1);
+            console.log("random key pick: " + k0);
+            window.setTimeout(g.skip, 1000);
         }
 }
 // char
