@@ -92,7 +92,7 @@ var g = {
             var b0 = bmp.a[c0];
             console.log(b0.length);
             // render char in canvas
-            // ren.bmp(b0, c0);
+            ren.bmp(b0, g0);
             window.setTimeout(g.skip, 1000);
         }
 }
@@ -194,6 +194,10 @@ var ren = {
     "clear": function() {
         sce.a.c.con.fillStyle = rgba.css([0,0,0,1.0]); // rgba.rmon();
         sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+    },
+    "bmp": function(b0, g0) {
+        g0.con.fillStyle = rgba.rmon();
+        g0.con.fillRect(0,0,g0.can.width,g0.can.height);
     }
 }
     // dom
