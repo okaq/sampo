@@ -196,8 +196,18 @@ var ren = {
         sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
     },
     "bmp": function(b0, g0) {
-        g0.con.fillStyle = rgba.rmon();
+        var rgba0 = [rgba.rmon(),rgba.rmon()];
+        g0.con.fillStyle = rgba0[0];
         g0.con.fillRect(0,0,g0.can.width,g0.can.height);
+        g0.con.fillStyle = rgba0[1];
+        for (var i = 0; i < b0.length; i++) {
+            if (b0[i] == 0) {
+                continue;
+            }
+            var x0 = i % 32;
+            var y0 = (i / 32) >>> 0;
+            g0.con.fillRect(x0,y0,1,1);
+        }
     }
 }
     // dom
