@@ -128,6 +128,20 @@ var word = {
         word.a = [];
         word.a[0] = "okaq";
         word.a[1] = "cookies";
+    },
+    "place": function(w0, p0) {
+        // put chars in grid pos
+        var x0 = p0[0];
+        var y0 = p0[1];
+        var k0 = "";
+        k0 = k0 + x0;
+        k0 = k0 + ":";
+        k0 = k0 + y0;
+        var w1 = w0.length;
+        var k1 = word.keys(k0, w1);
+    },
+    "keys": function(k0, w1) {
+        
     }
 }
 // data
