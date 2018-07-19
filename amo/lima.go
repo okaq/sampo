@@ -16,7 +16,7 @@ const (
 
 func LimaHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
-	http.ServerFile(w,r,INDEX)
+	http.ServeFile(w,r,INDEX)
 }
 
 func motd() {
