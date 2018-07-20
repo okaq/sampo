@@ -49,6 +49,27 @@ var db = {
         // reversible time history
         // events stamped window.performance.now high-res
         // add remove dom, generate game state, ui input
+    },
+    "word": function() {
+        // word defined by text and location
+        // assume 32x32 grid across entire page
+        db.a.w = {};
+        db.a.w["cookies"] = {};
+        db.a.w["cookies"].t = "COOKIES";
+        db.a.w["cookies"].p = [0,0]; // [x,y] grid position
+        db.a.w["adventure"] = {};
+        db.a.w["adventure"].t = "BIG ADVENTURE";
+        db.a.w["adventure"].p = [0,1]; // [x,y] grid position
+        db.a.w["nano"] = {};
+        db.a.w["nano"].t = "NANO GAMES AT PETA SCALE";
+        db.a.w["nano"].p = [0,2]; // [x,y] grid position
+        db.a.w["time"] = {};
+        db.a.w["time"].t = "2018";
+        db.a.w["time"].p = [0,3]; // [x,y] grid position
+
+        // all operations occur at the data layer
+        // add or remove a word
+        // will trigger the required scene and DOM manipulations
     }
 }
 // sce
