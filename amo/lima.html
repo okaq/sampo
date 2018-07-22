@@ -80,6 +80,12 @@ var db = {
         // two images for the screen
         // dragon and monster
         db.a.i = {};
+        db.a.i["dragon"] = {};
+        db.a.i["dragon"].b = null; // link to bitmap data
+        db.a.i["dragon"].r = [512,512,0,0]; // layout rect
+        db.a.i["monster"] = {};
+        db.a.i["monster"].b = null;
+        db.a.i["monster"].r = [512,512,512,0];
     }
 }
 // sce
