@@ -86,12 +86,27 @@ var db = {
         db.a.i["monster"] = {};
         db.a.i["monster"].b = null;
         db.a.i["monster"].r = [512,512,512,0];
+    },
+    "pic": function() {
+        // image key handler
+        // create scene canvas objects
+        // sce.a.i = {};
+        for (var k0 in db.a.i) {
+            sce.image(k0, sce.a.i[k0]);
+        }
     }
 }
 // sce
 var sce = {
     "init": function() {
         sce.a = {};
+        sce.a.i = {};
+        sce.a.w = {};
+    },
+    "image": function(k0, p0) {
+        sce.a.i[k0] = {};
+        sce.a.i[k0].c = dom.canvas(p0.r);
+        // fill rand bitmap data
     }
 }
     // dom
