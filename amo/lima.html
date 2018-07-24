@@ -93,7 +93,16 @@ var db = {
         // sce.a.i = {};
         for (var k0 in db.a.i) {
             sce.image(k0, sce.a.i[k0]);
+            db.a.i[k0].b = db.mix();
         }
+    },
+    "mix": function() {
+        // random bit array
+        var r0 = [];
+        for (var i = 0; i < 1024; i++) {
+            r0[i] = (Math.random() >= 0.5) ? 1 : 0;
+        }
+        return r0;
     }
 }
 // sce
@@ -107,6 +116,7 @@ var sce = {
         sce.a.i[k0] = {};
         sce.a.i[k0].c = dom.canvas(p0.r);
         // fill rand bitmap data
+        // add to canvas
     }
 }
     // dom
