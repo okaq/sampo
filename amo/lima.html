@@ -94,6 +94,7 @@ var db = {
         for (var k0 in db.a.i) {
             sce.image(k0, sce.a.i[k0]);
             db.a.i[k0].b = db.mix();
+            sce.add(k0);
         }
     },
     "mix": function() {
@@ -117,6 +118,11 @@ var sce = {
         sce.a.i[k0].c = dom.canvas(p0.r);
         // fill rand bitmap data
         // add to canvas
+    },
+    "add": function() {
+        // scene manages history, current, master lists
+        // as well as jump logic
+        dom.add(sce.a.i[k0].c);
     }
 }
     // dom
