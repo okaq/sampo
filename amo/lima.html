@@ -95,6 +95,7 @@ var db = {
             sce.image(k0, sce.a.i[k0]);
             db.a.i[k0].b = db.mix();
             sce.add(k0);
+            ren.test();
         }
     },
     "mix": function() {
@@ -123,6 +124,20 @@ var sce = {
         // scene manages history, current, master lists
         // as well as jump logic
         dom.add(sce.a.i[k0].c);
+    }
+}
+// render
+var ren = {
+    "test": function() {
+        // loop over scene collection
+        for (var k0 in sce.a.i) {
+            var c0 = sce.a.i[k0];
+            var b0 = db.a.i[k0].b;
+            ren.bmp(b0, c0);
+        }
+    },
+    "bmp": function(b0, c0) {
+        // draw bitmap in canvas
     }
 }
     // dom
