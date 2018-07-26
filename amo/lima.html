@@ -40,6 +40,8 @@ var g = {
         },
         "start": function() {
             console.log("starting now");
+
+            db.image();
         }
 }
 // data
@@ -86,13 +88,16 @@ var db = {
         db.a.i["monster"] = {};
         db.a.i["monster"].b = null;
         db.a.i["monster"].r = [512,512,512,0];
+
+        // pop
+        db.pic();
     },
     "pic": function() {
         // image key handler
         // create scene canvas objects
         // sce.a.i = {};
         for (var k0 in db.a.i) {
-            sce.image(k0, sce.a.i[k0]);
+            sce.image(k0, db.a.i[k0]);
             db.a.i[k0].b = db.mix();
             sce.add(k0);
             ren.test();
@@ -120,7 +125,7 @@ var sce = {
         // fill rand bitmap data
         // add to canvas
     },
-    "add": function() {
+    "add": function(k0) {
         // scene manages history, current, master lists
         // as well as jump logic
         dom.add(sce.a.i[k0].c);
@@ -131,13 +136,31 @@ var ren = {
     "test": function() {
         // loop over scene collection
         for (var k0 in sce.a.i) {
-            var c0 = sce.a.i[k0];
+            var c0 = sce.a.i[k0].c;
             var b0 = db.a.i[k0].b;
             ren.bmp(b0, c0);
         }
     },
     "bmp": function(b0, c0) {
         // draw bitmap in canvas
+        // canvas 512x512 px
+        // bitmap 32x32
+        // block size 16x16
+        c0.con.fillStyle = rgba.css([0,0,0,1.0]);
+        for (var i = 0; i < b0.length; i++) {
+            var b1 = b0[i];
+            if (b1 == 0) {
+                continue;
+            }
+            var x0 = i % 32
+            var y0 = (i / 32) >>> 0;
+            var x1 = (x0 * 16) >>> 0;
+            var y1 = (y0 * 16) >>> 0;
+            c0.con.fillRect(x1,y1,16,16);
+        }
+        // beautiful 16x16 monochrome blocks
+        // it is enough to fill the page
+        // add some mirro or kaleido effects
     }
 }
     // dom
