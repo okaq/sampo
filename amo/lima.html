@@ -42,6 +42,18 @@ var g = {
             console.log("starting now");
 
             db.image();
+
+            // loop
+            g.tick = 0;
+            g.id = window.setInterval(g.frame, 1000);
+        },
+        "frame": function() {
+            console.log("tick count: " + g.tick);
+            if (g.tick >= 16) {
+                console.log("anim done.");
+                window.clearInterval(g.id);
+            }
+            g.tick = g.tick + 1;
         }
 }
 // data
