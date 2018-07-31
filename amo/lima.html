@@ -46,6 +46,10 @@ var g = {
             // loop
             g.tick = 0;
             g.id = window.setInterval(g.frame, 1000);
+
+            // state
+            g.state = 0;
+            // zero-index enumeration fsm
         },
         "frame": function() {
             console.log("tick count: " + g.tick);
