@@ -317,8 +317,15 @@ var jump = {
             bmp.b = {};
             var b0 = dragon[0];
             var b1 = base64DecToArr(b0);
-            bmp.b[dragon] = bmp.exp(b1);
+            bmp.b["dragon"] = bmp.exp(b1);
             console.log("dragon logo decoded");
+        },
+        "golf": function() {
+            bmp.c = {};
+            var b0 = golf[0];
+            var b1 = base64DecToArr(b0);
+            bmp.b["golf"] = bmp.exp(b1);
+            console.log("golf man decoded");
         }
     }
     // gugi bitmap font
@@ -363,6 +370,10 @@ var jump = {
 // dragon
 var dragon = {
     "0": "/////////////////////////////x////9P////Bf///wb///8/H///H4///h+H//4fx/v8H+f5/B///Pwf//44P///AD///8Af///+H////g////////////////////////////////////////////////////////////8="
+}
+// golf
+var golf = {
+    "0": "///////////////////////4B///+Af///gH///4B///+Af///g////4P///+D////g////4P///+D////g////4z///wM///8DP///Px///z8f///////////////////////////////////////////////////////////8="
 }
     // string view
     /*\
