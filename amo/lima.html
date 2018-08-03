@@ -41,6 +41,8 @@ var g = {
         "start": function() {
             console.log("starting now");
 
+            bmp.logo();
+            bmp.golf();
             db.image();
 
             // loop
@@ -107,6 +109,12 @@ var db = {
 
         // pop
         db.pic();
+
+        // set
+        db.set();
+
+        // test
+        ren.test();
     },
     "pic": function() {
         // image key handler
@@ -116,7 +124,7 @@ var db = {
             sce.image(k0, db.a.i[k0]);
             db.a.i[k0].b = db.mix();
             sce.add(k0);
-            ren.test();
+            // ren.test();
         }
     },
     "mix": function() {
@@ -126,6 +134,11 @@ var db = {
             r0[i] = (Math.random() >= 0.5) ? 1 : 0;
         }
         return r0;
+    },
+    "set": function() {
+        db.a.i["dragon"].b = bmp.b["dragon"];
+        db.a.i["monster"].b = bmp.c["golf"];
+
     }
 }
 // sce
@@ -165,9 +178,16 @@ var ren = {
         c0.con.fillStyle = rgba.css([0,0,0,1.0]);
         for (var i = 0; i < b0.length; i++) {
             var b1 = b0[i];
+            /* white on black
             if (b1 == 0) {
                 continue;
             }
+            */
+            /* black on white */
+            if (b1 == 1)
+            {
+                continue;
+            }          
             var x0 = i % 32
             var y0 = (i / 32) >>> 0;
             var x1 = (x0 * 16) >>> 0;
@@ -324,7 +344,7 @@ var jump = {
             bmp.c = {};
             var b0 = golf[0];
             var b1 = base64DecToArr(b0);
-            bmp.b["golf"] = bmp.exp(b1);
+            bmp.c["golf"] = bmp.exp(b1);
             console.log("golf man decoded");
         }
     }
