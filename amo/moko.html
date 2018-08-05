@@ -1,4 +1,52 @@
 <!DOCTYPE html>
-ok okaq gltf go!
+<html lang="en">
+    <head id="zeta">
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=1920,height=1080,initial-scale=1" />
+        <meta name="source" content="https://github.com/okaq/sampo" />
+        <meta name="author" content="AQ<aq@okaq.com>" />
+        <meta name="date" content="2018-08-06" />
+        <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAMklEQVR4nGL5n9DAQEvARFPTRy0YtWDUglELRi0YtWDUglELRi0YtWDUAioCQAAAAP//YokCIkykmBgAAAAASUVORK5CYII=" />
+        <style type="text/css">
+            html,body{width:1920px;overflow:auto;height:1080px;margin:0px;border:0px;padding:0px;background-color:rgba(0,0,0,0);}
+        </style>
+        <script src="https://cdn.babylonjs.com/babylon.js"></script>
+        <script type="text/javascript">
+            // ok
+            console.log("okaq gira sampo amo moko ok!");
+            // async load
+            (function() {
+                var a = {
+                    "load": function(e) {
+                        console.log(e);
+                        g.init();
+                    }
+                }
+                document.addEventListener("DOMContentLoaded", a.load, false);
+            })();
+// game
+var g = {
+        "init": function() {
+            var t0 = window.performance.now();
+            console.log("okaq load babylon");
+
+            window.setTimeout(g.start, 1000);
+
+            // stats
+            console.log("total render time: " + (window.performance.now() - t0) + "ms.");
+        },
+        "start": function() {
+            console.log("engine start");
+            g.b = BABYLON;
+            console.log(g.b);
+        }
+}
+</script>
+        </head>
+        <body id="alpha">
+        </body>
+    </html>
+
+
 
 

@@ -14,7 +14,7 @@ const (
 	INDEX = "moko.html"
 )
 
-func MokoHandler(w http.Responsewriter, r *http.Request) {
+func MokoHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	http.ServeFile(w,r,INDEX)
 }
