@@ -39,9 +39,22 @@ var g = {
             console.log("engine start");
             g.b = BABYLON;
             console.log(g.b);
+            dom.init();
             sce.init();
             ren.clear();
+            gl.eng();
         }
+}
+// webgl
+var gl = {
+    "eng": function() {
+        // start engine
+        gl.c = document.createElement("canvas");
+        dom.alpha.appendChild(gl.c);
+        gl.e = new g.b.Engine(gl.c, true);
+        gl.s = new g.b.Scene(gl.e);
+        console.log(gl.e, gl.s);
+    }
 }
 // scene
 var sce = {
