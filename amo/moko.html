@@ -40,12 +40,25 @@ var g = {
             g.b = BABYLON;
             console.log(g.b);
             sce.init();
+            ren.clear();
         }
 }
 // scene
 var sce = {
     "init": function() {
         sce.a = {};
+        sce.a.r = [1920,1080,0,0];
+        sce.a.c = dom.canvas(sce.a.r);
+        dom.add(sce.a.c);
+        sce.a.d = rgba.css([0,0,0,1.0]);
+        console.log("full screen canvas added");
+    }
+}
+// render
+var ren = {
+    "clear": function() {
+        sce.a.c.con.fillStyle = sce.a.d;
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
     }
 }
     // dom
