@@ -53,6 +53,8 @@ var gl = {
         dom.alpha.appendChild(gl.c);
         gl.e = new g.b.Engine(gl.c, true);
         gl.s = new g.b.Scene(gl.e);
+        gl.a = new g.b.ArcRotateCamera("Camera", Math.PI / 2.0, Math.PI / 2.0, 2, g.b.Vector3.Zero(), gl.s);
+        gl.a.attachControl(gl.c, true);
         console.log(gl.e, gl.s);
     }
 }
