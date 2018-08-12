@@ -56,6 +56,8 @@ var gl = {
         gl.a = new g.b.ArcRotateCamera("Camera", Math.PI / 2.0, Math.PI / 2.0, 2, g.b.Vector3.Zero(), gl.s);
         gl.a.attachCamera(gl.c, true);
         // describe mesh
+        gl.m = g.b.MeshBuilder.CreateSphere("sphere", {}, gl.s);
+        // lights on
         console.log(gl.e, gl.s);
     }
 }
